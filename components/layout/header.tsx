@@ -6,25 +6,32 @@ import FenegLogo from '@/public/feneg.png'
 
 export default function Header() {
     return (
-        <div className='bg-gradient-to-b flex w-full align-middle items-center justify-between p-5'>
+        <div className='flex w-full align-middle items-center justify-between p-5'>
             <Image
+                priority={true}
                 src="/feneg.png"
-                width={150}
-                height={100}
+                width="0"
+                height="0"
+                sizes="100vw"
+                style={{ width: '150px', height: 'auto' }}
                 alt="FENEG Logo"
                 className='hover:animate-pulse cursor-pointer'
             />
             <Image
                 src="/sicoobfrutal.png"
-                width={159.6}
-                height={0}
+                width="0"
+                height="0"
+                sizes="100vw"
+                style={{ width: '150px', height: 'auto' }}
                 alt="FENEG Logo"
                 className='hover:animate-pulse cursor-pointer'
             />
             <Image
                 src="/sebrae.png"
-                width={156}
-                height={0}
+                width="0"
+                height="0"
+                sizes="100vw"
+                style={{ width: '150px', height: 'auto' }}
                 alt="FENEG Logo"
                 className='hover:animate-pulse cursor-pointer'
             />

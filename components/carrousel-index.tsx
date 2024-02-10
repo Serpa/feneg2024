@@ -15,7 +15,7 @@ export default function CarrouselIndex() {
         Autoplay({ delay: 2000, stopOnInteraction: true })
     )
     return (
-        <div>
+        <div className='p-5'>
             <Carousel
                 plugins={[plugin.current]}
             >
@@ -24,8 +24,10 @@ export default function CarrouselIndex() {
                         <Image
                             src={'/main.png'}
                             alt="Banner"
-                            width={820}
-                            height={0}
+                            width="0"
+                            height="0"
+                            sizes="100vw"
+                            style={{ width: '820px', height: 'auto' }}
                         />
                     </CarouselItem>
                     {/* <CarouselItem>...</CarouselItem>

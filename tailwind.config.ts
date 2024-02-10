@@ -55,6 +55,7 @@ const config = {
         'azul-claro': "#91f7ec",
         'verde-escuro': "#00353d",
         'verde-claro': "#55ba04",
+        'verde-be': "#7adcb4",
         'verde-amarelo': "#c5d200",
       },
       borderRadius: {

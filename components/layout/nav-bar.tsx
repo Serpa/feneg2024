@@ -68,7 +68,7 @@ export default function NavBar() {
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
-                        <Link href="/expor" legacyBehavior passHref>
+                        <Link href="/quero-expor" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                 QUERO EXPOR
                             </NavigationMenuLink>

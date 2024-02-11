@@ -5,6 +5,7 @@ import NavBar from "@/components/layout/nav-bar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Separator } from "@/components/ui/separator";
 import FooterComp from "@/components/layout/footer";
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "FENEG 2024 - Feira de Negócios Sicoob Frutal.",
@@ -39,7 +40,8 @@ export default function RootLayout({
           </div>
 
           {children}
-          <FooterComp/>
+          <Toaster />
+          <FooterComp />
         </ThemeProvider>
       </body>
     </html>

@@ -25,18 +25,22 @@ import { z } from "zod"
 import { useMaskito } from '@maskito/react';
 import phoneMask from '@/lib/masks/phone'
 import { FaWhatsapp } from "react-icons/fa6";
+import { useToast } from "@/components/ui/use-toast"
+import axios from 'axios'
+import { Loader2 } from "lucide-react"
 
 const expoSchema = z.object({
-    nome: z.string().min(3, 'O nome deve ter um mínimo de 3 caracteres.').max(255,'O Nome deve ter um máximo de 255 caracteres.'),
-    empresa: z.string().min(2, 'O nome da empresa deve ter um mínimo de 2 caracteres.').max(255,'O nome da empresa deve ter um máximo de 255 caracteres.'),
-    ramo: z.string().min(3, 'O Ramo deve ter um mínimo de 3 caracteres.').max(255,'O Ramo deve ter um máximo de 255 caracteres.'),
-    telefone: z.string().min(16, 'O telefone deve ter somente números e o padrão 99 99999-9999'),
-    email: z.string().email('E-mail inválido.'),
+    nome: z.string().min(3, 'O nome deve ter um mínimo de 3 caracteres.').max(255, 'O Nome deve ter um máximo de 255 caracteres.').toUpperCase(),
+    empresa: z.string().min(2, 'O nome da empresa deve ter um mínimo de 2 caracteres.').max(255, 'O nome da empresa deve ter um máximo de 255 caracteres.').toUpperCase(),
+    ramo: z.string().min(3, 'O Ramo deve ter um mínimo de 3 caracteres.').max(255, 'O Ramo deve ter um máximo de 255 caracteres.').toUpperCase(),
+    telefone: z.string().min(16, 'O telefone deve ter somente números e o padrão 99 99999-9999').toUpperCase(),
+    email: z.string().email('E-mail inválido.').toLowerCase(),
 })
 
 export default function FormExpo() {
     const maskedPhoneInput = useMaskito({ options: phoneMask });
-
+    const [loading, setLoading] = React.useState(false)
+    const { toast } = useToast()
     const form = useForm<z.infer<typeof expoSchema>>({
         resolver: zodResolver(expoSchema),
         defaultValues: {
@@ -48,9 +52,26 @@ export default function FormExpo() {
         },
     })
 
-    function onSubmit(values: z.infer<typeof expoSchema>) {
-        console.log(values)
-        console.log(values.telefone.length)
+    async function onSubmit(values: z.infer<typeof expoSchema>) {
+        setLoading(true)
+        try {
+            const res = await axios.post('/api/expoRegister', values)
+            console.log(res.data);
+            toast({
+                title: "Sucesso!",
+                description: `${values.nome}, suas informações foi encaminhadas à equipe responsável. Entraremos em contato o mais rápido possível.`,
+            })
+            form.reset();
+            setLoading(false)
+        } catch (error) {
+            console.log(error);
+            toast({
+                title: "Erro!",
+                description: "Houve um erro ao enviar suas informações, tente novamente.",
+                variant: 'destructive'
+            })
+            setLoading(false)
+        }
     }
 
     return (
@@ -141,8 +162,8 @@ export default function FormExpo() {
                             )}
                         />
                         <div className="flex flex-col justify-center mt-3 gap-2">
-                            <Button className="bg-verde-escuro hover:bg-verde-escuro/50" type="submit">Cadastrar</Button>
-                            <Button type="submit" className="gap-2"> <FaWhatsapp />WhatsApp</Button>
+                            <Button disabled={loading} className="bg-verde-escuro hover:bg-verde-escuro/50" type="submit">{loading ? <Loader2 className="animate-spin" /> : null}Cadastrar</Button>
+                            <Button disabled={loading} className="gap-2"> <FaWhatsapp />WhatsApp</Button>
                         </div>
                     </CardContent>
                 </form>

@@ -17,3 +17,12 @@ model User {
   hashedPassword String
   image          String?
 }
+
+model ExpoForm {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  nome     String
+  empresa  String
+  ramo     String
+  telefone String
+  email    String
+}

@@ -75,15 +75,15 @@ export default function NavBar() {
                         </Link>
                     </NavigationMenuItem>
 
-                    <NavigationMenuItem>
+                    {/* <NavigationMenuItem>
                         <Link href="/expor" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                 SOBRE NÓS
                             </NavigationMenuLink>
                         </Link>
-                    </NavigationMenuItem>
+                    </NavigationMenuItem> */}
 
-                    <NavigationMenuItem>
+                    {/* <NavigationMenuItem>
                         <NavigationMenuTrigger>FOTOS</NavigationMenuTrigger>
                         <NavigationMenuContent className="text-verde-escuro">
                             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
@@ -98,7 +98,7 @@ export default function NavBar() {
                                 ))}
                             </ul>
                         </NavigationMenuContent>
-                    </NavigationMenuItem>
+                    </NavigationMenuItem> */}
 
                 </NavigationMenuList>
             </NavigationMenu>

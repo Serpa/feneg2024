@@ -6,7 +6,7 @@ import FenegLogo from '@/public/feneg.png'
 
 export default function Header() {
     return (
-        <div className='flex w-full align-middle items-center justify-between p-5'>
+        <div className='flex w-full align-middle items-center justify-between'>
             <Image
                 priority={true}
                 src="/feneg.png"

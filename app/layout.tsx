@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" suppressHydrationWarning>
-      <body className="min-w-fit h-full">
+      <body className="flex min-h-screen flex-col w-min-fit">
 
         <ThemeProvider
           attribute="class"
@@ -28,7 +28,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
 
-          <div className="bg-gradient-to-b from-verde-be/30 to-white">
+          <div className="top-0 bg-gradient-to-b from-verde-be/30 to-white">
             <Header />
             <div className="flex justify-center items-center">
               <Separator className="w-[90%]" />
@@ -38,8 +38,9 @@ export default function RootLayout({
               <Separator className="w-[90%]" />
             </div>
           </div>
-
-          {children}
+          <main className="container flex-1 grow">
+            {children}
+          </main>
           <Toaster />
           <FooterComp />
         </ThemeProvider>

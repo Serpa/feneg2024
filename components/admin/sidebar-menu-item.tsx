@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 export default function SideBarMenuItem({ item, toggleCollapse }: { item: SideNavItem, toggleCollapse: boolean }) {
     const pathName = usePathname();
     const ActiveLinkStyle = 'rounded-md bg-gray-700/20'
-    const LinkStyle = 'flex items-center min-h-40px h-full text-black py-2 px-4 hover:text-black/20 rounded-md duration-300';
+    const LinkStyle = 'flex items-center min-h-40px h-full py-2 px-4 hover:rounded-md duration-300';
     const subLinkStyle = LinkStyle;
     const [subMenuOpen, setSubMenuOpen] = useState(false)
     function toggleSubMenu() {

@@ -21,13 +21,6 @@ export default function RootLayout({
     <html lang="pt-br" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col w-min-fit">
 
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-
           <div className="top-0 bg-gradient-to-b from-verde-be/30 to-white">
             <Header />
             <div className="flex justify-center items-center">
@@ -43,7 +36,6 @@ export default function RootLayout({
           </main>
           <Toaster />
           <FooterComp />
-        </ThemeProvider>
       </body>
     </html>
   );

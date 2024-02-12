@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
         maxAge: 60 * 60,
     },
     pages: {
-        signIn: '/',
+        signIn: '/admin',
         signOut: '/',
         error: '/',
         verifyRequest: '/',

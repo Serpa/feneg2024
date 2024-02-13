@@ -6,6 +6,7 @@ import HeaderAdmin from "@/components/admin/header";
 import PageWrapper from "@/components/admin/pageWrapper";
 import AuthProvider from "@/components/session-provider";
 import { Toaster } from "@/components/ui/toaster"
+import SwrProvider from "@/components/swr-provider";
 
 export const metadata: Metadata = {
   title: "FENEG 2024 - Feira de Negócios Sicoob Frutal.",
@@ -27,15 +28,16 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-
-          <div className="flex min-h-screen">
-            <HeaderAdmin />
-            <SideBarAdmin />
-            <PageWrapper >
-              {children}
-            </PageWrapper>
-          </div>
-          <Toaster />
+            <SwrProvider>
+              <div className="flex min-h-screen">
+                <HeaderAdmin />
+                <SideBarAdmin />
+                <PageWrapper >
+                  {children}
+                </PageWrapper>
+              </div>
+              <Toaster />
+            </SwrProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>

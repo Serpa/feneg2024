@@ -16,7 +16,7 @@ export default function HeaderAdmin() {
     return (
         <header className={`${toggleCollapse ? asideOpen : asideClose}`}>
             <div className='flex items-center justify-between h-16'>
-                <Button className='hover:bg-white ml3 rounded-md h-[30px] shadow-sm shadow-black/10 transition duration-300 ease-in-out flex items-center justify-center dark:text-white' variant='ghost' onClick={sideBarToggle}><Menu /></Button>
+                <Button className='hover:bg-primary ml3 rounded-md h-[30px] shadow-sm shadow-black/10 transition duration-300 ease-in-out flex items-center justify-center dark:text-white' variant='ghost' onClick={sideBarToggle}><Menu /></Button>
                 <div className='flex flex-row gap-2'>
                     <Avatar>
                         <AvatarImage src="https://github.com/shadcn.png" />

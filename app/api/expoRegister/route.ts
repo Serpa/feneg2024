@@ -5,7 +5,6 @@ import prisma from '@/lib/prisma';
 export async function POST(req: Request) {
 
     const form = await req.json()
-    console.log(form)
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -17,7 +16,7 @@ export async function POST(req: Request) {
     const mailOptions = {
         from: 'queroexpor@feneg.com.br',
         to: 'serpa419@gmail.com',
-        subject: 'Teste',
+        subject: `Novo Cadastro de Interesse - ${form.nome}`,
         html: `
         <!DOCTYPE html>
 <html lang="pt-br">
@@ -134,7 +133,7 @@ export async function POST(req: Request) {
                     console.error(err);
                     reject(err);
                 } else {
-                    console.log(info);
+                    // console.log(info);
                     resolve(info);
                 }
             });

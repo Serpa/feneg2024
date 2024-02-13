@@ -59,7 +59,7 @@ export default function Login() {
     }
 
     return (
-        <Card className='h-fit xs:w-full sm:w-5/6 md:w-3/5 lg:w-2/5 w-1/5'>
+        <Card className='h-fit xs:w-full sm:w-5/6 md:w-3/5 lg:w-2/5 w-1/5 min-w-fit'>
             <CardHeader className='flex justify-center items-center'>
                 <CardTitle >Entrar</CardTitle>
             </CardHeader>

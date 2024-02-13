@@ -10,6 +10,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Status {
+  Novo
+  Contatado
+  Interessado
+  Negociacao
+  Vendido
+}
+
 model User {
   id             String  @id @default(auto()) @map("_id") @db.ObjectId
   name           String
@@ -19,10 +27,12 @@ model User {
 }
 
 model ExpoForm {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  nome     String
-  empresa  String
-  ramo     String
-  telefone String
-  email    String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  nome      String
+  empresa   String
+  ramo      String
+  telefone  String
+  email     String
+  status    Status   @default(Novo)
+  createdAt DateTime @default(now())
 }

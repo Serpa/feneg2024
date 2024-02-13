@@ -46,7 +46,6 @@ export const authOptions: NextAuthOptions = {
                 password: { label: 'Password', type: 'password' }
             },
             async authorize(credentials): Promise<any> {
-                
                 if (!credentials?.email || !credentials.password) {
                     return null
                 }
@@ -56,6 +55,7 @@ export const authOptions: NextAuthOptions = {
                         email: credentials.email
                     },
                 })
+                console.log(user)
 
                 if (!user) {
                     return null

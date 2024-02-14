@@ -36,3 +36,10 @@ model ExpoForm {
   status    Status   @default(Novo)
   createdAt DateTime @default(now())
 }
+
+model MainPost {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  alt       String
+  createdAt DateTime @default(now())
+}

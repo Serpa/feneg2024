@@ -5,10 +5,11 @@ import { columns } from './columns'
 import useSWR from 'swr'
 import Loading from '@/components/loading'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import LoadingError from '@/components/error-loading'
 
 export default function Interessados() {
     const { data, error, isLoading } = useSWR('/api/admin/registers')
-    if (error) return <div>failed to load</div>
+    if (error) return <LoadingError/>
     if (isLoading) return <Loading />
     return (
         <div className='p-5'>

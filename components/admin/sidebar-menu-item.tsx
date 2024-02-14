@@ -33,21 +33,22 @@ export default function SideBarMenuItem({ item, toggleCollapse }: { item: SideNa
 
 
                         </a>
-                        {subMenuOpen && <div className='border-l-4'>
-                            <div className='grid gap-y-2 px-10 py-3 leading-5'>
-                                {
-                                    item.subMenuItems?.map((subItem, index) => {
-                                        return (
-                                            <Link key={index} href={subItem.path} className='py-2 px-4 text-black/90'>
-                                                <span>
-                                                    {subItem.title}
-                                                </span>
-                                            </Link>
-                                        )
-                                    })
-                                }
-                            </div>
-                        </div>}
+                        {subMenuOpen && toggleCollapse &&
+                            <div className='hover:bg-primary/50 rounded-md'>
+                                <div className='grid gap-y-2 px-10 py-3 leading-5'>
+                                    {
+                                        item.subMenuItems?.map((subItem, index) => {
+                                            return (
+                                                <Link key={index} href={subItem.path} className='py-2 px-4'>
+                                                    <span>
+                                                        {subItem.title}
+                                                    </span>
+                                                </Link>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>}
                     </div>)
                     : (<Link href={item.path} className={`${LinkStyle} ${item.path === pathName ? ActiveLinkStyle : ''}`}>
                         {item.icon}

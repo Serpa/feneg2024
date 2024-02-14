@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import FooterComp from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/toaster"
 import SwrProvider from "@/components/swr-provider";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "FENEG 2024 - Feira de Negócios Sicoob Frutal.",
@@ -34,6 +35,7 @@ export default function RootLayout({
           </div>
           <main className="container flex-1 grow">
             {children}
+            <SpeedInsights />
           </main>
           <Toaster />
           <FooterComp />

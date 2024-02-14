@@ -7,6 +7,7 @@ import PageWrapper from "@/components/admin/pageWrapper";
 import AuthProvider from "@/components/session-provider";
 import { Toaster } from "@/components/ui/toaster"
 import SwrProvider from "@/components/swr-provider";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "FENEG 2024 - Feira de Negócios Sicoob Frutal.",
@@ -34,6 +35,7 @@ export default function RootLayout({
                 <SideBarAdmin />
                 <PageWrapper >
                   {children}
+                  <SpeedInsights />
                 </PageWrapper>
               </div>
               <Toaster />

@@ -51,6 +51,10 @@ type ActionsCellProps = {
     row: Row<Interessados>;
 }
 
+type CopyRow = {
+    row: Row<Interessados>;
+}
+
 const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
@@ -124,7 +128,6 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
                     name="status"
                     render={({ field }) => (
                         <FormItem className="w-[8rem]">
-                            <FormLabel>Status</FormLabel>
                             <Select onValueChange={(e: string) => {
                                 onChangeSubmit(form.getValues('id'), e)
                             }} defaultValue={field.value}>
@@ -150,6 +153,32 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
     )
 }
 
+const CopyCellEmail: React.FC<CopyRow> = ({ row }) => {
+    const { toast } = useToast()
+    function handleCopy() {
+        navigator.clipboard.writeText(row.getValue('email'))
+        toast({
+            title: "Texto copiado para a área de transferência...",
+        })
+    }
+    return (
+        <p onClick={handleCopy} className="cursor-pointer">{row.getValue('email')}</p>
+    )
+}
+const CopyCellTel: React.FC<CopyRow> = ({ row }) => {
+    const { toast } = useToast()
+    const telefone: string = row.getValue('telefone');
+    function handleCopy() {
+        navigator.clipboard.writeText(telefone.toString().replace('-', '').replace(/ /g,'').substring(3))
+        toast({
+            title: "Texto copiado para a área de transferência...",
+        })
+    }
+    return (
+        <p onClick={handleCopy} className="cursor-pointer">{row.getValue('telefone')}</p>
+    )
+}
+
 export const columns: ColumnDef<Interessados>[] = [
     {
         accessorKey: "nome",
@@ -166,10 +195,12 @@ export const columns: ColumnDef<Interessados>[] = [
     {
         accessorKey: "telefone",
         header: "Telefone",
+        cell: CopyCellTel
     },
     {
         accessorKey: "email",
         header: "E-mail",
+        cell: CopyCellEmail
     },
     {
         accessorKey: "status",

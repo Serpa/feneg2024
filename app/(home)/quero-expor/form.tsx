@@ -28,6 +28,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import { useToast } from "@/components/ui/use-toast"
 import axios from 'axios'
 import { Loader2 } from "lucide-react"
+import Link from "next/link"
 
 const expoSchema = z.object({
     nome: z.string().min(3, 'O nome deve ter um mínimo de 3 caracteres.').max(255, 'O Nome deve ter um máximo de 255 caracteres.').toUpperCase(),
@@ -81,9 +82,9 @@ export default function FormExpo() {
                 <CardDescription>Faça o cadastro e se torne um expositor na FENEG 2024.</CardDescription>
             </CardHeader>
 
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                    <CardContent>
+            <CardContent>
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-1">
 
                         <FormField
                             control={form.control}
@@ -163,11 +164,15 @@ export default function FormExpo() {
                         />
                         <div className="flex flex-col justify-center mt-3 gap-2">
                             <Button disabled={loading} className="bg-verde-escuro hover:bg-verde-escuro/50" type="submit">{loading ? <Loader2 className="animate-spin" /> : null}Cadastrar</Button>
-                            <Button disabled={loading} className="gap-2"> <FaWhatsapp />WhatsApp</Button>
                         </div>
-                    </CardContent>
-                </form>
-            </Form>
-        </Card>
+                    </form>
+                </Form>
+                <div className="flex flex-col justify-center mt-3 gap-2">
+                    <Link href={'https://wa.me/5534999999999?text=Ol%C3%A1%2C+tenho+interesse+em+participar+como+expositor+na+FENEG+2024+e+gostaria+de+obter+mais+informa%C3%A7%C3%B5es...'} target="_blank" className="w-full">
+                        <Button disabled={loading} className="w-full"> <FaWhatsapp />WhatsApp</Button>
+                    </Link>
+                </div>
+            </CardContent>
+        </Card >
     )
 }

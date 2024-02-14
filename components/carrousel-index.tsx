@@ -30,7 +30,7 @@ export default function CarrouselIndex() {
                 <CarouselContent>
                     {data.map((img: MainPost) => {
                         return (
-                            <CarouselItem>
+                            <CarouselItem key={img.id}>
                                 <Image
                                     src={img.url}
                                     alt={img.alt}

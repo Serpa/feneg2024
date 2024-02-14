@@ -30,6 +30,16 @@ export default function CarrouselIndex() {
                             style={{ width: '820px', height: 'auto' }}
                         />
                     </CarouselItem>
+                    {/* <CarouselItem>
+                        <Image
+                            src={'https://picsum.photos/200/300'}
+                            alt="Banner"
+                            width="0"
+                            height="0"
+                            sizes="100vw"
+                            style={{ width: '820px', height: '300px' }}
+                        />
+                    </CarouselItem> */}
                     {/* <CarouselItem>...</CarouselItem>
                     <CarouselItem>...</CarouselItem> */}
                 </CarouselContent>

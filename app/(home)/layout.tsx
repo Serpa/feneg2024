@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Separator } from "@/components/ui/separator";
 import FooterComp from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/toaster"
+import SwrProvider from "@/components/swr-provider";
 
 export const metadata: Metadata = {
   title: "FENEG 2024 - Feira de Negócios Sicoob Frutal.",
@@ -19,7 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" suppressHydrationWarning>
-      <body className="flex min-h-screen flex-col w-min-fit">
+      <SwrProvider>
+        <body className="flex min-h-screen flex-col min-w-fit">
           <div className="top-0 bg-gradient-to-b from-verde-be/30 to-white">
             <Header />
             <div className="flex justify-center items-center">
@@ -35,7 +37,8 @@ export default function RootLayout({
           </main>
           <Toaster />
           <FooterComp />
-      </body>
+        </body>
+      </SwrProvider>
     </html>
   );
 }

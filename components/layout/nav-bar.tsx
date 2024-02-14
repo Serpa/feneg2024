@@ -16,41 +16,24 @@ import { ModeToggle } from '../theme-changer'
 
 export default function NavBar() {
 
-    const components: { title: string; href: string; description: string }[] = [
+    const SocialMedia: { title: string; href: string; description: string }[] = [
         {
-            title: "Alert Dialog",
-            href: "/docs/primitives/alert-dialog",
+            title: "FENEG",
+            href: "https://www.instagram.com/fenegsicoob/",
             description:
-                "A modal dialog that interrupts the user with important content and expects a response.",
+                "Instagram FENEG Frutal.",
         },
         {
-            title: "Hover Card",
-            href: "/docs/primitives/hover-card",
+            title: "Sicoob Frutal.",
+            href: "https://www.instagram.com/sicoobfrutal",
             description:
-                "For sighted users to preview content available behind a link.",
+                "Instagram FENEG Frutal.",
         },
         {
-            title: "Progress",
-            href: "/docs/primitives/progress",
+            title: "WhatsApp",
+            href: `https://wa.me/5534999958509?text=Ol%C3%A1%2C+tenho+interesse+em+mais+informa%C3%A7%C3%B5es+sobre+o+FENEG+Frutal+2024`,
             description:
-                "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-        },
-        {
-            title: "Scroll-area",
-            href: "/docs/primitives/scroll-area",
-            description: "Visually or semantically separates content.",
-        },
-        {
-            title: "Tabs",
-            href: "/docs/primitives/tabs",
-            description:
-                "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-        },
-        {
-            title: "Tooltip",
-            href: "/docs/primitives/tooltip",
-            description:
-                "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+                "WhatsApp FENEG 2024",
         },
     ]
 
@@ -70,7 +53,7 @@ export default function NavBar() {
                     <NavigationMenuItem>
                         <Link href="/quero-expor" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                QUERO EXPOR
+                                QUERO SER EXPOSITOR
                             </NavigationMenuLink>
                         </Link>
                     </NavigationMenuItem>
@@ -83,11 +66,11 @@ export default function NavBar() {
                         </Link>
                     </NavigationMenuItem> */}
 
-                    {/* <NavigationMenuItem>
-                        <NavigationMenuTrigger>FOTOS</NavigationMenuTrigger>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger>FALE CONOSCO</NavigationMenuTrigger>
                         <NavigationMenuContent className="text-verde-escuro">
                             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                {components.map((component) => (
+                                {SocialMedia.map((component) => (
                                     <ListItem
                                         key={component.title}
                                         title={component.title}
@@ -98,7 +81,7 @@ export default function NavBar() {
                                 ))}
                             </ul>
                         </NavigationMenuContent>
-                    </NavigationMenuItem> */}
+                    </NavigationMenuItem>
 
                 </NavigationMenuList>
             </NavigationMenu>

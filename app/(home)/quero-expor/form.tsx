@@ -168,7 +168,7 @@ export default function FormExpo() {
                     </form>
                 </Form>
                 <div className="flex flex-col justify-center mt-3 gap-2">
-                    <Link href={'https://wa.me/5534999958509?text=Ol%C3%A1%2C+tenho+interesse+em+participar+como+expositor+na+FENEG+2024+e+gostaria+de+obter+mais+informa%C3%A7%C3%B5es...'} target="_blank" className="w-full">
+                    <Link href={`https://wa.me/5534999958509?text=Ol%C3%A1%2C+tenho+interesse+em+participar+como+expositor+na+FENEG+2024+e+gostaria+de+obter+mais+informa%C3%A7%C3%B5es...`} target="_blank" className="w-full">
                         <Button disabled={loading} className="w-full"> <FaWhatsapp />WhatsApp</Button>
                     </Link>
                 </div>

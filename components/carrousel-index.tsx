@@ -15,7 +15,7 @@ export default function CarrouselIndex() {
         Autoplay({ delay: 2000, stopOnInteraction: true })
     )
     return (
-        <div className='p-5'>
+        <div className='p-5 flex justify-center'>
             <Carousel
                 plugins={[plugin.current]}
             >

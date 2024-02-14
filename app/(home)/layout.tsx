@@ -20,7 +20,6 @@ export default function RootLayout({
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col w-min-fit">
-
           <div className="top-0 bg-gradient-to-b from-verde-be/30 to-white">
             <Header />
             <div className="flex justify-center items-center">

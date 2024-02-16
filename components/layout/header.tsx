@@ -13,7 +13,7 @@ export default function Header() {
                 width="0"
                 height="0"
                 sizes="100vw"
-                style={{ width: '5rem', height: 'auto' }}
+                style={{ width: '7rem', height: 'auto' }}
                 alt="FENEG Logo"
                 className='hover:animate-pulse cursor-pointer'
             />

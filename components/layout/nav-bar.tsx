@@ -24,16 +24,16 @@ export default function NavBar() {
                 "Instagram FENEG Frutal.",
         },
         {
-            title: "Sicoob Frutal.",
+            title: "Sicoob Frutal",
             href: "https://www.instagram.com/sicoobfrutal",
             description:
-                "Instagram FENEG Frutal.",
+                "Instagram Sicoob Frutal.",
         },
         {
             title: "WhatsApp",
             href: `https://wa.me/553484114909?text=Ol%C3%A1%2C+tenho+interesse+em+mais+informa%C3%A7%C3%B5es+sobre+o+FENEG+Frutal+2024`,
             description:
-                "WhatsApp FENEG 2024",
+                "Fale com um de nossos colaboradores.",
         },
     ]
 

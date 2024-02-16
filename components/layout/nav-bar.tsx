@@ -18,7 +18,7 @@ export default function NavBar() {
 
     const SocialMedia: { title: string; href: string; description: string }[] = [
         {
-            title: "FENEG",
+            title: "FENEG 2024",
             href: "https://www.instagram.com/fenegsicoob/",
             description:
                 "Instagram FENEG Frutal.",
@@ -31,7 +31,7 @@ export default function NavBar() {
         },
         {
             title: "WhatsApp",
-            href: `https://wa.me/5534999958509?text=Ol%C3%A1%2C+tenho+interesse+em+mais+informa%C3%A7%C3%B5es+sobre+o+FENEG+Frutal+2024`,
+            href: `https://wa.me/553484114909?text=Ol%C3%A1%2C+tenho+interesse+em+mais+informa%C3%A7%C3%B5es+sobre+o+FENEG+Frutal+2024`,
             description:
                 "WhatsApp FENEG 2024",
         },

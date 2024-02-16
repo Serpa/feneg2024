@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     });
     const mailOptions = {
         from: 'queroexpor@feneg.com.br',
-        to: 'informatica@sicoobfrutal.com.br',
+        to: 'feneg@sicoobfrutal.com.br',
         subject: `Novo Cadastro de Interesse - ${form.nome}`,
         html: `
         <!DOCTYPE html>

@@ -34,12 +34,12 @@ export default function SideBarMenuItem({ item, toggleCollapse }: { item: SideNa
 
                         </a>
                         {subMenuOpen && toggleCollapse &&
-                            <div className='hover:bg-primary/50 rounded-md'>
-                                <div className='grid gap-y-2 px-10 py-3 leading-5'>
+                            <div>
+                                <div className={`p-2 h-fit flex flex-col`}>
                                     {
                                         item.subMenuItems?.map((subItem, index) => {
                                             return (
-                                                <Link key={index} href={subItem.path} className='py-2 px-4'>
+                                                <Link key={index} href={subItem.path} className={`py-2 px-4 hover:bg-primary/50 rounded-md gap-2 ${pathName === subItem.path ? ActiveLinkStyle : ''}`}>
                                                     <span>
                                                         {subItem.title}
                                                     </span>

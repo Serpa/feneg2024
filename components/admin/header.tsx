@@ -16,10 +16,11 @@ export default function HeaderAdmin() {
     }
     const asideOpen = 'fixed bg-background w-full z-0 px-4 shadow-sm shadow-slate-500/40 sm:pl-[20rem]'
     const asideClose = 'fixed bg-background w-full z-0 px-4 shadow-sm shadow-slate-500/40 sm:pl-[5.6rem]'
+    const buttonOpen = 'max-[639px]:ml-[20rem]'
     return (
         <header className={`${toggleCollapse ? asideOpen : asideClose}`}>
             <div className='flex items-center justify-between h-16'>
-                <Button className='hover:bg-primary ml3 rounded-md h-[30px] shadow-sm shadow-black/10 transition duration-300 ease-in-out flex items-center justify-center dark:text-white' variant='ghost' onClick={sideBarToggle}><Menu /></Button>
+                <Button className={`hover:bg-primary ml3 rounded-md h-[30px] shadow-sm shadow-black/10 transition duration-300 ease-in-out flex items-center justify-center dark:text-white ${toggleCollapse ? buttonOpen : ''}`} variant='ghost' onClick={sideBarToggle}><Menu /></Button>
                 <div className='flex flex-row gap-2'>
                     {session.status === 'authenticated' && <DropdownMenu>
                         <DropdownMenuTrigger asChild>

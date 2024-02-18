@@ -7,8 +7,8 @@ import { useSideBarToggle } from '@/lib/hooks/use-sidebar-toggle'
 
 export default function SideBarAdmin() {
     const { toggleCollapse } = useSideBarToggle()
-    const asideOpen = 'fixed bg-background z-50 h-full shadow-lg shadow-gray-900/20 transition duration-300 ease-in-out w-[20rem]';
-    const asideClose = 'fixed bg-background z-50 h-full shadow-lg shadow-gray-900/20 transition duration-300 ease-in-out sm:w-[5.4rem] sm:left-0 left-[100%]';
+    const asideOpen = 'fixed bg-background z-49 h-full shadow-lg shadow-gray-900/20 transition duration-300 ease-in-out w-[20rem]';
+    const asideClose = 'fixed bg-background z-49 h-full shadow-lg shadow-gray-900/20 transition duration-300 ease-in-out sm:w-[5.4rem] sm:left-0 left-[100%]';
     return (
         <aside className={`${toggleCollapse ? asideOpen : asideClose} `}>
             <div className='flex relative items-center py-5'>

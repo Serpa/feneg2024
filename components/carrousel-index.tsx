@@ -31,13 +31,12 @@ export default function CarrouselIndex() {
                     {data.map((img: MainPost) => {
                         return (
                             <CarouselItem key={img.id} className='flex justify-center'>
-                                <Image
+                                <img
                                     src={img.url}
                                     alt={img.alt}
                                     width="0"
                                     height="0"
                                     sizes="100vw"
-                                    priority
                                     style={{ width: '820px', height: 'auto' }}
                                 />
                             </CarouselItem>

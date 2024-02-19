@@ -1,5 +1,5 @@
 import { SideNavItem } from "@/lib/types/types";
-import { BookUser, Home, Image } from "lucide-react";
+import { BookUser, Home, Image, PencilLine } from "lucide-react";
 
 export const SideNav_Items: SideNavItem[] = [
     {
@@ -13,6 +13,11 @@ export const SideNav_Items: SideNavItem[] = [
         icon: <BookUser />,
     },
     {
+        title: 'Sobre Nós',
+        path: '/admin/sobre-nos',
+        icon: <PencilLine />,
+    },
+    {
         title: 'Imagens',
         path: '/admin/imagens',
         icon: <Image />,
@@ -20,7 +25,12 @@ export const SideNav_Items: SideNavItem[] = [
         subMenuItems: [
             {
                 title: 'Principal',
-                path: '/admin/principal',
+                path: '/admin/imagens/principal',
+                icon: <BookUser />,
+            },
+            {
+                title: 'Empresas',
+                path: '/admin/imagens/empresas',
                 icon: <BookUser />,
             }
         ]

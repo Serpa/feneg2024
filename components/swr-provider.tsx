@@ -12,7 +12,9 @@ export default function SwrProvider({ children }: { children: React.ReactNode })
                 setTimeout(() => revalidate({ retryCount }), 1000)
             },
             refreshInterval: 3000,
-            fetcher: (url: string) => axios.get(url).then(res => res.data),
+            fetcher: (url) => fetch(url, {
+                cache: 'no-store',
+            }).then(res => res.json()),
         }}
     >{children}</SWRConfig>;
 }

@@ -43,3 +43,9 @@ model MainPost {
   alt       String
   createdAt DateTime @default(now())
 }
+
+model SobreNosPage {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  ativo  Boolean @default(false)
+  pagina String
+}

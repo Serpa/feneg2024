@@ -31,7 +31,7 @@ export default function CarrouselIndex() {
                     {data.map((img: MainPost) => {
                         return (
                             <CarouselItem key={img.id} className='flex justify-center'>
-                                <img
+                                <Image
                                     src={img.url}
                                     alt={img.alt}
                                     width="0"

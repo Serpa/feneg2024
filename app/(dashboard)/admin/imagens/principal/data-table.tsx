@@ -31,52 +31,6 @@ interface DataTableProps<TData, TValue> {
   data: TData[]
 }
 
-const status = [
-  {
-    value: 'Novo',
-    label: 'Novo',
-    icon: BellPlus
-  },
-  {
-    value: 'Contatado',
-    label: 'Contatado',
-    icon: PhoneOutgoing
-  },
-  {
-    value: 'Interessado',
-    label: 'Interessado',
-    icon: AlertTriangle
-  },
-  {
-    value: 'Negociacao',
-    label: 'Em Negociação',
-    icon: Receipt
-  },
-  {
-    value: 'Vendido',
-    label: 'Fechado',
-    icon: Stamp
-  },
-]
-
-const dataRegistro = [
-  {
-    value: '24',
-    label: 'Mais de 24 Horas',
-    icon: ShieldAlert
-  },
-  {
-    value: '48',
-    label: 'Mais de 48 Horas',
-    icon: XOctagon
-  },
-  {
-    value: '-24',
-    label: 'Menos de 24 Horas',
-    icon: Flame
-  },
-]
-
 export function DataTable<TData, TValue>({
   columns,
   data,
@@ -103,39 +57,13 @@ export function DataTable<TData, TValue>({
       <div className="p-5 flex items-center justify-between">
         <div className="flex w-[70%]">
           <Input
-            placeholder="Procurar Nome..."
-            value={(table.getColumn("nome")?.getFilterValue() as string) ?? ""}
+            placeholder="Procurar Descrição..."
+            value={(table.getColumn("alt")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
-              table.getColumn("nome")?.setFilterValue(event.target.value)
+              table.getColumn("alt")?.setFilterValue(event.target.value)
             }
             className="mx-5 max-w-sm"
           />
-          <Input
-            placeholder="Procurar Empresa..."
-            value={(table.getColumn("empresa")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("empresa")?.setFilterValue(event.target.value)
-            }
-            className="mx-5 max-w-sm"
-          />
-        </div>
-
-        <div className="flex gap-2">
-          {table.getColumn("status") && (
-            <DataTableFacetedFilter
-              column={table.getColumn("status")}
-              title="Status"
-              options={status}
-            />
-          )}
-
-          {table.getColumn("createdAt") && (
-            <DataTableFacetedFilter
-              column={table.getColumn("createdAt")}
-              title="Data"
-              options={dataRegistro}
-            />
-          )}
         </div>
 
       </div>

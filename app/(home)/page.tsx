@@ -1,8 +1,4 @@
 import CarrouselIndex from "@/components/carrousel-index";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
 

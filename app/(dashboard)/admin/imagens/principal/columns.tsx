@@ -22,10 +22,11 @@ import axios from "axios"
 import { useToast } from "@/components/ui/use-toast"
 import { mutate } from "swr"
 import { useState } from "react"
-import { AlertTriangle, BellPlus, Loader2, PhoneOutgoing, Receipt, Stamp } from "lucide-react"
+import { AlertTriangle, BellPlus, Delete, Loader2, PhoneOutgoing, Receipt, Stamp } from "lucide-react"
 import dayjs from 'dayjs';
 import { DataTableColumnHeader } from "@/components/DataTableColumnHeader"
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -47,59 +48,18 @@ type CopyRow = {
 const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
-    const statusSchema = z.object({
-        id: z.string(),
-        url: z.string(),
-        alt: z.string(),
-        createdAt: z.string(),
-    })
 
-    const form = useForm<z.infer<typeof statusSchema>>({
-        resolver: zodResolver(statusSchema),
-        defaultValues: {
-            id: row.original.id,
-            url: row.original.url,
-            alt: row.original.alt,
-            createdAt: row.original.createdAt,
-        },
-    })
-
-
-    // async function onSubmit(values: z.infer<typeof statusSchema>) {
-    //     console.log(values);
-    //     // setLoading(true)
-    //     // try {
-    //     //     const res = await axios.put('/api/unimed-frutal/clientes/titulares/update', values)
-    //     //     if (res.status === 200) {
-    //     //         toast({
-    //     //             title: "Sucesso!",
-    //     //             description: `${row.original.nome} atualizado com sucesso!`,
-    //     //         })
-    //     //         setLoading(false)
-    //     //         mutate('/api/unimed-frutal/clientes/titulares')
-    //     //     }
-    //     // } catch (error) {
-    //     //     toast({
-    //     //         title: "Erro",
-    //     //         description: `${error}`,
-    //     //         variant: 'destructive'
-    //     //     })
-    //     //     setLoading(false)
-    //     // }
-    // }
-
-    async function onChangeSubmit(id: string, status: string) {
-        // console.log(id, status);
+    async function onSubmit() {
         setLoading(true)
         try {
-            const res = await axios.put('/api/admin/registers/updateStatus', { id, status })
+            const res = await axios.delete(`/api/admin/mainPosts/${row.original.id}`)
             if (res.status === 200) {
                 toast({
                     title: "Sucesso!",
-                    description: `Status de ${row.original.alt} atualizado com sucesso!`,
+                    description: `${row.original.alt} removida com sucesso!`,
                 })
                 setLoading(false)
-                mutate('/api/admin/registers/')
+                mutate('/api/admin/mainPosts')
             }
         } catch (error) {
             toast({
@@ -107,42 +67,12 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
                 description: `${error}`,
                 variant: 'destructive'
             })
-            mutate('/api/admin/registers/')
             setLoading(false)
         }
     }
 
-
     return (
-        <Form {...form}>
-            <form className="w-2/3 space-y-6">
-                <FormField
-                    control={form.control}
-                    name="url"
-                    render={({ field }) => (
-                        <FormItem className="w-[8rem]">
-                            <Select onValueChange={(e: string) => {
-                                onChangeSubmit(form.getValues('id'), e)
-                            }} defaultValue={field.value}>
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Selecione um valor." />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="Contatado">Contatado</SelectItem>
-                                    <SelectItem value="Interessado">Interessado</SelectItem>
-                                    <SelectItem value="Negociacao">Negociação</SelectItem>
-                                    <SelectItem value="Vendido">Vendido</SelectItem>
-                                    <SelectItem value="Novo">Novo</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-            </form>
-        </Form>
+        <Button variant='ghost' onClick={onSubmit}><Delete /></Button>
     )
 }
 
@@ -171,14 +101,15 @@ export const columns: ColumnDef<MainPosts>[] = [
         cell: CopyCellUrl
     },
     {
-        accessorKey: "url",
-        header: "Link",
+        id: "imageView",
+        header: "Prévia",
         cell: ({ row }) => {
             return (
                 <div className="flex justify-center">
                     <Image
                         src={row.original.url}
                         alt={row.original.alt}
+                        priority
                         width="0"
                         height="0"
                         sizes="100vw"
@@ -187,5 +118,10 @@ export const columns: ColumnDef<MainPosts>[] = [
                 </div>
             )
         }
+    },
+    {
+        id: "actions",
+        header: "Ação",
+        cell: ActionsCell
     },
 ]

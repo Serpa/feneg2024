@@ -1,7 +1,7 @@
-'use client';
+'use server';
 import CarrouselIndex from "@/components/carrousel-index";
 
-export default function Home() {
+export default async function Home() {
 
   return (
     <>

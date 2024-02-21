@@ -57,10 +57,10 @@ export function DataTable<TData, TValue>({
       <div className="p-5 flex items-center justify-between">
         <div className="flex w-[70%]">
           <Input
-            placeholder="Procurar Descrição..."
-            value={(table.getColumn("alt")?.getFilterValue() as string) ?? ""}
+            placeholder="Procurar Nome..."
+            value={(table.getColumn("nome")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
-              table.getColumn("alt")?.setFilterValue(event.target.value)
+              table.getColumn("nome")?.setFilterValue(event.target.value)
             }
             className="mx-5 max-w-sm"
           />

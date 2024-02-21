@@ -4,7 +4,7 @@ import Loading from '@/components/loading'
 import { RichTextReadOnly } from 'mui-tiptap';
 import React from 'react'
 import useSWR from 'swr'
-import useExtensions from '../sobre-nos/useExtensions';
+import useExtensions from '@/app/(dashboard)/admin/sobre-nos/useExtensions';
 
 export default function TestPage() {
     const extensions = useExtensions()

@@ -1,5 +1,6 @@
-'use server';
 import CarrouselIndex from "@/components/carrousel-index";
+import EmpresasParticipantes from "@/components/empresas";
+import { Separator } from "@/components/ui/separator";
 
 export default async function Home() {
 
@@ -16,6 +17,7 @@ export default async function Home() {
         <div className="flex justify-center align-middle items-center">
           <CarrouselIndex />
         </div>
+        <EmpresasParticipantes />
       </div>
     </>
   );

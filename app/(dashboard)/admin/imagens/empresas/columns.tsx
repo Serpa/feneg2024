@@ -30,20 +30,25 @@ import { Button } from "@/components/ui/button"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type MainPosts = {
+export type EmpresasParticipantes = {
     id: string
     url: string
-    alt: string
-    public_id: string
+    nome: string
+    instagram: string,
+    telefone: string,
+    whatsapp: string,
+    endereco: string,
+    cidade: string,
+    estado: string,
     createdAt: string
 }
 
 type ActionsCellProps = {
-    row: Row<MainPosts>;
+    row: Row<EmpresasParticipantes>;
 }
 
 type CopyRow = {
-    row: Row<MainPosts>;
+    row: Row<EmpresasParticipantes>;
 }
 
 const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
@@ -53,14 +58,14 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
     async function onSubmit() {
         setLoading(true)
         try {
-            const res = await axios.delete(`/api/admin/mainPosts/${row.original.id}`)
+            const res = await axios.delete(`/api/admin/empresasParticipantes/${row.original.id}`)
             if (res.status === 200) {
                 toast({
                     title: "Sucesso!",
-                    description: `${row.original.alt} removida com sucesso!`,
+                    description: `${row.original.nome} removida com sucesso!`,
                 })
                 setLoading(false)
-                mutate('/api/admin/mainPosts')
+                mutate('/api/admin/empresasParticipantes')
             }
         } catch (error) {
             toast({
@@ -86,15 +91,15 @@ const CopyCellUrl: React.FC<CopyRow> = ({ row }) => {
         })
     }
     return (
-        <p onClick={handleCopy} className="cursor-pointer">{row.getValue('url')}</p>
+        <p onClick={handleCopy} className="cursor-pointer">URL {row.original.nome}</p>
     )
 }
 
 
-export const columns: ColumnDef<MainPosts>[] = [
+export const columns: ColumnDef<EmpresasParticipantes>[] = [
     {
-        accessorKey: "alt",
-        header: "Descrição",
+        accessorKey: "nome",
+        header: "Nome",
     },
     {
         accessorKey: "url",
@@ -102,15 +107,22 @@ export const columns: ColumnDef<MainPosts>[] = [
         cell: CopyCellUrl
     },
     {
+        accessorKey: "email",
+        header: "E-mail",
+    },
+    {
+        accessorKey: "telefone",
+        header: "Telefone",
+    },
+    {
         id: "imageView",
         header: "Prévia",
         cell: ({ row }) => {
             return (
                 <div className="flex justify-center">
-                    <Image
+                    <img
                         src={row.original.url}
-                        alt={row.original.alt}
-                        priority
+                        alt={row.original.nome}
                         width="0"
                         height="0"
                         sizes="100vw"

@@ -9,10 +9,22 @@ export async function GET(req: Request) {
         return new Response('Não autorizado!', { status: 401 })
     }
     try {
-        const res = await prisma.expoForm.findMany({
-            orderBy:{
-                createdAt:'desc'
-            }
+        const res = await prisma.empresas.findMany()
+        return new Response(JSON.stringify(res), { status: 200 })
+    } catch (error) {
+        return new Response(JSON.stringify(error), { status: 500 })
+    }
+}
+
+export async function POST(req: Request) {
+    const session = await getServerSession(authOptions)
+    if (!session) {
+        return new Response('Não autorizado!', { status: 401 })
+    }
+    try {
+        const image = await req.json()
+        const res = await prisma.empresas.create({
+            data: image
         })
         return new Response(JSON.stringify(res), { status: 200 })
     } catch (error) {

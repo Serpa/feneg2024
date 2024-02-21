@@ -85,6 +85,7 @@ export default function SobreNosEdit() {
                         extensions={extensions}
                         content={data[0].pagina}
                         renderControls={() => <EditorMenuControls />}
+                        className="p-50"
                     >
                         {() => (
                             <>

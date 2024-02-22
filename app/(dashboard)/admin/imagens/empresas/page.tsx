@@ -42,7 +42,7 @@ const imageSchema = z.object({
         .any()
         .refine((files) => {
             return files?.[0]?.size <= MAX_FILE_SIZE;
-        }, `Tamanho máximo da imagem: 5 MB.`)
+        }, `Tamanho máximo da imagem: 4 MB.`)
         .refine(
             (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
             "Somente os formatos .jpg, .jpeg, .png and .webp são permitidos."

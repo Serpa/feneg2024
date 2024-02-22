@@ -28,7 +28,7 @@ import Image from 'next/image'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Albuns } from '@prisma/client'
 
-const MAX_FILE_SIZE = 1024 * 1024 * 5;
+const MAX_FILE_SIZE = 1024 * 1024 * 4;
 const ACCEPTED_IMAGE_MIME_TYPES = [
     "image/jpeg",
     "image/jpg",
@@ -42,7 +42,7 @@ const imageSchema = z.object({
         .any()
         .refine((files) => {
             return files?.[0]?.size <= MAX_FILE_SIZE;
-        }, `Tamanho máximo da imagem: 5 MB.`)
+        }, `Tamanho máximo da imagem: 4 MB.`)
         .refine(
             (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
             "Somente os formatos .jpg, .jpeg, .png and .webp são permitidos."
@@ -232,7 +232,6 @@ export default function ImagensAlbuns() {
                                                 <Input
                                                     type="file"
                                                     id="fileInput"
-                                                    multiple
                                                     onBlur={field.onBlur}
                                                     name={field.name}
                                                     ref={field.ref}

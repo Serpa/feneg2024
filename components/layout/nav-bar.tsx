@@ -14,6 +14,7 @@ import Link from 'next/link'
 import ExpositoresMenu from './expostiores-menu'
 import SobreNosMenu from './sobre-nos-menu'
 import FotosMenu from './albuns'
+import FaqMenu from './faq-menu'
 
 export default function NavBar() {
 
@@ -64,7 +65,8 @@ export default function NavBar() {
                     </NavigationMenuItem>
 
                     <FotosMenu />
-
+                    <FaqMenu />
+                    
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>FALE CONOSCO</NavigationMenuTrigger>
                         <NavigationMenuContent className="text-verde-escuro">

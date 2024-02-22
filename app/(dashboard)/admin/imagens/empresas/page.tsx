@@ -96,7 +96,7 @@ export default function ImagensEmpresas() {
             })
         );
         try {
-            const { data: response } = await axios.post("/api/admin/upload", { folder: 'mainPage', images: imagesList });
+            const { data: response } = await axios.post("/api/admin/upload", { folder: 'companies', images: imagesList });
             delete values.images;
             const res = await axios.post('/api/admin/empresasParticipantes', { ...values, url: response[0].secure_url, public_id: response[0].public_id })
 

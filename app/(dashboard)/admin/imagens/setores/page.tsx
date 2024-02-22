@@ -79,7 +79,7 @@ export default function ImagensPrincipal() {
             })
         );
         try {
-            const { data: response } = await axios.post("/api/admin/upload", { folder: 'mainPage', images: imagesList });
+            const { data: response } = await axios.post("/api/admin/upload", { folder: 'sectors', images: imagesList });
 
             const res = await axios.post('/api/admin/setores', { url: response[0].secure_url, public_id: response[0].public_id, alt: values.alt })
 

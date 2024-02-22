@@ -41,7 +41,8 @@ const imageSchema = z.object({
     images: z
         .any()
         .refine((files) => {
-            return files?.[0]?.size <= MAX_FILE_SIZE;
+            const over = Array.from(files).filter((file: any) => file?.size > MAX_FILE_SIZE)
+            return over.length > 0 ? false : true
         }, `Tamanho máximo da imagem: 4 MB.`)
         .refine(
             (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
@@ -98,15 +99,21 @@ export default function ImagensAlbuns() {
             })
         );
         try {
-            const { data: response } = await axios.post("/api/admin/upload", { folder: 'photos', images: imagesList });
+            const responseUpload = await Promise.all(imagesList.map(async (img) => {
+                const { data: response } = await axios.post("/api/admin/upload", { folder: 'photos', images: [img] });
+                return response[0]
+            }))
 
-            const dataParsed = response.map((r: any) => {
+            const dataParsed = responseUpload.map((r: any) => {
                 return {
                     url: r.secure_url,
                     public_id: r.public_id,
                     albunsId: values.albunsId
                 }
             })
+            console.log(responseUpload);
+            console.log(dataParsed);
+
 
             const res = await axios.post('/api/admin/photos', dataParsed)
             console.log(res);
@@ -232,6 +239,7 @@ export default function ImagensAlbuns() {
                                                 <Input
                                                     type="file"
                                                     id="fileInput"
+                                                    multiple
                                                     onBlur={field.onBlur}
                                                     name={field.name}
                                                     ref={field.ref}

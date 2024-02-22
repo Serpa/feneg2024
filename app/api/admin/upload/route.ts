@@ -1,6 +1,7 @@
 import { authOptions } from '@/lib/authOptions';
 import { getServerSession } from 'next-auth';
 import { v2 as cloudinary } from 'cloudinary';
+import axios from 'axios';
 
 cloudinary.config({
     cloud_name: process.env.CLOUDNARY_CLOUD_NAME,
@@ -14,14 +15,26 @@ export async function POST(req: Request) {
         return new Response('Não autorizado!', { status: 401 })
     }
     try {
-        const dataUpload = await req.json()
-        const responseList = await Promise.all(dataUpload.images.map((async (img: string) => {
-            const uploadResponse = await cloudinary.uploader.upload(img, {
-                upload_preset: 'ml_default',
-                folder: dataUpload.folder
-            });
-            return uploadResponse
-        })))
+        const formData = await req.formData()
+        const images = formData.getAll('images') as unknown as File[];
+        const folder = formData.get('folder')?.toString();
+
+        const responseList = await Promise.all(
+            images.map(async (img) => {
+                const fileBuffer = await img.arrayBuffer();
+
+                var mime = img.type;
+                var encoding = 'base64';
+                var base64Data = Buffer.from(fileBuffer).toString('base64');
+                var fileUri = 'data:' + mime + ';' + encoding + ',' + base64Data;
+
+                const uploadResponse = await cloudinary.uploader.upload(fileUri, {
+                    upload_preset: 'ml_default',
+                    folder: folder
+                });
+                return uploadResponse
+            })
+        )
 
         return new Response(JSON.stringify(responseList), { status: 200 })
     } catch (error) {

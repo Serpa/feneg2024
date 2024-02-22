@@ -64,43 +64,50 @@ export default function ImagensPrincipal() {
     })
 
     async function onSubmit(values: z.infer<typeof imageSchema>) {
-        setLoading(true)
-        const imagesList = await Promise.all(
-            Array.from(values.images).map(async (image) => {
-                if (image instanceof File) {
-                    return await fileToBase64(image);
-                } else {
-                    toast({
-                        title: "Erro",
-                        description: `Erro no upload da imagem.`,
-                        variant: 'destructive'
-                    });
-                }
-            })
-        );
-        try {
-            const { data: response } = await axios.post("/api/admin/upload", { folder: 'mainPage', images: imagesList });
+        // setLoading(true)
 
-            const res = await axios.post('/api/admin/setores', { url: response[0].secure_url, public_id: response[0].public_id, alt: values.alt })
-
-            if (res.status === 200) {
+        const formData = new FormData();
+        formData.append('folder', 'setores')
+        Array.from(values.images).forEach((file) => {
+            if (file instanceof File) {
+                formData.append("images", file);
+            } else {
                 toast({
-                    title: "Sucesso!",
-                    description: `${values.alt} adicionada com sucesso!`,
+                    title: "Erro",
+                    description: `Erro ao realizar o upload!`,
+                    variant: 'destructive'
                 })
-                setLoading(false)
-                mutate('/api/admin/setores')
-                form.reset()
-                setSelectedImage(null)
-                setOpen(false)
             }
+        });
+        
+        try {
+            const { data: response } = await axios.post("/api/admin/upload", formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+            // console.log(response);
+
+            // const res = await axios.post('/api/admin/setores', { url: response[0].secure_url, public_id: response[0].public_id, alt: values.alt })
+
+            // if (res.status === 200) {
+            //     toast({
+            //         title: "Sucesso!",
+            //         description: `${values.alt} adicionada com sucesso!`,
+            //     })
+            //     setLoading(false)
+            //     mutate('/api/admin/setores')
+            //     form.reset()
+            //     setSelectedImage(null)
+            //     setOpen(false)
+            // }
         } catch (err) {
-            toast({
-                title: "Erro",
-                description: `${err}`,
-                variant: 'destructive'
-            })
-            setLoading(false)
+            // console.log(err);
+
+            // toast({
+            //     title: "Erro",
+            //     description: `${err}`,
+            //     variant: 'destructive'
+            // })
+            // setLoading(false)
         }
     }
 
@@ -148,6 +155,7 @@ export default function ImagensPrincipal() {
                                                 <Input
                                                     type="file"
                                                     id="fileInput"
+                                                    multiple
                                                     onBlur={field.onBlur}
                                                     name={field.name}
                                                     ref={field.ref}

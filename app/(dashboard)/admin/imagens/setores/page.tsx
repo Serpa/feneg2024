@@ -26,7 +26,7 @@ import { useToast } from '@/components/ui/use-toast'
 import { fileToBase64 } from '@/components/file2Base64'
 import Image from 'next/image'
 
-const MAX_FILE_SIZE = 1024 * 1024 * 5;
+const MAX_FILE_SIZE = 1024 * 1024 * 4;
 const ACCEPTED_IMAGE_MIME_TYPES = [
     "image/jpeg",
     "image/jpg",

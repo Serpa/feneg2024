@@ -4,6 +4,11 @@ const nextConfig = {
     images: {
         domains: ['i.imgur.com', 'localhost', 'res.cloudinary.com']
     },
+    experimental: {
+        serverActions: {
+            bodySizeLimit: '80mb'
+        }
+    }
 };
 
 

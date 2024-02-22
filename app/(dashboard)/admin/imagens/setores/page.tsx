@@ -95,6 +95,8 @@ export default function ImagensPrincipal() {
                 setOpen(false)
             }
         } catch (err) {
+            console.log(err);
+
             toast({
                 title: "Erro",
                 description: `${err}`,

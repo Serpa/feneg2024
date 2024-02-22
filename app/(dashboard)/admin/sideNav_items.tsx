@@ -26,13 +26,15 @@ export const SideNav_Items: SideNavItem[] = [
             {
                 title: 'Principal',
                 path: '/admin/imagens/principal',
-                icon: <BookUser />,
             },
             {
                 title: 'Empresas',
                 path: '/admin/imagens/empresas',
-                icon: <BookUser />,
-            }
+            },
+            {
+                title: 'Álbuns',
+                path: '/admin/imagens/albuns',
+            },
         ]
     }
 ]

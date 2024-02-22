@@ -7,7 +7,7 @@ import Loading from '@/components/loading'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import LoadingError from '@/components/error-loading'
 import { Button } from '@/components/ui/button'
-import { Plus } from 'lucide-react'
+import { Loader2, Plus } from 'lucide-react'
 import {
     Dialog,
     DialogContent,
@@ -26,9 +26,27 @@ import { useToast } from '@/components/ui/use-toast'
 import { useMaskito } from '@maskito/react'
 import phoneMask from '@/lib/masks/phone'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { fileToBase64 } from '@/components/file2Base64'
+
+const MAX_FILE_SIZE = 1024 * 1024 * 5;
+const ACCEPTED_IMAGE_MIME_TYPES = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/webp",
+];
+const ACCEPTED_IMAGE_TYPES = ["jpeg", "jpg", "png", "webp"];
 
 const imageSchema = z.object({
-    url: z.string().url('Link inválido.'),
+    images: z
+        .any()
+        .refine((files) => {
+            return files?.[0]?.size <= MAX_FILE_SIZE;
+        }, `Tamanho máximo da imagem: 5 MB.`)
+        .refine(
+            (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
+            "Somente os formatos .jpg, .jpeg, .png and .webp são permitidos."
+        ),
     nome: z.string().min(2, 'Nome da empresa é obrigatório.'),
     email: z.string().email('E-mail inválido.').optional().or(z.literal('')),
     instagram: z.string().url('Link inválido.').optional().or(z.literal('')),
@@ -45,11 +63,12 @@ export default function ImagensEmpresas() {
     const maskedPhoneInput = useMaskito({ options: phoneMask });
     const { data, error, isLoading, mutate } = useSWR('/api/admin/empresasParticipantes')
     const [open, setOpen] = useState(false)
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
     const form = useForm<z.infer<typeof imageSchema>>({
         resolver: zodResolver(imageSchema),
         defaultValues: {
-            url: "",
+            images: undefined,
             nome: "",
             email: "",
             instagram: "",
@@ -63,8 +82,24 @@ export default function ImagensEmpresas() {
 
     async function onSubmit(values: z.infer<typeof imageSchema>) {
         setLoading(true)
+        const imagesList = await Promise.all(
+            Array.from(values.images).map(async (image) => {
+                if (image instanceof File) {
+                    return await fileToBase64(image);
+                } else {
+                    toast({
+                        title: "Erro",
+                        description: `Erro no upload da imagem.`,
+                        variant: 'destructive'
+                    });
+                }
+            })
+        );
         try {
-            const res = await axios.post('/api/admin/empresasParticipantes', values)
+            const { data: response } = await axios.post("/api/admin/upload", { folder: 'mainPage', images: imagesList });
+            delete values.images;
+            const res = await axios.post('/api/admin/empresasParticipantes', { ...values, url: response[0].secure_url, public_id: response[0].public_id })
+
             if (res.status === 200) {
                 toast({
                     title: "Sucesso!",
@@ -88,30 +123,6 @@ export default function ImagensEmpresas() {
     function openDialog() {
         setOpen(true)
     }
-
-    // async function getEstados() {
-    //     try {
-    //         const estados = await axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
-    //     } catch (error) {
-    //         toast({
-    //             title: "Erro",
-    //             description: `${error}`,
-    //             variant: 'destructive'
-    //         })
-    //     }
-    // }
-
-    // async function getCidades(estado: string) {
-    //     try {
-    //         const cidades = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estado}/municipios`)
-    //     } catch (error) {
-    //         toast({
-    //             title: "Erro",
-    //             description: `${error}`,
-    //             variant: 'destructive'
-    //         })
-    //     }
-    // }
 
     if (error) return <LoadingError />
     if (isLoading) return <Loading />
@@ -141,12 +152,22 @@ export default function ImagensEmpresas() {
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
                                 <FormField
                                     control={form.control}
-                                    name="url"
+                                    name="images"
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel>URL</FormLabel>
                                             <FormControl>
-                                                <Input placeholder="https://exemplo.com.br/imagem.png" {...field} />
+                                                <Input
+                                                    type="file"
+                                                    id="fileInput"
+                                                    onBlur={field.onBlur}
+                                                    name={field.name}
+                                                    ref={field.ref}
+                                                    onChange={(e) => {
+                                                        field.onChange(e.target.files);
+                                                        setSelectedImage(e.target.files?.[0] || null)
+                                                    }}
+                                                />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -270,7 +291,7 @@ export default function ImagensEmpresas() {
                                 />
 
                                 <div className='flex justify-end'>
-                                    <Button type="submit">Adicionar</Button>
+                                    <Button disabled={loading} type="submit">{loading && <Loader2 className='animate-spin' />}Adicionar</Button>
                                 </div>
                             </form>
                         </Form>

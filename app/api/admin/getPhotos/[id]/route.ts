@@ -10,6 +10,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDNARY_API_SECRET
 });
 
+
 export async function DELETE(
     request: Request,
     { params }: { params: { id: string } }
@@ -20,14 +21,14 @@ export async function DELETE(
     }
     const id = params.id
     try {
-        const getPost = await prisma.empresas.findUnique({
+        const getPost = await prisma.photos.findUnique({
             where: {
                 id: id
             }
         })
         if (getPost) {
             const deleteResponse = await cloudinary.uploader.destroy(getPost?.public_id)
-            const res = await prisma.empresas.delete({
+            const res = await prisma.photos.delete({
                 where: {
                     id: id
                 }

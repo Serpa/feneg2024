@@ -23,6 +23,9 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input'
 import axios from 'axios'
 import { useToast } from '@/components/ui/use-toast'
+import { fileToBase64 } from '@/components/file2Base64'
+import Image from 'next/image'
+
 const MAX_FILE_SIZE = 1024 * 1024 * 5;
 const ACCEPTED_IMAGE_MIME_TYPES = [
     "image/jpeg",
@@ -31,8 +34,6 @@ const ACCEPTED_IMAGE_MIME_TYPES = [
     "image/webp",
 ];
 const ACCEPTED_IMAGE_TYPES = ["jpeg", "jpg", "png", "webp"];
-import { fileToBase64 } from '@/components/file2Base64'
-import Image from 'next/image'
 
 const imageSchema = z.object({
     images: z

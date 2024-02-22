@@ -3,16 +3,16 @@ import React from 'react'
 import {
     NavigationMenu,
     NavigationMenuContent,
-    NavigationMenuIndicator,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
-    NavigationMenuViewport,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import Link from 'next/link'
-import { ModeToggle } from '../theme-changer'
+
+import ExpositoresMenu from './expostiores-menu'
+import SobreNosMenu from './sobre-nos-menu'
 
 export default function NavBar() {
 
@@ -50,6 +50,8 @@ export default function NavBar() {
                         </Link>
                     </NavigationMenuItem>
 
+                    <SobreNosMenu />
+
                     <NavigationMenuItem>
                         <Link href="/quero-expor" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -59,12 +61,14 @@ export default function NavBar() {
                     </NavigationMenuItem>
 
                     {/* <NavigationMenuItem>
-                        <Link href="/expor" legacyBehavior passHref>
+                        <Link href="/sobre-nos" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                 SOBRE NÓS
                             </NavigationMenuLink>
                         </Link>
                     </NavigationMenuItem> */}
+
+                    <ExpositoresMenu />
 
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>FALE CONOSCO</NavigationMenuTrigger>
@@ -86,31 +90,31 @@ export default function NavBar() {
                 </NavigationMenuList>
             </NavigationMenu>
             {/* <ModeToggle /> */}
-        </div>
+        </div >
 
     )
 }
 
 const ListItem = React.forwardRef<
-React.ElementRef<"a">,
-React.ComponentPropsWithoutRef<"a">
+    React.ElementRef<"a">,
+    React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
-return (
-    <li>
-        <NavigationMenuLink asChild>
-            <a
-                ref={ref}
-                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                {...props}
-            >
-                <div className="text-sm font-medium leading-none">{title}</div>
-                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                    {children}
-                </p>
-            </a>
-        </NavigationMenuLink>
-    </li>
-)
+    return (
+        <li>
+            <NavigationMenuLink asChild>
+                <a
+                    ref={ref}
+                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    {...props}
+                >
+                    <div className="text-sm font-medium leading-none">{title}</div>
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        {children}
+                    </p>
+                </a>
+            </NavigationMenuLink>
+        </li>
+    )
 })
 
 ListItem.displayName = "ListItem"

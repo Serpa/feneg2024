@@ -30,25 +30,20 @@ import { Button } from "@/components/ui/button"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type EmpresasParticipantes = {
+export type SetoresImages = {
     id: string
     url: string
-    nome: string
-    instagram: string,
-    telefone: string,
-    whatsapp: string,
-    endereco: string,
-    cidade: string,
-    estado: string,
+    alt: string
+    public_id: string
     createdAt: string
 }
 
 type ActionsCellProps = {
-    row: Row<EmpresasParticipantes>;
+    row: Row<SetoresImages>;
 }
 
 type CopyRow = {
-    row: Row<EmpresasParticipantes>;
+    row: Row<SetoresImages>;
 }
 
 const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
@@ -58,14 +53,14 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
     async function onSubmit() {
         setLoading(true)
         try {
-            const res = await axios.delete(`/api/admin/empresasParticipantes/${row.original.id}`)
+            const res = await axios.delete(`/api/admin/setores/${row.original.id}`)
             if (res.status === 200) {
                 toast({
                     title: "Sucesso!",
-                    description: `${row.original.nome} removida com sucesso!`,
+                    description: `${row.original.alt} removida com sucesso!`,
                 })
                 setLoading(false)
-                mutate('/api/admin/empresasParticipantes')
+                mutate('/api/admin/SetoresImages')
             }
         } catch (error) {
             toast({
@@ -96,10 +91,10 @@ const CopyCellUrl: React.FC<CopyRow> = ({ row }) => {
 }
 
 
-export const columns: ColumnDef<EmpresasParticipantes>[] = [
+export const columns: ColumnDef<SetoresImages>[] = [
     {
-        accessorKey: "nome",
-        header: "Nome",
+        accessorKey: "alt",
+        header: "Descrição",
     },
     {
         accessorKey: "url",
@@ -107,22 +102,15 @@ export const columns: ColumnDef<EmpresasParticipantes>[] = [
         cell: CopyCellUrl
     },
     {
-        accessorKey: "email",
-        header: "E-mail",
-    },
-    {
-        accessorKey: "telefone",
-        header: "Telefone",
-    },
-    {
         id: "imageView",
         header: "Prévia",
         cell: ({ row }) => {
             return (
                 <div className="flex justify-center">
-                    <img
+                    <Image
                         src={row.original.url}
-                        alt={row.original.nome}
+                        alt={row.original.alt}
+                        priority
                         width="0"
                         height="0"
                         sizes="100vw"

@@ -35,6 +35,10 @@ export const SideNav_Items: SideNavItem[] = [
                 title: 'Álbuns',
                 path: '/admin/imagens/albuns',
             },
+            {
+                title: 'Setores',
+                path: '/admin/imagens/setores',
+            },
         ]
     }
 ]

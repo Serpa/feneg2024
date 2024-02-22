@@ -13,6 +13,7 @@ import Link from 'next/link'
 
 import ExpositoresMenu from './expostiores-menu'
 import SobreNosMenu from './sobre-nos-menu'
+import FotosMenu from './albuns'
 
 export default function NavBar() {
 
@@ -52,6 +53,8 @@ export default function NavBar() {
 
                     <SobreNosMenu />
 
+                    <ExpositoresMenu />
+
                     <NavigationMenuItem>
                         <Link href="/quero-expor" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -60,15 +63,7 @@ export default function NavBar() {
                         </Link>
                     </NavigationMenuItem>
 
-                    {/* <NavigationMenuItem>
-                        <Link href="/sobre-nos" legacyBehavior passHref>
-                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                SOBRE NÓS
-                            </NavigationMenuLink>
-                        </Link>
-                    </NavigationMenuItem> */}
-
-                    <ExpositoresMenu />
+                    <FotosMenu />
 
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>FALE CONOSCO</NavigationMenuTrigger>

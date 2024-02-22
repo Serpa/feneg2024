@@ -74,7 +74,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
     }
 
     return (
-        <Button variant='ghost' onClick={onSubmit}><Delete /></Button>
+        <Button disabled={loading} variant='ghost' onClick={onSubmit}>{loading ? <Loader2 className="animate-spin" /> : <Delete />}</Button>
     )
 }
 

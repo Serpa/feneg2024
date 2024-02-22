@@ -83,3 +83,11 @@ model Photos {
   Albuns    Albuns?  @relation(fields: [albunsId], references: [id])
   albunsId  String?  @db.ObjectId
 }
+
+model SetoresImages {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  alt       String
+  public_id String
+  createdAt DateTime @default(now())
+}

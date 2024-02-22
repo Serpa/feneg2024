@@ -51,7 +51,7 @@ const imageSchema = z.object({
 export default function ImagensPrincipal() {
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
-    const { data, error, isLoading, mutate } = useSWR('/api/admin/mainPosts')
+    const { data, error, isLoading, mutate } = useSWR('/api/admin/setores')
     const [open, setOpen] = useState(false)
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
@@ -81,7 +81,7 @@ export default function ImagensPrincipal() {
         try {
             const { data: response } = await axios.post("/api/admin/upload", { folder: 'mainPage', images: imagesList });
 
-            const res = await axios.post('/api/admin/mainPosts', { url: response[0].secure_url, public_id: response[0].public_id, alt: values.alt })
+            const res = await axios.post('/api/admin/setores', { url: response[0].secure_url, public_id: response[0].public_id, alt: values.alt })
 
             if (res.status === 200) {
                 toast({
@@ -89,7 +89,7 @@ export default function ImagensPrincipal() {
                     description: `${values.alt} adicionada com sucesso!`,
                 })
                 setLoading(false)
-                mutate('/api/admin/mainPosts')
+                mutate('/api/admin/setores')
                 form.reset()
                 setSelectedImage(null)
                 setOpen(false)
@@ -115,10 +115,10 @@ export default function ImagensPrincipal() {
             <Card className='p-5'>
                 <CardHeader>
                     <CardTitle>
-                        Imagens Página Principal.
+                        Imagens Lista de Setores.
                     </CardTitle>
                     <CardDescription>
-                        Lista de imagens do carrosel da página principal.
+                        Lista de imagens dos setores presentes na FENEG.
                     </CardDescription>
                     <div className='flex justify-end'>
                         <Button variant={'ghost'} className='w-fit h-fit' onClick={openDialog}><Plus /> Adicionar Imagem</Button>

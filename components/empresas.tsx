@@ -20,10 +20,17 @@ export default function EmpresasParticipantes() {
         return (
             <div className='flex flex-col gap-1 justify-center'>
                 <p className='text-2xl text-white text-center'>{item.nome.toUpperCase()}</p>
+
                 {item.endereco && <p className='text-2xl text-white text-center'>{item.endereco}</p>}
+
                 {item.cidade && item.estado && <p className='text-2xl text-white text-center'>{item.cidade}-{item.estado}</p>}
+
+                {item.telefone && <p className='text-2xl text-white text-center'>{item.telefone}</p>}
+
                 {item.whatsapp && <Link href={item.whatsapp} className='flex justify-center text-center'><FaWhatsapp /></Link>}
+
                 {item.instagram && <Link href={item.instagram} className='flex justify-center text-center'><FaInstagram size={30} /></Link>}
+
             </div>
         )
 

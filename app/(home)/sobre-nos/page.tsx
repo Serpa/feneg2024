@@ -14,10 +14,10 @@ export default function TestPage() {
     return (
         <div className='h-full w-full'>
             {/* <div dangerouslySetInnerHTML={{ __html: data[0].pagina }} /> */}
-            <RichTextReadOnly
+            {data[0].ativo && <RichTextReadOnly
                 content={data[0].pagina}
                 extensions={extensions}
-            />
+            />}
         </div>
     )
 }

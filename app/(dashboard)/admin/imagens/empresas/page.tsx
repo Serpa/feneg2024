@@ -61,6 +61,7 @@ export default function ImagensEmpresas() {
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
     const maskedPhoneInput = useMaskito({ options: phoneMask });
+    const maskedWhatsappInput = useMaskito({ options: phoneMask });
     const { data, error, isLoading, mutate } = useSWR('/api/admin/empresasParticipantes')
     const [open, setOpen] = useState(false)
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -240,7 +241,7 @@ export default function ImagensEmpresas() {
                                             <FormControl>
                                                 <Input placeholder="99 9999-9999"
                                                     {...field}
-                                                    ref={maskedPhoneInput}
+                                                    ref={maskedWhatsappInput}
                                                     onInput={(evt) => {
                                                         form.setValue('whatsapp', evt.currentTarget.value)
                                                     }}

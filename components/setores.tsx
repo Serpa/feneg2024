@@ -22,7 +22,7 @@ export default function SetoresParticipantes() {
             <Separator />
             <div className="flex justify-center">
                 <div className="space-y-4">
-                    <h1 className="text-center text-4xl font-bold tracking-tighter sm:text-4xl md:text-4xl">SETORES PRESENTES.</h1>
+                    <h1 className="text-center pt-5 text-4xl font-bold tracking-tighter sm:text-4xl md:text-4xl">SETORES PRESENTES</h1>
                     <PhotoProvider
                         maskOpacity={0.7}
                     >

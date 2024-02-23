@@ -39,7 +39,7 @@ export default function EmpresasParticipantes() {
         <div className="mx-auto max-w-7xl w-full text-verde-escuro my-5">
             <div className="flex justify-center">
                 <div className="space-y-4">
-                    <h1 className="text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">EMPRESAS PARTICIPANTES.</h1>
+                    <h1 className="text-center pt-2 pb-4 text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">EMPRESAS PARTICIPANTES</h1>
                     <PhotoProvider
                     maskOpacity={0.7}
                         overlayRender={({ overlay, images }) => {

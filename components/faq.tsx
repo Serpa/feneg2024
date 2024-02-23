@@ -21,7 +21,7 @@ export default function FaqComp() {
         <div className="mx-auto max-w-7xl w-full text-verde-escuro my-5">
             <div className="flex justify-center">
                 <div className="space-y-4 w-full">
-                    <h1 className="text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">FAQ FENEG</h1>
+                    <h1 className="text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">FAQ FENEG - Perguntas Frequentes</h1>
                     <Separator/>
                     <Accordion type="single" collapsible>
                         {data.map((faq: Faq, index: number) => (

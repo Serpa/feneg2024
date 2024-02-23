@@ -16,7 +16,7 @@ export default function Fotos({ params }: { params: { album: string } }) {
             {data.photos.length > 0 ? (
                 <>
                     <p className='text-3xl font-bold text-verde-escuro text-center p-5'>{data.nome}</p>
-                    <div className='flex justify-center'>
+                    <div className='flex justify-center mt-5'>
                         <PhotoProvider>
                             <div className='flex gap-2 justify-center flex-wrap'>
                                 {data.photos.map((item: Photos, index: number) => (

@@ -25,7 +25,7 @@ export default function FotosMenu() {
         <>
             {
                 albunsData.length > 0 && photosData.length > 0 && <NavigationMenuItem>
-                    <NavigationMenuTrigger>FOTOS</NavigationMenuTrigger>
+                    <NavigationMenuTrigger>GALERIA</NavigationMenuTrigger>
                     <NavigationMenuContent className="text-verde-escuro">
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                             {albunsData.map((component: AlbumData) => {

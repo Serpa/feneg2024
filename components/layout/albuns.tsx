@@ -15,13 +15,16 @@ type AlbumData = {
 
 export default function FotosMenu() {
     const { data: albunsData, error: albunsError, isLoading: albunsIsLoading } = useSWR('/api/albuns')
+    const { data: photosData, error: photosError, isLoading: photosIsLoading } = useSWR('/api/fotos')
 
     if (albunsIsLoading) return null
     if (albunsError) return null
+    if (photosIsLoading) return null
+    if (photosError) return null
     return (
         <>
             {
-                albunsData.length > 0 && <NavigationMenuItem>
+                albunsData.length > 0 && photosData.length > 0 && <NavigationMenuItem>
                     <NavigationMenuTrigger>FOTOS</NavigationMenuTrigger>
                     <NavigationMenuContent className="text-verde-escuro">
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">

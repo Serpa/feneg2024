@@ -41,8 +41,11 @@ const imageSchema = z.object({
     images: z
         .any()
         .refine((files) => {
-            const over = Array.from(files).filter((file: any) => file?.size > MAX_FILE_SIZE)
-            return over.length > 0 ? false : true
+            if (files) {
+                const over = Array.from(files).filter((file: any) => file?.size > MAX_FILE_SIZE)
+                return over.length > 0 ? false : true
+            }
+            return false
         }, `Tamanho máximo da imagem: 4 MB.`)
         .refine(
             (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),

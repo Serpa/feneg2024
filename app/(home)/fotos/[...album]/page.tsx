@@ -13,18 +13,21 @@ export default function Fotos({ params }: { params: { album: string } }) {
     if (isLoading) return <Loading />
     return (
         <div>
-            <p className='text-3xl font-bold text-verde-escuro text-center p-5'>{data.nome}</p>
-            <div className='flex justify-center'>
-                <PhotoProvider>
-                    <div className='flex gap-2 justify-center flex-wrap'>
-                        {data.photos.map((item: Photos, index: number) => (
-                            <PhotoView key={index} src={item.url}>
-                                <img src={item.url} alt="" width={'150px'} />
-                            </PhotoView>
-                        ))}
+            {data.photos.length > 0 ? (
+                <>
+                    <p className='text-3xl font-bold text-verde-escuro text-center p-5'>{data.nome}</p>
+                    <div className='flex justify-center'>
+                        <PhotoProvider>
+                            <div className='flex gap-2 justify-center flex-wrap'>
+                                {data.photos.map((item: Photos, index: number) => (
+                                    <PhotoView key={index} src={item.url}>
+                                        <img src={item.url} alt="" width={'150px'} />
+                                    </PhotoView>
+                                ))}
+                            </div>
+                        </PhotoProvider>
                     </div>
-                </PhotoProvider>
-            </div>
+                </>) : (<LoadingError />)}
 
         </div>
     )

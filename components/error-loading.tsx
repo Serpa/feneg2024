@@ -12,7 +12,7 @@ export default function LoadingError() {
             </div>
             <div className="space-y-2">
                 <p className="text-sm text-gray-500">Não é você, somos nós.</p>
-                <Button onClick={()=>router.refresh()} className="mx-auto" size="lg">
+                <Button onClick={()=>location.reload()} className="mx-auto" size="lg">
                     Recarregar
                 </Button>
             </div>

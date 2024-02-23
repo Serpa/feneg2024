@@ -91,3 +91,10 @@ model SetoresImages {
   public_id String
   createdAt DateTime @default(now())
 }
+
+model Faq {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  pergunta  String
+  resposta  String
+  createdAt DateTime @default(now())
+}

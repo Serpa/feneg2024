@@ -26,7 +26,7 @@ export default function SetoresParticipantes() {
                     <PhotoProvider
                         maskOpacity={0.7}
                     >
-                        <div className='flex gap-2 justify-center flex-wrap'>
+                        <div className='flex gap-4 justify-center flex-wrap'>
                             {data.map((item: SetoresImages, index: number) => (
                                 <PhotoView key={index} src={item.url}
                                 >

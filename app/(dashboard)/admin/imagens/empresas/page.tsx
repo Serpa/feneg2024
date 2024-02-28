@@ -156,7 +156,7 @@ export default function ImagensEmpresas() {
                                     name="images"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>URL</FormLabel>
+                                            <FormLabel>Adicionar Imagem</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     type="file"

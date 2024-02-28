@@ -20,53 +20,53 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
 export default function SobreNosEdit() {
-    const { toast } = useToast()
-    const [loading, setLoading] = useState(false)
-    const extensions = useExtensions();
-    const rteRef = useRef<RichTextEditorRef>(null);
-    const { data, isLoading, error, mutate } = useSWR('/api/admin/sobreNos')
-    if (isLoading) return <Loading />
-    if (error) return <LoadingError />
+    // const { toast } = useToast()
+    // const [loading, setLoading] = useState(false)
+    // const extensions = useExtensions();
+    // const rteRef = useRef<RichTextEditorRef>(null);
+    // const { data, isLoading, error, mutate } = useSWR('/api/admin/sobreNos')
+    // if (isLoading) return <Loading />
+    // if (error) return <LoadingError />
 
-    async function handleUpdate() {
-        setLoading(true)
-        try {
-            const res = await axios.put('/api/admin/sobreNos', { pagina: rteRef.current?.editor?.getHTML() })
-            toast({
-                title: "Sucesso!",
-                description: "A página foi alterada com sucesso!",
-            })
-            setLoading(false)
-        } catch (error) {
-            setLoading(false)
-            toast({
-                title: "Erro!",
-                description: "A página não foi alterada!",
-                variant: 'destructive'
-            })
-        }
-    }
-    async function handleCheck() {
-        setLoading(true)
-        try {
-            const res = await axios.put('/api/admin/sobreNos', { ativo: !data[0].ativo })
-            toast({
-                title: "Sucesso!",
-                description: "O Satatus da página foi alterada com sucesso!",
-            })
-            setLoading(false)
-        } catch (error) {
-            setLoading(false)
-            toast({
-                title: "Erro!",
-                description: "O Status da página não foi alterada!",
-                variant: 'destructive'
-            })
-        }
-    }
+    // async function handleUpdate() {
+    //     setLoading(true)
+    //     try {
+    //         const res = await axios.put('/api/admin/sobreNos', { pagina: rteRef.current?.editor?.getHTML() })
+    //         toast({
+    //             title: "Sucesso!",
+    //             description: "A página foi alterada com sucesso!",
+    //         })
+    //         setLoading(false)
+    //     } catch (error) {
+    //         setLoading(false)
+    //         toast({
+    //             title: "Erro!",
+    //             description: "A página não foi alterada!",
+    //             variant: 'destructive'
+    //         })
+    //     }
+    // }
+    // async function handleCheck() {
+    //     setLoading(true)
+    //     try {
+    //         const res = await axios.put('/api/admin/sobreNos', { ativo: !data[0].ativo })
+    //         toast({
+    //             title: "Sucesso!",
+    //             description: "O Satatus da página foi alterada com sucesso!",
+    //         })
+    //         setLoading(false)
+    //     } catch (error) {
+    //         setLoading(false)
+    //         toast({
+    //             title: "Erro!",
+    //             description: "O Status da página não foi alterada!",
+    //             variant: 'destructive'
+    //         })
+    //     }
+    // }
     return (
         <div>
-            <Card>
+            {/* <Card>
                 <CardHeader>
                     <CardTitle>
                         Sobre nós.
@@ -107,7 +107,7 @@ export default function SobreNosEdit() {
                         {loading ? <Loader2 className="animate-spin" /> : ''}Salvar
                     </Button>
                 </CardContent>
-            </Card>
+            </Card> */}
         </div>
     )
 }

@@ -29,8 +29,6 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Albuns } from "@prisma/client"
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
 export type Photos = {
     id: string
     url: string

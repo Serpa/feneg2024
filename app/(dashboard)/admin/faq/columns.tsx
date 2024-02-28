@@ -72,10 +72,16 @@ export const columns: ColumnDef<Faq>[] = [
     {
         accessorKey: "pergunta",
         header: "Pergunta",
+        cell: ({ row }) => {
+            return row.original.pergunta.length > 50 ? (row.original.pergunta.toString().substring(0, 50) + '...') : (row.original.pergunta)
+        }
     },
     {
         accessorKey: "resposta",
         header: "Resposta",
+        cell: ({ row }) => {
+            return row.original.resposta.length > 50 ? (row.original.resposta.toString().substring(0, 50) + '...') : (row.original.resposta)
+        }
     },
     {
         id: "actions",

@@ -18,7 +18,7 @@ export default function TestPage() {
             <h1 className='flex mb-4 justify-center items-center text-4xl font-extrabold leading-none tracking-tight text-verde-escuro md:text-5xl lg:text-6xl dark:text-white m-5'>SOBRE NÓS</h1>
             <Separator />
             <div className='flex flex-col grow p-5'>
-                <p className='text-2xl text-verde-escuro font-bold'>HISTÓRIA DA COOPERATIVA SICOOB CREDIPONTAL</p>
+                <p className='text-2xl text-verde-escuro font-bold'>HISTÓRIA DA COOPERATIVA SICOOB FRUTAL</p>
                 <div className='p-5 space-y-2'>
                     <p className='text-xl'>
                         O Sicoob Frutal é uma Cooperativa de Crédito que foi constituída em setembro de 1993, com início das atividades em fevereiro de 1994. A ideia de abrir uma Cooperativa de Crédito em Frutal, surgiu dentro do Conselho de Administração da Cooperativa mãe: Cofrul.

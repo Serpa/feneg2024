@@ -30,7 +30,7 @@ export default function SetoresParticipantes() {
                             {data.map((item: SetoresImages, index: number) => (
                                 <PhotoView key={index} src={item.url}
                                 >
-                                    <img src={item.url} alt="" width={'250px'} />
+                                    <img src={item.url} alt="" width={'180px'} />
                                 </PhotoView>
                             ))}
                         </div>

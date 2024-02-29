@@ -34,9 +34,27 @@ export default function TestPage() {
                     </p>
                 </div>
                 <Separator />
-                <div className='flex flex-row p-5'>
+                <div className='flex flex-row p-5 items-center'>
                     <div className='w-2/4 p-5'>
                         <p className='text-2xl text-verde-escuro font-bold'>A FENEG</p>
+                        <p className='text-xl'>
+                            A Feira de Negócios Sicoob Frutal foi idealizada para ser algo diferente, focada em negócios e cultura.
+                        </p>
+                        <p className='text-xl'>
+                            Esse evento foi criado para que a comunidade da nossa região tivesse um espaço para desenvolver sua empresa, fazer bons negócios e trocar conhecimento.
+                        </p>
+                        <p className='text-xl'>
+                            A primeira edição da feira foi responsável pela injeção de mais de R$ 100 milhões na economia regional, graças à ampla oferta de taxas e condições facilitadas por parte de mais de 30 empresas nos estandes.
+                        </p>
+                        <p className='text-xl'>
+                            “Buscamos aliar o desenvolvimento financeiro ao social, pois um não existe sem o outro.” -Reginaldo Dias Machado, Presidente Administrativo do Sicoob Frutal.
+                        </p>
+                        <p className='text-xl'>
+                            “Entre os expositores, há o consenso de que a FENEG superou as expectativas. Isso é gratificante e mostra que todo o trabalho valeu a pena” - Joana Rafaela, analista técnica do Sebrae.
+                        </p>
+                        <p className='text-xl'>
+                            Agradecemos profundamente a todos que participaram do sucesso da 1ª FENEG. E deixamos aqui nosso convite para a FENEG 2024!
+                        </p>
                     </div>
                     <div className='w-2/4'>
                         <Image src={'https://res.cloudinary.com/dt8o4rsmt/image/upload/v1709054154/sobre-nos/egicw1lehibdi6qwin3j.jpg'} width={800} height={800} alt='Foto abertura evento.' />
@@ -45,9 +63,9 @@ export default function TestPage() {
             </div>
             <Separator />
             <div className='flex grow p-5'>
-                <video controls preload="none">
+                <video controls autoPlay muted className='object-fill'>
                     <source src="https://fenesc.com.br/wp-content/uploads/2019/02/FENESC-V%C3%8DDEO-TV.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
+                    Seu navegador não suporta a execução de videos.
                 </video>
             </div>
         </>

@@ -64,7 +64,7 @@ export default function TestPage() {
             <Separator />
             <div className='flex grow p-5'>
                 <video controls autoPlay muted className='object-fill'>
-                    <source src="https://fenesc.com.br/wp-content/uploads/2019/02/FENESC-V%C3%8DDEO-TV.mp4" type="video/mp4" />
+                    <source src="https://res.cloudinary.com/dt8o4rsmt/video/upload/v1709555429/sobre-nos/bqndgotdu1usst9izvks.mp4" type="video/mp4" />
                     Seu navegador não suporta a execução de videos.
                 </video>
             </div>

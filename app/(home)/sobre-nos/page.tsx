@@ -24,10 +24,11 @@ export default function TestPage() {
                         O Sicoob Frutal é uma Cooperativa de Crédito que foi constituída em setembro de 1993, com início das atividades em fevereiro de 1994. A ideia de abrir uma Cooperativa de Crédito em Frutal, surgiu dentro do Conselho de Administração da Cooperativa mãe: Cofrul.
                     </p>
                     <p className='text-xl'>
-                        A Cooperativa prosperou e desde então, 8 agências e 1 Unidade Administrativa foram abertas: Em 03/12/1996 inaugurou-se a Agência de Pirajuba, em 13/04/1998 a Agência do Distrito de Aparecida de Minas, em 25/04/2003 a sede própria na Praça da Matriz de Frutal – Agência Matriz, em 28/07/2004 a Agência de Fronteira,  em 06/06/2005 a Agência de Comendador Gomes, em 23/02/2012 a Agência do CIAP  junto ao Sindicato Rural de Frutal, em 21/11/2014 foi criada a UAD (Unidade Administrativa, primeiramente localizada na Praça Dr. França, próxima a prefeitura de Frutal),  em 31/07/2015 inaugurou-se a Agência JK e nesta mesma data a UAD (Unidade Administrativa) foi transferida da Praça Dr. França para a Avenida JK, 111 e em 20/06/2023 inaugurou-se a Agência de São José do Rio Preto. Além das inaugurações, no dia 27/10/2023 a Unidade Administrativa foi segmentada em dois prédios, sendo o Centro Administrativo na Av. JK, 101 e a Unidade de Negócios Estratégicos, na Av. JK, 111.
+                        A Cooperativa prosperou e desde então, 8 agências e 1 Unidade Administrativa foram abertas: Em 03/12/1996 inaugurou-se a Agência de Pirajuba, em 13/04/1998 a Agência do Distrito de Aparecida de Minas, em 25/04/2003 a sede própria na Praça da Matriz de Frutal – Agência Matriz, em 28/07/2004 a Agência de Fronteira, em 06/06/2005 a Agência de Comendador Gomes, em 23/02/2012 a Agência do CIAP junto ao Sindicato Rural de Frutal, em 21/11/2014 foi criada a UAD (Unidade Administrativa, primeiramente localizada na Praça Dr. França, próxima a prefeitura de Frutal), em 31/07/2015 inaugurou-se a Agência JK e nesta mesma data a UAD (Unidade Administrativa) foi transferida da Praça Dr. França para a Avenida JK, 111 e em 20/06/2023 inaugurou-se a Agência de São José do Rio Preto. Além das inaugurações, no dia 27/10/2023 a Unidade Administrativa foi segmentada em dois prédios, sendo o Centro Administrativo na Av. JK, 101 e a Unidade de Negócios Estratégicos, na Av. JK, 111.
                     </p>
                     <p className='text-xl'>
                         O Sicoob Frutal se desenvolveu de forma impressionante e o crescimento está totalmente alinhado com o propósito de “Conectar pessoas para promover justiça financeira e prosperidade” e a missão de “Promover soluções e experiências inovadoras e sustentáveis por meio da cooperação”.
+
                     </p>
                     <p className='text-xl'>
                         Esse é o Sicoob Frutal: uma Cooperativa feita de Valores!
@@ -38,19 +39,18 @@ export default function TestPage() {
                     <div className='w-2/4 p-5'>
                         <p className='text-2xl text-verde-escuro font-bold'>A FENEG</p>
                         <p className='text-xl'>
-                            A Feira de Negócios Sicoob Frutal foi idealizada para ser algo diferente, focada em negócios e cultura.
+                            A Feira de Negócios Sicoob Frutal foi idealizada para ser algo diferente e inovador, focada em negócios e cultura. Por isso, o Sicoob Frutal e Sebrae se uniram mais uma vez para promover o desenvolvimento econômico e social da região.
                         </p>
                         <p className='text-xl'>
-                            Esse evento foi criado para que a comunidade da nossa região tivesse um espaço para desenvolver sua empresa, fazer bons negócios e trocar conhecimento.
+                            A Feira oportuniza as empresas, exporem e venderem seus produtos e serviços por meio de financiamentos com taxas diferenciadas e competitivas no mercado, fomentando a sustentabilidade dos negócios.
                         </p>
                         <p className='text-xl'>
-                            A primeira edição da feira foi responsável pela injeção de mais de R$ 100 milhões na economia regional, graças à ampla oferta de taxas e condições facilitadas por parte de mais de 30 empresas nos estandes.
+                            O agronegócio, o comércio e os demais pilares negociais do território são beneficiados, uma vez que são ofertados pela cooperativa recursos para custeio, investimento, financiamentos e capital de giro, além de um vasto portfólio de produtos e serviços disponibilizados pelos expositores em condições muito favoráveis.
                         </p>
                         <p className='text-xl'>
-                            “Buscamos aliar o desenvolvimento financeiro ao social, pois um não existe sem o outro.” -Reginaldo Dias Machado, Presidente Administrativo do Sicoob Frutal.
-                        </p>
-                        <p className='text-xl'>
-                            “Entre os expositores, há o consenso de que a FENEG superou as expectativas. Isso é gratificante e mostra que todo o trabalho valeu a pena” - Joana Rafaela, analista técnica do Sebrae.
+                            No âmbito de conhecimento e conexão o evento proporciona uma programação repleta de aprendizado com temáticas de grande relevância, além da geração networking.
+                            Em 2023 a primeira edição da feira foi responsável pela injeção de mais de R$ 100 milhões na economia regional, graças à ampla oferta de taxas e condições facilitadas pelas empresas nos estandes.
+
                         </p>
                         <p className='text-xl'>
                             Agradecemos profundamente a todos que participaram do sucesso da 1ª FENEG. E deixamos aqui nosso convite para a FENEG 2024!

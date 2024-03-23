@@ -4,11 +4,11 @@ const nextConfig = {
     images: {
         domains: ['i.imgur.com', 'localhost', 'res.cloudinary.com']
     },
-    experimental: {
-        serverActions: {
-            bodySizeLimit: '80mb'
-        }
-    }
+    webpack: (config) => {
+        config.resolve.fallback = { fs: false };
+
+        return config;
+    },
 };
 
 

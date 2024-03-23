@@ -49,8 +49,9 @@ export default function TestPage() {
                         </p>
                         <p className='text-xl'>
                             No âmbito de conhecimento e conexão o evento proporciona uma programação repleta de aprendizado com temáticas de grande relevância, além da geração networking.
+                        </p>
+                        <p className='text-xl'>
                             Em 2023 a primeira edição da feira foi responsável pela injeção de mais de R$ 100 milhões na economia regional, graças à ampla oferta de taxas e condições facilitadas pelas empresas nos estandes.
-
                         </p>
                         <p className='text-xl'>
                             Agradecemos profundamente a todos que participaram do sucesso da 1ª FENEG. E deixamos aqui nosso convite para a FENEG 2024!

@@ -98,3 +98,14 @@ model Faq {
   resposta  String
   createdAt DateTime @default(now())
 }
+
+model ExpositorFiles {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  url_image       String
+  public_id_image String
+  url_video       String
+  public_id_video String
+  url_pdf         String
+  public_id_pdf   String
+  createdAt       DateTime @default(now())
+}

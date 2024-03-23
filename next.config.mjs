@@ -2,11 +2,10 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: ['i.imgur.com', 'localhost', 'res.cloudinary.com']
+        domains: ['i.imgur.com', 'localhost', 'res.cloudinary.com', 'minio.serpaaa.com']
     },
     webpack: (config) => {
         config.resolve.fallback = { fs: false };
-
         return config;
     },
 };

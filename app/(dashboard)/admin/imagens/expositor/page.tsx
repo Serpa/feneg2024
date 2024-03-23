@@ -20,17 +20,13 @@ import { useForm } from "react-hook-form"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useToast } from '@/components/ui/use-toast'
-import * as Minio from 'minio'
+import axios from 'axios'
 
-const s3Client = new Minio.Client({
-    endPoint: process.env.NEXT_PUBLIC_END_POINT_MINIO as string,
-    accessKey: process.env.NEXT_PUBLIC_ACCESS_KEY_MINIO as string,
-    secretKey: process.env.NEXT_PUBLIC_SECRET_KEY_MINIO as string,
-})
 
 
 const MAX_FILE_SIZE = 1024 * 1024 * 4;
 const MAX_FILE_SIZE_VIDEO = 1024 * 1024 * 50;
+const MAX_FILE_SIZE_PDF = 1024 * 1024 * 50;
 const ACCEPTED_IMAGE_MIME_TYPES = [
     "image/jpeg",
     "image/jpg",
@@ -67,7 +63,7 @@ const imageSchema = z.object({
     pdf: z
         .any()
         .refine((files) => {
-            return files?.[0]?.size <= MAX_FILE_SIZE;
+            return files?.[0]?.size <= MAX_FILE_SIZE_PDF;
         }, `Tamanho máximo da imagem: 4 MB.`)
         .refine(
             (files) => ACCEPTED_PDF_MIME_TYPES.includes(files?.[0]?.type),
@@ -86,11 +82,11 @@ export default function ImagensExpositor() {
     })
 
     async function onSubmit(values: z.infer<typeof imageSchema>) {
-        console.log(values.images[0].type)
-
+        setLoading(true)
         try {
-            const presignedUrl = await generatePresignedUrl(values.images[0].name, 'files');
-            const response = await fetch(presignedUrl, {
+            const { data: presignedUrlImage } = await axios.post('/api/admin/getUrlUpload', { fileName: `imagem_queroExpor.${values.images[0].type.replace('image/', '')}`, bucketName: 'files' });
+
+            const responseImage = await fetch(presignedUrlImage, {
                 method: 'PUT',
                 body: values.images[0],
                 headers: {
@@ -98,120 +94,87 @@ export default function ImagensExpositor() {
                     'Access-Control-Allow-Origin': '*',
                 },
             })
-            const url = await s3Client.presignedGetObject(
-                'files',
-                values.images[0].name,
-            );
-            console.log(url)
-            // const file = values.video[0];
 
-            // const reader = new FileReader();
-
-            // reader.onload = (event) => {
-            //     const arrayBuffer = event.target.result;
-            //     const buffer = Buffer.from(arrayBuffer); // Convert to buffer using Buffer class
-            //     s3Client.putObject(
-            //         'files',
-            //         values.video[0].name,
-            //         buffer,
-            //         {
-            //             overwrite: true, // Sobrescreve o arquivo existente
-            //         }
-            //     );
-            //     console.log(buffer);
-            // };
-
-            // reader.readAsArrayBuffer(file);
-            // const buffer = Buffer.from(values.video[0]);
-            // console.log(buffer);
-            // const teste = s3Client.putObject(
-            //     'files',
-            //     values.video[0].name,
-            //     buffer,
-            //     {
-            //         overwrite: true, // Sobrescreve o arquivo existente
-            //     }
-            // );
+            const { data: urlImage } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=imagem_queroExpor.${values.images[0].type.replace('image/', '')}`);
 
 
-            // console.log(teste);
-            // console.log('teste2');
-            // const presignedUrl = await generatePresignedUrl('teste.png', 'files');
-            // const formData = new FormData();
-            // formData.append('file', values.images[0]);
-            // const xhr = new XMLHttpRequest();
-            // xhr.open('PUT', presignedUrl);
-            // xhr.setRequestHeader("Content-Type", "image/png");
-            // xhr.send(formData);
-            // const response = await fetch(presignedUrl, {
-            //     method: 'PUT',
-            //     body: formData,
-            //     headers: {
-            //         "Content-type": 'image/png'
-            //     }
-            // });
+            const { data: presignedUrlVideo } = await axios.post('/api/admin/getUrlUpload', { fileName: `video_queroExpor.${values.video[0].type.replace('video/', '')}`, bucketName: 'files' });
 
-            // if (response.ok) {
-            //     console.log('Arquivo enviado com sucesso!');
-            // } else {
-            //     console.error('Erro ao enviar o arquivo:', response.statusText);
-            // }
+            const responseVideo = await fetch(presignedUrlVideo, {
+                method: 'PUT',
+                body: values.video[0],
+                headers: {
+                    'Content-Type': values.video[0].type,
+                    'Access-Control-Allow-Origin': '*',
+                },
+            })
+
+            const { data: urlVideo } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=video_queroExpor.${values.video[0].type.replace('video/', '')}`);
+
+            const { data: presignedUrlPdf } = await axios.post('/api/admin/getUrlUpload', { fileName: `pdf_queroExpor.${values.pdf[0].type.replace('application/', '')}`, bucketName: 'files' });
+
+            const responsePdf = await fetch(presignedUrlPdf, {
+                method: 'PUT',
+                body: values.pdf[0],
+                headers: {
+                    'Content-Type': values.pdf[0].type,
+                    'Access-Control-Allow-Origin': '*',
+                },
+            })
+
+            const { data: urlPdf } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=pdf_queroExpor.${values.pdf[0].type.replace('application/', '')}`);
+            console.log(urlImage, urlVideo, urlPdf)
+
+            const res = await axios.post('/api/admin/queroSerExpositor', {
+                url_image: urlImage,
+                public_id_image: `imagem_queroExpor.${values.images[0].type.replace('image/', '')}`,
+                url_video: urlVideo,
+                public_id_video: `video_queroExpor.${values.video[0].type.replace('video/', '')}`,
+                url_pdf: urlPdf,
+                public_id_pdf: `pdf_queroExpor.${values.pdf[0].type.replace('application/', '')}`,
+            })
+
+            if (res.status === 200) {
+                toast({
+                    title: "Sucesso!",
+                    description: `Arquivos alterados com sucesso!`,
+                })
+                setLoading(false)
+                mutate('/api/admin/queroSerExpositor')
+                form.reset()
+                setOpen(false)
+            }
         } catch (error) {
-            console.log(error)
+            setLoading(false)
         }
-        // try {
-        //     const { data: response } = await axios.post("/api/admin/upload", { folder: 'sectors', images: imagesList });
-
-        //     const res = await axios.post('/api/admin/setores', { url: response[0].secure_url, public_id: response[0].public_id, alt: values.alt })
-
-        //     if (res.status === 200) {
-        //         toast({
-        //             title: "Sucesso!",
-        //             description: `${values.alt} adicionada com sucesso!`,
-        //         })
-        //         setLoading(false)
-        //         mutate('/api/admin/setores')
-        //         form.reset()
-        //         setSelectedImage(null)
-        //         setOpen(false)
-        //     }
-        // } catch (err) {
-        //     toast({
-        //         title: "Erro",
-        //         description: `${err}`,
-        //         variant: 'destructive'
-        //     })
-        //     setLoading(false)
-        // }
     }
 
     function openDialog() {
         setOpen(true)
     }
 
-    async function teste() {
-        let size = 0
-        s3Client.getObject('files', 'teste.png', function (e, dataStream) {
-            if (e) {
-                return console.log(e)
-            }
-            dataStream.on('data', function (chunk) {
-                size += chunk.length
-            })
-            dataStream.on('end', function () {
-                console.log('End. Total size = ' + size)
-            })
-            dataStream.on('error', function (e) {
-                console.log(e)
-            })
-        })
-    }
+    // async function teste() {
+    //     let size = 0
+    //     s3Client.getObject('files', 'teste.png', function (e, dataStream) {
+    //         if (e) {
+    //             return console.log(e)
+    //         }
+    //         dataStream.on('data', function (chunk) {
+    //             size += chunk.length
+    //         })
+    //         dataStream.on('end', function () {
+    //             console.log('End. Total size = ' + size)
+    //         })
+    //         dataStream.on('error', function (e) {
+    //             console.log(e)
+    //         })
+    //     })
+    // }
 
     if (error) return <LoadingError />
     if (isLoading) return <Loading />
     return (
         <div className='p-5'>
-            <Button onClick={teste}>Teste</Button>
             <Card className='p-5'>
                 <CardHeader>
                     <CardTitle>
@@ -311,18 +274,4 @@ export default function ImagensExpositor() {
             </Dialog>
         </div >
     )
-}
-
-async function generatePresignedUrl(fileName: string, bucketName: string) {
-    const expiry = 60 * 1000;
-    const presignedUrl = await s3Client.presignedPutObject(
-        bucketName,
-        fileName,
-        expiry,
-    );
-    return presignedUrl;
-}
-
-async function removeAllObjects() {
-
 }

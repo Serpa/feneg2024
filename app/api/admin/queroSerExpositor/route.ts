@@ -22,9 +22,11 @@ export async function POST(req: Request) {
         return new Response('Não autorizado!', { status: 401 })
     }
     try {
-        const image = await req.json()
+        const files = await req.json()
+        const del = await prisma.expositorFiles.deleteMany({})
+
         const res = await prisma.expositorFiles.create({
-            data: image
+            data: files
         })
         return new Response(JSON.stringify(res), { status: 200 })
     } catch (error) {

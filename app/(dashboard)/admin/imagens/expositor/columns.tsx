@@ -1,32 +1,13 @@
 "use client"
 import { ColumnDef, Row } from "@tanstack/react-table"
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import { z } from "zod"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import { useToast } from "@/components/ui/use-toast"
 import { mutate } from "swr"
 import { useState } from "react"
-import { AlertTriangle, BellPlus, Delete, Loader2, PhoneOutgoing, Receipt, Stamp } from "lucide-react"
-import dayjs from 'dayjs';
-import { DataTableColumnHeader } from "@/components/DataTableColumnHeader"
-import Image from "next/image"
+import { Delete, Loader2} from "lucide-react"
+
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -98,18 +79,28 @@ export const columns: ColumnDef<ExpositorFiles>[] = [
     {
         accessorKey: "url_image",
         header: "Imagem",
+        cell: ({ row }) => {
+            return (
+                <Button variant='link'><Link href={row.original.url_image ?? ''} rel="noopener noreferrer" target="_blank"> Abrir Imagem </Link></Button>
+            )
+        }
     },
     {
         accessorKey: "url_video",
         header: "Video",
+        cell: ({ row }) => {
+            return (
+                <Button variant='link'><Link href={row.original.url_video ?? ''} rel="noopener noreferrer" target="_blank"> Abrir Video </Link></Button>
+            )
+        }
     },
     {
         accessorKey: "url_pdf",
         header: "PDF",
-    },
-    {
-        id: "actions",
-        header: "Ação",
-        cell: ActionsCell
+        cell: ({ row }) => {
+            return (
+                <Button variant='link'><Link href={row.original.url_pdf ?? ''} rel="noopener noreferrer" target="_blank"> Abrir PDF </Link></Button>
+            )
+        }
     },
 ]

@@ -95,8 +95,6 @@ export default function ImagensExpositor() {
                 },
             })
 
-            console.log(responseImage);
-
             const { data: urlImage } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=imagem_queroExpor.${values.images[0].type.replace('image/', '')}`);
 
 
@@ -125,14 +123,13 @@ export default function ImagensExpositor() {
             })
 
             const { data: urlPdf } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=pdf_queroExpor.${values.pdf[0].type.replace('application/', '')}`);
-            console.log(urlImage, urlVideo, urlPdf)
 
             const res = await axios.post('/api/admin/queroSerExpositor', {
-                url_image: urlImage,
+                url_image: urlImage.split("?")[0],
                 public_id_image: `imagem_queroExpor.${values.images[0].type.replace('image/', '')}`,
-                url_video: urlVideo,
+                url_video: urlVideo.split("?")[0],
                 public_id_video: `video_queroExpor.${values.video[0].type.replace('video/', '')}`,
-                url_pdf: urlPdf,
+                url_pdf: urlPdf.split("?")[0],
                 public_id_pdf: `pdf_queroExpor.${values.pdf[0].type.replace('application/', '')}`,
             })
 

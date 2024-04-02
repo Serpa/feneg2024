@@ -24,9 +24,9 @@ import axios from 'axios'
 
 
 
-const MAX_FILE_SIZE = 1024 * 1024 * 4;
-const MAX_FILE_SIZE_VIDEO = 1024 * 1024 * 50;
-const MAX_FILE_SIZE_PDF = 1024 * 1024 * 50;
+const MAX_FILE_SIZE = 1024 * 1024 * 15;
+const MAX_FILE_SIZE_VIDEO = 1024 * 1024 * 100;
+const MAX_FILE_SIZE_PDF = 1024 * 1024 * 100;
 const ACCEPTED_IMAGE_MIME_TYPES = [
     "image/jpeg",
     "image/jpg",
@@ -46,7 +46,7 @@ const imageSchema = z.object({
         .any()
         .refine((files) => {
             return files?.[0]?.size <= MAX_FILE_SIZE;
-        }, `Tamanho máximo da imagem: 4 MB.`)
+        }, `Tamanho máximo da imagem: 15 MB.`)
         .refine(
             (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
             "Somente os formatos .jpg, .jpeg, .png and .webp são permitidos."
@@ -55,7 +55,7 @@ const imageSchema = z.object({
         .any()
         .refine((files) => {
             return files?.[0]?.size <= MAX_FILE_SIZE_VIDEO;
-        }, `Tamanho máximo da imagem: 4 MB.`)
+        }, `Tamanho máximo da imagem: 100 MB.`)
         .refine(
             (files) => ACCEPTED_VIDEO_MIME_TYPES.includes(files?.[0]?.type),
             "Somente os formatos .jpg, .jpeg, .png and .webp são permitidos."
@@ -64,7 +64,7 @@ const imageSchema = z.object({
         .any()
         .refine((files) => {
             return files?.[0]?.size <= MAX_FILE_SIZE_PDF;
-        }, `Tamanho máximo da imagem: 4 MB.`)
+        }, `Tamanho máximo da imagem: 100 MB.`)
         .refine(
             (files) => ACCEPTED_PDF_MIME_TYPES.includes(files?.[0]?.type),
             "Somente os formatos .jpg, .jpeg, .png and .webp são permitidos."

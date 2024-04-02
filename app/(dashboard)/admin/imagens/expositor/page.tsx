@@ -95,6 +95,8 @@ export default function ImagensExpositor() {
                 },
             })
 
+            console.log(responseImage);
+
             const { data: urlImage } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=imagem_queroExpor.${values.images[0].type.replace('image/', '')}`);
 
 

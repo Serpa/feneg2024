@@ -13,7 +13,7 @@ import { FaInstagram, FaWhatsapp } from 'react-icons/fa6';
 
 export default function SetoresParticipantes() {
     const { data, isLoading, error } = useSWR('/api/setores')
-    if (isLoading) return <Loading />
+    if (isLoading) return null
     if (error) return <LoadingError />
     if (data.length < 1) return null
 
@@ -26,11 +26,11 @@ export default function SetoresParticipantes() {
                     <PhotoProvider
                         maskOpacity={0.7}
                     >
-                        <div className='flex gap-20 justify-center flex-wrap'>
+                        <div className='flex gap-15 justify-center flex-wrap'>
                             {data.map((item: SetoresImages, index: number) => (
                                 <PhotoView key={index} src={item.url}
                                 >
-                                    <img src={item.url} alt="" width={'180px'} />
+                                    <img src={item.url} alt="" width={'120px'} />
                                 </PhotoView>
                             ))}
                         </div>

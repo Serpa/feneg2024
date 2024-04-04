@@ -43,6 +43,10 @@ export const SideNav_Items: SideNavItem[] = [
                 title: 'Quero ser Expositor',
                 path: '/admin/imagens/expositor',
             },
+            {
+                title: 'Vídeo Página Inicial',
+                path: '/admin/imagens/introduction',
+            },
         ]
     },
     {

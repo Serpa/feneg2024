@@ -1,6 +1,6 @@
 import CarrouselIndex from "@/components/carrousel-index";
+import HomeVideo from "@/components/homeVideo";
 import SetoresParticipantes from "@/components/setores";
-import { Separator } from "@/components/ui/separator";
 
 export default async function Home() {
 
@@ -18,6 +18,7 @@ export default async function Home() {
           <CarrouselIndex />
         </div>
         <SetoresParticipantes />
+        <HomeVideo />
       </div>
     </>
   );

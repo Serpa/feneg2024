@@ -16,7 +16,7 @@ import { MainPost } from '@prisma/client'
 
 export default function CarrouselIndex() {
     const plugin = React.useRef(
-        Autoplay({ delay: 2000, stopOnInteraction: true })
+        Autoplay({ delay: 5000, stopOnInteraction: true })
     )
     const { data, error, isLoading } = useSWR('/api/posts')
     if (error) return <LoadingError />

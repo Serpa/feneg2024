@@ -9,7 +9,11 @@ export async function GET(req: Request) {
         return new Response('Não autorizado!', { status: 401 })
     }
     try {
-        const res = await prisma.expoForm.findMany()
+        const res = await prisma.expoForm.findMany({
+            orderBy:{
+                createdAt:'desc'
+            }
+        })
         return new Response(JSON.stringify(res), { status: 200 })
     } catch (error) {
         return new Response(JSON.stringify(error), { status: 500 })

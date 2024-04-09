@@ -34,6 +34,7 @@ export type MainPosts = {
     id: string
     url: string
     alt: string
+    public_id: string
     createdAt: string
 }
 
@@ -72,7 +73,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
     }
 
     return (
-        <Button variant='ghost' onClick={onSubmit}><Delete /></Button>
+        <Button disabled={loading} variant='ghost' onClick={onSubmit}>{loading ? <Loader2 className="animate-spin" /> : <Delete />}</Button>
     )
 }
 
@@ -85,7 +86,7 @@ const CopyCellUrl: React.FC<CopyRow> = ({ row }) => {
         })
     }
     return (
-        <p onClick={handleCopy} className="cursor-pointer">{row.getValue('url')}</p>
+        <p onClick={handleCopy} className="cursor-pointer">Clique para copiar a url da imagem.</p>
     )
 }
 

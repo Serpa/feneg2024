@@ -1,5 +1,5 @@
 import { SideNavItem } from "@/lib/types/types";
-import { BookUser, Home, Image, PencilLine } from "lucide-react";
+import { BookUser, Home, Image, MessageCircleQuestion, PencilLine } from "lucide-react";
 
 export const SideNav_Items: SideNavItem[] = [
     {
@@ -12,11 +12,11 @@ export const SideNav_Items: SideNavItem[] = [
         path: '/admin/interessados',
         icon: <BookUser />,
     },
-    {
-        title: 'Sobre Nós',
-        path: '/admin/sobre-nos',
-        icon: <PencilLine />,
-    },
+    // {
+    //     title: 'Sobre Nós',
+    //     path: '/admin/sobre-nos',
+    //     icon: <PencilLine />,
+    // },
     {
         title: 'Imagens',
         path: '/admin/imagens',
@@ -26,13 +26,32 @@ export const SideNav_Items: SideNavItem[] = [
             {
                 title: 'Principal',
                 path: '/admin/imagens/principal',
-                icon: <BookUser />,
             },
             {
                 title: 'Empresas',
                 path: '/admin/imagens/empresas',
-                icon: <BookUser />,
-            }
+            },
+            {
+                title: 'Álbuns',
+                path: '/admin/imagens/albuns',
+            },
+            {
+                title: 'Setores',
+                path: '/admin/imagens/setores',
+            },
+            {
+                title: 'Quero ser Expositor',
+                path: '/admin/imagens/expositor',
+            },
+            {
+                title: 'Vídeo Página Inicial',
+                path: '/admin/imagens/introduction',
+            },
         ]
-    }
+    },
+    {
+        title: 'FAQ',
+        path: '/admin/faq',
+        icon: <MessageCircleQuestion />,
+    },
 ]

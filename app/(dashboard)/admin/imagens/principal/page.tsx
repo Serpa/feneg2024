@@ -7,7 +7,7 @@ import Loading from '@/components/loading'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import LoadingError from '@/components/error-loading'
 import { Button } from '@/components/ui/button'
-import { Plus } from 'lucide-react'
+import { Loader2, Plus } from 'lucide-react'
 import {
     Dialog,
     DialogContent,
@@ -23,9 +23,28 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input'
 import axios from 'axios'
 import { useToast } from '@/components/ui/use-toast'
+import { fileToBase64 } from '@/components/file2Base64'
+import Image from 'next/image'
+
+const MAX_FILE_SIZE = 1024 * 1024 * 4;
+const ACCEPTED_IMAGE_MIME_TYPES = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/webp",
+];
+const ACCEPTED_IMAGE_TYPES = ["jpeg", "jpg", "png", "webp"];
 
 const imageSchema = z.object({
-    url: z.string().url('Link inválido.'),
+    images: z
+        .any()
+        .refine((files) => {
+            return files?.[0]?.size <= MAX_FILE_SIZE;
+        }, `Tamanho máximo da imagem: 4 MB.`)
+        .refine(
+            (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
+            "Somente os formatos .jpg, .jpeg, .png and .webp são permitidos."
+        ),
     alt: z.string().min(2, 'A descrição é obrigatória.')
 })
 
@@ -34,19 +53,36 @@ export default function ImagensPrincipal() {
     const [loading, setLoading] = useState(false)
     const { data, error, isLoading, mutate } = useSWR('/api/admin/mainPosts')
     const [open, setOpen] = useState(false)
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
     const form = useForm<z.infer<typeof imageSchema>>({
         resolver: zodResolver(imageSchema),
         defaultValues: {
-            url: "",
+            images: undefined,
             alt: ""
         },
     })
 
     async function onSubmit(values: z.infer<typeof imageSchema>) {
         setLoading(true)
+        const imagesList = await Promise.all(
+            Array.from(values.images).map(async (image) => {
+                if (image instanceof File) {
+                    return await fileToBase64(image);
+                } else {
+                    toast({
+                        title: "Erro",
+                        description: `Erro no upload da imagem.`,
+                        variant: 'destructive'
+                    });
+                }
+            })
+        );
         try {
-            const res = await axios.post('/api/admin/mainPosts', values)
+            const { data: response } = await axios.post("/api/admin/upload", { folder: 'mainPage', images: imagesList });
+
+            const res = await axios.post('/api/admin/mainPosts', { url: response[0].secure_url, public_id: response[0].public_id, alt: values.alt })
+
             if (res.status === 200) {
                 toast({
                     title: "Sucesso!",
@@ -54,11 +90,14 @@ export default function ImagensPrincipal() {
                 })
                 setLoading(false)
                 mutate('/api/admin/mainPosts')
+                form.reset()
+                setSelectedImage(null)
+                setOpen(false)
             }
-        } catch (error) {
+        } catch (err) {
             toast({
                 title: "Erro",
-                description: `${error}`,
+                description: `${err}`,
                 variant: 'destructive'
             })
             setLoading(false)
@@ -93,21 +132,31 @@ export default function ImagensPrincipal() {
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Adicionar URL de Imagem</DialogTitle>
+                        <DialogTitle>Adicionar Imagem</DialogTitle>
+                        {selectedImage && <div className='flex justify-center'>
+                            <Image src={URL.createObjectURL(selectedImage)} alt='Prévia' width={0} height={0} className='w-24' />
+                        </div>}
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                                 <FormField
                                     control={form.control}
-                                    name="url"
+                                    name="images"
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel>URL</FormLabel>
                                             <FormControl>
-                                                <Input placeholder="https://exemplo.com.br/imagem.png" {...field} />
+                                                <Input
+                                                    type="file"
+                                                    id="fileInput"
+                                                    onBlur={field.onBlur}
+                                                    name={field.name}
+                                                    ref={field.ref}
+                                                    onChange={(e) => {
+                                                        field.onChange(e.target.files);
+                                                        setSelectedImage(e.target.files?.[0] || null)
+                                                    }}
+                                                />
                                             </FormControl>
-                                            <FormDescription>
-                                                Link para Imagem a ser adicionada.
-                                            </FormDescription>
                                             <FormMessage />
                                         </FormItem>
                                     )}
@@ -129,7 +178,7 @@ export default function ImagensPrincipal() {
                                     )}
                                 />
                                 <div className='flex justify-end'>
-                                    <Button type="submit">Adicionar</Button>
+                                    <Button disabled={loading} type="submit">{loading && <Loader2 className='animate-spin' />}Adicionar</Button>
                                 </div>
                             </form>
                         </Form>

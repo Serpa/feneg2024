@@ -13,11 +13,11 @@ export default function TestPage() {
     if (error) return <LoadingError />
     return (
         <div className='h-full w-full'>
-            <div dangerouslySetInnerHTML={{ __html: data[0].pagina }} />
-            {/* <RichTextReadOnly
+            {/* <div dangerouslySetInnerHTML={{ __html: data[0].pagina }} /> */}
+            <RichTextReadOnly
                 content={data[0].pagina}
-                extensions={[]}
-            /> */}
+                extensions={extensions}
+            />
         </div>
     )
 }

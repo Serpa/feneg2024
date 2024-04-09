@@ -41,6 +41,7 @@ model MainPost {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   url       String
   alt       String
+  public_id String
   createdAt DateTime @default(now())
 }
 
@@ -48,4 +49,71 @@ model SobreNosPage {
   id     String  @id @default(auto()) @map("_id") @db.ObjectId
   ativo  Boolean @default(false)
   pagina String
+}
+
+model Empresas {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  public_id String
+  nome      String
+  email     String?
+  instagram String?
+  telefone  String?
+  whatsapp  String?
+  endereco  String?
+  cidade    String?
+  estado    String?
+  createdAt DateTime @default(now())
+}
+
+model Albuns {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  nome      String
+  nomeMenu  String
+  link      String   @unique
+  createdAt DateTime @default(now())
+  photos    Photos[]
+}
+
+model Photos {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  public_id String
+  createdAt DateTime @default(now())
+  Albuns    Albuns?  @relation(fields: [albunsId], references: [id])
+  albunsId  String?  @db.ObjectId
+}
+
+model SetoresImages {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  alt       String
+  public_id String
+  createdAt DateTime @default(now())
+}
+
+model Faq {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  pergunta  String
+  resposta  String
+  createdAt DateTime @default(now())
+}
+
+model ExpositorFiles {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  url_image       String
+  public_id_image String
+  url_video       String
+  public_id_video String
+  url_pdf         String
+  public_id_pdf   String
+  createdAt       DateTime @default(now())
+}
+
+model HomeVideo {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  url_video       String
+  public_id_video String
+  title           String?
+  createdAt       DateTime @default(now())
 }

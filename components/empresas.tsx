@@ -57,7 +57,7 @@ export default function EmpresasParticipantes() {
                                 <PhotoView key={index} src={item.url} overlay={
                                     <RenderInfo item={item} />
                                 }>
-                                    <img src={item.url} alt="" width={'250px'} />
+                                    <img src={item.url} alt="" width={'230px'} />
                                 </PhotoView>
                             ))}
                         </div>

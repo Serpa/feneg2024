@@ -5,9 +5,9 @@ import bcrypt from "bcrypt";
 
 export async function GET(req: Request) {
     const session = await getServerSession(authOptions)
-    if (!session) {
-        return new Response('Não autorizado!', { status: 401 })
-    }
+    // if (!session) {
+    //     return new Response('Não autorizado!', { status: 401 })
+    // }
     try {
         const res = await prisma.expoForm.findMany({
             orderBy:{

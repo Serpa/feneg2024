@@ -13,13 +13,13 @@ cloudinary.config({
 
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: { id: number } }
 ) {
     const session = await getServerSession(authOptions)
     if (!session) {
         return new Response('Não autorizado!', { status: 401 })
     }
-    const id = params.id
+    const id = +params.id
     try {
         const getPost = await prisma.mainPost.findUnique({
             where: {
@@ -36,6 +36,7 @@ export async function DELETE(
             return new Response(JSON.stringify(res), { status: 200 })
         }
     } catch (error) {
+        console.log(error)
         return new Response(JSON.stringify(error), { status: 500 })
     }
 }

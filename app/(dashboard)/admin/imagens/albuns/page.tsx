@@ -111,7 +111,7 @@ export default function ImagensAlbuns() {
                 return {
                     url: r.secure_url,
                     public_id: r.public_id,
-                    albunsId: values.albunsId
+                    albunsId: +values.albunsId
                 }
             })
             console.log(responseUpload);
@@ -219,7 +219,7 @@ export default function ImagensAlbuns() {
                                                 <SelectContent>
                                                     {albumData && albumData.map((album: Albuns) => {
                                                         return (
-                                                            <SelectItem key={album.id} value={album.id}>{album.nome}</SelectItem>
+                                                            <SelectItem key={album.id} value={album.id.toString()}>{album.nome}</SelectItem>
                                                         )
                                                     })}
                                                 </SelectContent>

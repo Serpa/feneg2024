@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -19,7 +19,7 @@ enum Status {
 }
 
 model User {
-  id             String  @id @default(auto()) @map("_id") @db.ObjectId
+  id             Int  @id @default(autoincrement())
   name           String
   email          String  @unique
   hashedPassword String
@@ -27,7 +27,7 @@ model User {
 }
 
 model ExpoForm {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        Int   @id @default(autoincrement())
   nome      String
   empresa   String
   ramo      String
@@ -38,7 +38,7 @@ model ExpoForm {
 }
 
 model MainPost {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        Int   @id @default(autoincrement())
   url       String
   alt       String
   public_id String
@@ -46,13 +46,13 @@ model MainPost {
 }
 
 model SobreNosPage {
-  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  id     Int  @id @default(autoincrement())
   ativo  Boolean @default(false)
-  pagina String
+  pagina String @db.Text
 }
 
 model Empresas {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        Int   @id @default(autoincrement())
   url       String
   public_id String
   nome      String
@@ -67,7 +67,7 @@ model Empresas {
 }
 
 model Albuns {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        Int   @id @default(autoincrement())
   nome      String
   nomeMenu  String
   link      String   @unique
@@ -76,16 +76,16 @@ model Albuns {
 }
 
 model Photos {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        Int   @id @default(autoincrement())
   url       String
   public_id String
   createdAt DateTime @default(now())
   Albuns    Albuns?  @relation(fields: [albunsId], references: [id])
-  albunsId  String?  @db.ObjectId
+  albunsId  Int?
 }
 
 model SetoresImages {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        Int   @id @default(autoincrement())
   url       String
   alt       String
   public_id String
@@ -93,14 +93,14 @@ model SetoresImages {
 }
 
 model Faq {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        Int   @id @default(autoincrement())
   pergunta  String
-  resposta  String
+  resposta  String @db.Text
   createdAt DateTime @default(now())
 }
 
 model ExpositorFiles {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  id              Int   @id @default(autoincrement())
   url_image       String
   public_id_image String
   url_video       String
@@ -111,7 +111,7 @@ model ExpositorFiles {
 }
 
 model HomeVideo {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  id              Int   @id @default(autoincrement())
   url_video       String
   public_id_video String
   title           String?

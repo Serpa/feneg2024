@@ -10,6 +10,7 @@ import { Separator } from './ui/separator';
 import Link from 'next/link';
 import { Instagram } from 'lucide-react';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa6';
+import Image from 'next/image';
 
 export default function SetoresParticipantes() {
     const { data, isLoading, error } = useSWR('/api/setores')
@@ -30,7 +31,7 @@ export default function SetoresParticipantes() {
                             {data.map((item: SetoresImages, index: number) => (
                                 <PhotoView key={index} src={item.url}
                                 >
-                                    <img src={item.url} alt="" width={'120px'} />
+                                    <Image src={item.url} width={120} alt='image ' height={0} />
                                 </PhotoView>
                             ))}
                         </div>

@@ -14,15 +14,21 @@ export async function POST(req: Request) {
         return new Response('Não autorizado!', { status: 401 })
     }
     try {
-        const { bucketName, fileName } = await req.json()
-        const expiry = 60 * 1000;
-        const presignedUrl = await s3Client.presignedPutObject(
-            bucketName,
-            fileName,
-            expiry,
-        );
+        const urls = [];
+        const { bucketName, fileNames } = await req.json()
+        console.log(fileNames)
+        for (const fileName of fileNames) {
+            const expiry = 60 * 1000;
+            const presignedUrl = await s3Client.presignedPutObject(
+                bucketName,
+                fileName,
+                expiry,
+            );
+            // Gere a URL pré-assinada para cada arquivo
+            urls.push(presignedUrl);
+        }
 
-        return new Response(JSON.stringify(presignedUrl), { status: 200 })
+        return new Response(JSON.stringify(urls), { status: 200 })
     } catch (error) {
         console.log(error);
         return new Response(JSON.stringify(error), { status: 500 })
@@ -47,7 +53,7 @@ export async function GET(req: Request) {
             fileName,
         );
 
-        return new Response(JSON.stringify(fileUrl.split("?")[0]), { status: 200 })
+        return new Response(JSON.stringify(fileUrl), { status: 200 })
     } catch (error) {
         console.log(error);
         return new Response(JSON.stringify(error), { status: 500 })

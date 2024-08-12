@@ -6,6 +6,7 @@ import useSWR from 'swr';
 import { Photos } from '@prisma/client';
 import LoadingError from '@/components/error-loading';
 import Loading from '@/components/loading';
+import Image from 'next/image';
 
 export default function Fotos({ params }: { params: { album: string } }) {
     const { data, error, isLoading } = useSWR(`/api/fotos/${params.album}`)
@@ -21,7 +22,7 @@ export default function Fotos({ params }: { params: { album: string } }) {
                             <div className='flex gap-2 justify-center flex-wrap'>
                                 {data.photos.map((item: Photos, index: number) => (
                                     <PhotoView key={index} src={item.url}>
-                                        <img src={item.url} alt="" width={'150px'} />
+                                        <Image src={item.url} width={150} alt ='image 'height={undefined} />
                                     </PhotoView>
                                 ))}
                             </div>

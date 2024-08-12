@@ -1,5 +1,5 @@
 import { SideNavItem } from "@/lib/types/types";
-import { BookUser, Home, Image, MessageCircleQuestion, PencilLine } from "lucide-react";
+import { BookUser, Home, Image, MessageCircleQuestion, Newspaper, PencilLine } from "lucide-react";
 
 export const SideNav_Items: SideNavItem[] = [
     {
@@ -46,6 +46,22 @@ export const SideNav_Items: SideNavItem[] = [
             {
                 title: 'Vídeo Página Inicial',
                 path: '/admin/imagens/introduction',
+            },
+        ]
+    },
+    {
+        title: 'Notícias',
+        path: '/admin/imagens',
+        icon: <Newspaper />,
+        submenu: true,
+        subMenuItems: [
+            {
+                title: 'Postagens',
+                path: '/admin/news',
+            },
+            {
+                title: 'Criar Postagem',
+                path: '/admin/news/add',
             },
         ]
     },

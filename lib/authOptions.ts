@@ -7,19 +7,11 @@ declare module "next-auth" {
     /**
      * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
      */
-    //     interface Session {
-    //         user: {
-    //             cargo: {
-    //                 id: number;
-    //                 nome: string;
-    //                 descricao: string;
-    //                 permFrutal: permFrutal[];
-    //                 permUberlandia: permUberlandia[];
-    //                 permUniodonto: permUniodonto[];
-    //             },
-    //             id: number;
-    //         } & DefaultSession["user"]
-    //     }
+    interface Session {
+        user: {
+            id: number;
+        } & DefaultSession["user"]
+    }
 }
 
 export const authOptions: NextAuthOptions = {
@@ -54,7 +46,7 @@ export const authOptions: NextAuthOptions = {
                         email: credentials.email
                     },
                 })
-                
+
 
                 if (!user) {
                     return null
@@ -84,6 +76,7 @@ export const authOptions: NextAuthOptions = {
             if (user) {
                 const u = user as unknown as any
                 return {
+                    id: u.id,
                     ...token,
                 }
             }
@@ -93,6 +86,10 @@ export const authOptions: NextAuthOptions = {
             // console.log('Session Callback', { session, token })
             return {
                 ...session,
+                user: {
+                    ...session.user,
+                    id: token.id,
+                }
             }
         },
     }

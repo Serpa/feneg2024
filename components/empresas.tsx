@@ -10,6 +10,7 @@ import { Separator } from './ui/separator';
 import Link from 'next/link';
 import { Instagram } from 'lucide-react';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa6';
+import Image from 'next/image';
 
 export default function EmpresasParticipantes() {
     const { data, isLoading, error } = useSWR('/api/empresas')
@@ -57,7 +58,7 @@ export default function EmpresasParticipantes() {
                                 <PhotoView key={index} src={item.url} overlay={
                                     <RenderInfo item={item} />
                                 }>
-                                    <img src={item.url} alt="" width={'230px'} />
+                                    <Image src={item.url} alt="" width={230} height={0} />
                                 </PhotoView>
                             ))}
                         </div>

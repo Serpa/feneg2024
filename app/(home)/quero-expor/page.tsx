@@ -28,7 +28,7 @@ export default function Expositor() {
                     <div className='flex flex-col items-center w-2/4 space-y-2 min-w-[450px]'>
                         <h1 className='text-2xl text-verde-escuro font-bold p-5 pb-0'>Mapa do Evento</h1>
                         <Button><Link href={data.url_pdf ?? ''} rel="noopener noreferrer" target="_blank">Apresentação </Link><FileDown /></Button>
-                        <img src={data.url_image} alt='Mapa' className='px-16 rounded-2xl' />
+                        <Image src={data.url_image} alt='Mapa' className='px-16 rounded-2xl' height={500} width={500}/>
                         <video controls autoPlay muted className='px-16 pb-5'>
                             <source src={data.url_video} type="video/mp4" />
                             Seu navegador não suporta a execução de videos.

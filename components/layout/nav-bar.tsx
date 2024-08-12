@@ -64,6 +64,14 @@ export default function NavBar() {
                         </Link>
                     </NavigationMenuItem>
 
+                    <NavigationMenuItem>
+                        <Link href="/news" legacyBehavior passHref>
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                NOTÍCIAS
+                            </NavigationMenuLink>
+                        </Link>
+                    </NavigationMenuItem>
+
                     <FotosMenu />
                     <FaqMenu />
                     <NavigationMenuItem>

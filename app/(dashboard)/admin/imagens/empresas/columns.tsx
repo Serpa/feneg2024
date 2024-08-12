@@ -397,7 +397,7 @@ export const columns: ColumnDef<EmpresasParticipantes>[] = [
         cell: ({ row }) => {
             return (
                 <div className="flex justify-center">
-                    <img
+                    <Image
                         src={row.original.url}
                         alt={row.original.nome}
                         width="0"

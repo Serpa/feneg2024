@@ -128,13 +128,13 @@ export default function EditorMenuControls() {
       unlikely to have a keyboard that will allow for using Tab/Shift+Tab. These
       buttons probably aren't necessary for keyboard users and would add extra
       clutter. */}
-            {isTouchDevice() && (
+            {/* {isTouchDevice() && (
                 <>
                     <MenuButtonIndent />
 
                     <MenuButtonUnindent />
                 </>
-            )}
+            )} */}
 
             <MenuDivider />
 
@@ -148,7 +148,7 @@ export default function EditorMenuControls() {
 
             <MenuDivider />
 
-            <MenuButtonAddImage
+            {/* <MenuButtonAddImage
                 onClick={() => {
                     const url = window.prompt("Image URL");
 
@@ -156,7 +156,7 @@ export default function EditorMenuControls() {
                         editor?.chain().focus().setImage({ src: url }).run();
                     }
                 }}
-            />
+            /> */}
 
             <MenuDivider />
 

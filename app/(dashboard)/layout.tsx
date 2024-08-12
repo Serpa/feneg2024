@@ -8,6 +8,8 @@ import AuthProvider from "@/components/session-provider";
 import { Toaster } from "@/components/ui/toaster"
 import SwrProvider from "@/components/swr-provider";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { NextAppDirEmotionCacheProvider } from "tss-react/next/appDir";
+import { TssCacheProvider } from "tss-react";
 
 export const metadata: Metadata = {
   title: "FENEG 2024 - Feira de Negócios Sicoob Frutal.",
@@ -21,6 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" suppressHydrationWarning>
+      <head></head>
       <body>
         <ThemeProvider
           attribute="class"
@@ -34,7 +37,9 @@ export default function RootLayout({
                 <HeaderAdmin />
                 <SideBarAdmin />
                 <PageWrapper >
-                  {children}
+                  <NextAppDirEmotionCacheProvider options={{ key: "css" }}>
+                    {children}
+                  </NextAppDirEmotionCacheProvider>
                   <SpeedInsights />
                 </PageWrapper>
               </div>

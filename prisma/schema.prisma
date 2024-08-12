@@ -19,15 +19,16 @@ enum Status {
 }
 
 model User {
-  id             Int  @id @default(autoincrement())
+  id             Int     @id @default(autoincrement())
   name           String
   email          String  @unique
   hashedPassword String
   image          String?
+  Posts          Posts[]
 }
 
 model ExpoForm {
-  id        Int   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   nome      String
   empresa   String
   ramo      String
@@ -38,7 +39,7 @@ model ExpoForm {
 }
 
 model MainPost {
-  id        Int   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   url       String
   alt       String
   public_id String
@@ -46,13 +47,13 @@ model MainPost {
 }
 
 model SobreNosPage {
-  id     Int  @id @default(autoincrement())
+  id     Int     @id @default(autoincrement())
   ativo  Boolean @default(false)
-  pagina String @db.Text
+  pagina String  @db.Text
 }
 
 model Empresas {
-  id        Int   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   url       String
   public_id String
   nome      String
@@ -67,7 +68,7 @@ model Empresas {
 }
 
 model Albuns {
-  id        Int   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   nome      String
   nomeMenu  String
   link      String   @unique
@@ -76,7 +77,7 @@ model Albuns {
 }
 
 model Photos {
-  id        Int   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   url       String
   public_id String
   createdAt DateTime @default(now())
@@ -85,7 +86,7 @@ model Photos {
 }
 
 model SetoresImages {
-  id        Int   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   url       String
   alt       String
   public_id String
@@ -93,14 +94,14 @@ model SetoresImages {
 }
 
 model Faq {
-  id        Int   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   pergunta  String
-  resposta  String @db.Text
+  resposta  String   @db.Text
   createdAt DateTime @default(now())
 }
 
 model ExpositorFiles {
-  id              Int   @id @default(autoincrement())
+  id              Int      @id @default(autoincrement())
   url_image       String
   public_id_image String
   url_video       String
@@ -111,9 +112,29 @@ model ExpositorFiles {
 }
 
 model HomeVideo {
-  id              Int   @id @default(autoincrement())
+  id              Int      @id @default(autoincrement())
   url_video       String
   public_id_video String
   title           String?
   createdAt       DateTime @default(now())
+}
+
+model Posts {
+  id          Int           @id @default(autoincrement())
+  title       String
+  content     String        @db.LongText
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  User        User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int?
+  ImagensPost ImagensPost[]
+}
+
+model ImagensPost {
+  id        Int      @id @default(autoincrement())
+  url       String
+  public_id String
+  createdAt DateTime @default(now())
+  Posts     Posts?   @relation(fields: [postsId], references: [id], onDelete: Cascade)
+  postsId   Int?
 }

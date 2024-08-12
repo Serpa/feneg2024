@@ -1,15 +1,12 @@
 'use client';
 import LoadingError from '@/components/error-loading'
 import Loading from '@/components/loading'
-import { RichTextReadOnly } from 'mui-tiptap';
 import React from 'react'
 import useSWR from 'swr'
-import useExtensions from '@/app/(dashboard)/admin/sobre-nos/useExtensions';
 import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
 
 export default function TestPage() {
-    const extensions = useExtensions()
     const { data, isLoading, error } = useSWR('/api/admin/sobreNos')
     if (isLoading) return <Loading />
     if (error) return <LoadingError />

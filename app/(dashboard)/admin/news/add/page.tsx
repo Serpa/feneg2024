@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Loader2, Plus } from 'lucide-react'
@@ -49,11 +49,12 @@ const imageSchema = z.object({
 })
 
 export default function AddNews() {
+    const [isClient, setIsClient] = useState(false);
+
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
     const extensions = useExtensions();
     const rteRef = useRef<RichTextEditorRef>(null);
-    // const { data, error, isLoading, mutate } = useSWR('/api/admin/homeVideo')
     const [open, setOpen] = useState(false)
 
     const form = useForm<z.infer<typeof imageSchema>>({
@@ -65,11 +66,11 @@ export default function AddNews() {
         }
     })
 
-    const { field: contentField } = useController({
-        name: 'content',
-        control: form.control,
-        defaultValue: ''
-    });
+    // const { field: contentField } = useController({
+    //     name: 'content',
+    //     control: form.control,
+    //     defaultValue: ''
+    // });
 
     async function onSubmit(values: z.infer<typeof imageSchema>) {
         setLoading(true)
@@ -131,7 +132,14 @@ export default function AddNews() {
             setLoading(false)
         }
     }
-    if (typeof navigator !== 'undefined') return (
+    useEffect(() => {
+        setIsClient(typeof window !== 'undefined' && typeof navigator !== 'undefined');
+    }, []);
+
+    if (!isClient) {
+        return null; // Ou um fallback apropriado
+    }
+    return (
         <div className='p-5'>
             <Card className='p-5'>
                 <CardHeader>
@@ -163,7 +171,7 @@ export default function AddNews() {
                                         <FormLabel>Imagens</FormLabel>
                                         <FormControl>
                                             <Input
-                                                accept='.png'
+                                                accept="image/*"
                                                 type="file"
                                                 id="fileInput2"
                                                 multiple
@@ -190,8 +198,7 @@ export default function AddNews() {
                                                 ref={rteRef}
                                                 extensions={extensions}
                                                 renderControls={() => <EditorMenuControls />}
-                                                content={contentField.value}
-                                                onUpdate={(e) => contentField.onChange(e.editor.getHTML())}
+                                                onUpdate={(e) => field.onChange(e.editor.getHTML())}
                                             >
                                                 {() => (
                                                     <>

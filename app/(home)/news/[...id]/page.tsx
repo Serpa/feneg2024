@@ -34,20 +34,24 @@ export default function PostId({ params }: { params: { id: number } }) {
                     opts={{ loop: true }}
                 >
                     <CarouselContent>
-                        {data.ImagensPost.map((img: ImagensPost) => {
-                            return (
-                                <CarouselItem key={img.id} className='flex justify-center'>
-                                    <Image
-                                        src={img.url}
-                                        alt={img.public_id}
-                                        width="0"
-                                        height="0"
-                                        sizes="100vw"
-                                        style={{ width: 'auto', height: '350px' }}
-                                    />
-                                </CarouselItem>
-                            )
-                        })}
+                        <PhotoProvider>
+                            {data.ImagensPost.map((img: ImagensPost) => {
+                                return (
+                                    <CarouselItem key={img.id} className='flex justify-center'>
+                                        <PhotoView src={img.url}>
+                                            <Image
+                                                src={img.url}
+                                                alt={img.public_id}
+                                                width="0"
+                                                height="0"
+                                                sizes="100vw"
+                                                style={{ width: 'auto', height: '350px' }}
+                                            />
+                                        </PhotoView>
+                                    </CarouselItem>
+                                )
+                            })}
+                        </PhotoProvider>
                     </CarouselContent>
                     <CarouselPrevious />
                     <CarouselNext />

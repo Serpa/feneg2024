@@ -5,21 +5,20 @@ import { NavigationMenuItem, NavigationMenuLink, navigationMenuTriggerStyle } fr
 import Link from 'next/link';
 
 export default function SobreNosMenu() {
-    const { data: sobreData, error: sobreError, isLoading: sobreIsLoading } = useSWR('/api/sobreNos')
+    // const { data: sobreData, error: sobreError, isLoading: sobreIsLoading } = useSWR('/api/sobreNos')
 
-    if (sobreIsLoading) return null
-    if (sobreError) return null
+    // if (sobreIsLoading) return null
+    // if (sobreError) return null
     return (
         <>
-            {
-                sobreData.ativo && < NavigationMenuItem >
-                    <Link href="/sobre-nos" legacyBehavior passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            SOBRE NÓS
-                        </NavigationMenuLink>
-                    </Link>
-                </NavigationMenuItem>
-            }
+            < NavigationMenuItem >
+                <Link href="/sobre-nos" legacyBehavior passHref>
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                        SOBRE NÓS
+                    </NavigationMenuLink>
+                </Link>
+            </NavigationMenuItem>
+
         </>
     )
 }

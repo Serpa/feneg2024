@@ -12,6 +12,7 @@ import {
 import { Faq, ImagensPost } from '@prisma/client';
 import { Separator } from '@/components/ui/separator';
 import NewsCard from './newsCard';
+import { Button } from './ui/button';
 
 type Posts = {
     id: number;
@@ -39,9 +40,9 @@ export default function NewsComp() {
                             return <NewsCard {...d} key={d.id} />
                         })}
                     </div>
-
                 </div>
             </div>
+            <Button className='flex w-full gap-5'>Carregar mais...</Button>
         </div>
     )
 }

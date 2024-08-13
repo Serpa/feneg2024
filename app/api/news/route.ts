@@ -4,10 +4,9 @@ import prisma from "@/lib/prisma"
 export async function GET(req: Request) {
     const url = new URL(req.url);
     const page = parseInt(url.searchParams.get("page") || "1");
-    const pageSize = parseInt(url.searchParams.get("pageSize") || "10");
+    const pageSize = parseInt(url.searchParams.get("pageSize") || "6");
 
     const skip = (page - 1) * pageSize;
-
     try {
         const res = await prisma.posts.findMany({
             skip: skip,

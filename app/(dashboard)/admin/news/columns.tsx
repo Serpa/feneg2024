@@ -1,34 +1,23 @@
 "use client"
 import { ColumnDef, Row } from "@tanstack/react-table"
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import { z } from "zod"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import axios from "axios"
 import { useToast } from "@/components/ui/use-toast"
 import { mutate } from "swr"
 import { useState } from "react"
-import { AlertTriangle, BellPlus, Delete, Loader2, PhoneOutgoing, Receipt, Stamp } from "lucide-react"
-import dayjs from 'dayjs';
-import { DataTableColumnHeader } from "@/components/DataTableColumnHeader"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ImagensPost } from "@prisma/client"
 import Link from "next/link"
+import { Delete, Loader2 } from "lucide-react"
+import { FaEllipsis } from "react-icons/fa6"
+import { useRouter } from "next/navigation"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -54,7 +43,7 @@ type CopyRow = {
 const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
-
+    const router = useRouter();
     async function onSubmit() {
         setLoading(true)
         try {
@@ -78,7 +67,13 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
     }
 
     return (
-        <Button disabled={loading} variant='ghost' onClick={onSubmit}>{loading ? <Loader2 className="animate-spin" /> : <Delete />}</Button>
+        <DropdownMenu>
+            <DropdownMenuTrigger><FaEllipsis /></DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuItem onClick={() => router.push(`/admin/news/edit/${row.original.id}`)}>Editar</DropdownMenuItem>
+                <DropdownMenuItem onClick={onSubmit}>{loading ? <Loader2 className="animate-spin" /> : 'Excluir'}</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
     )
 }
 

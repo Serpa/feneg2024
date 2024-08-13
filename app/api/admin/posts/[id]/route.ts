@@ -49,8 +49,54 @@ export async function DELETE(
         } else {
             console.log('Nenhuma imagem para excluir.');
         }
-        
+
         const result = await prisma.posts.delete({
+            where: {
+                id: id
+            }
+        })
+
+        return new Response(JSON.stringify(result), { status: 200 })
+    } catch (error) {
+        return new Response(JSON.stringify(error), { status: 500 })
+    }
+}
+
+export async function GET(
+    request: Request,
+    { params }: { params: { id: number } }
+) {
+    const session = await getServerSession(authOptions)
+    if (!session) {
+        return new Response('Não autorizado!', { status: 401 })
+    }
+    const id = +params.id
+    try {
+
+        const getPost = await prisma.posts.findUnique({
+            where: {
+                id: id
+            }
+        })
+
+        return new Response(JSON.stringify(getPost), { status: 200 })
+    } catch (error) {
+        return new Response(JSON.stringify(error), { status: 500 })
+    }
+}
+export async function PUT(
+    request: Request,
+    { params }: { params: { id: number } }
+) {
+    const session = await getServerSession(authOptions)
+    if (!session) {
+        return new Response('Não autorizado!', { status: 401 })
+    }
+    const id = +params.id
+    try {
+        const editPost = await request.json();
+        const result = await prisma.posts.update({
+            data: editPost,
             where: {
                 id: id
             }

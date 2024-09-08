@@ -37,7 +37,7 @@ export const authOptions: NextAuthOptions = {
                 },
                 password: { label: 'Password', type: 'password' }
             },
-            async authorize(credentials): Promise<any> {
+            async authorize(credentials, req): Promise<any> {
                 if (!credentials?.email || !credentials.password) {
                     return null
                 }
@@ -56,10 +56,38 @@ export const authOptions: NextAuthOptions = {
                     credentials.password,
                     user.hashedPassword
                 )
+                // Capturar o IP do cliente da requisição
+                const headers = req.headers || {}; // Fallback caso headers seja indefinido
+                let ip = headers['x-forwarded-for'] || headers['remote-addr'] || 'IP não disponível';
 
                 if (!isPasswordValid) {
+                    // Registrar o log de login com o IP
+                    await prisma.log.create({
+                        data: {
+                            userId: user.id,
+                            action: 'INVALID LOGIN',
+                            details: {
+                                email: user.email
+                            },
+                            ip: ip,
+                        }
+                    });
                     return null
                 }
+
+
+
+                // Registrar o log de login com o IP
+                await prisma.log.create({
+                    data: {
+                        userId: user.id,
+                        action: 'LOGIN',
+                        details: {
+                            email: user.email
+                        },
+                        ip: ip,
+                    }
+                });
 
                 return {
                     id: user.id,

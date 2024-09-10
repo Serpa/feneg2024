@@ -5,7 +5,7 @@ import { NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, Navigati
 import { Albuns, Photos } from '@prisma/client';
 
 type AlbumData = {
-    id: string;
+    id: number;
     nome: string;
     nomeMenu: string;
     link: string;

@@ -30,7 +30,7 @@ import { Button } from "@/components/ui/button"
 import { Albuns } from "@prisma/client"
 
 export type Photos = {
-    id: string
+    id: number
     url: string
     public_id: string
     createdAt: string

@@ -13,7 +13,7 @@ import dayjs from "dayjs"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type HomeVideo = {
-    id: string
+    id: number
     url_video: string
     public_id_video: string
     title?: string

@@ -31,7 +31,7 @@ import { Button } from "@/components/ui/button"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type MainPosts = {
-    id: string
+    id: number
     url: string
     alt: string
     public_id: string

@@ -29,7 +29,7 @@ import { DataTableColumnHeader } from "@/components/DataTableColumnHeader"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Interessados = {
-    id: string
+    id: number
     nome: string
     empresa: string
     ramo: string
@@ -59,7 +59,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
     const statusSchema = z.object({
-        id: z.string(),
+        id: z.number(),
         status: z.enum(["Contatado", "Interessado", "Negociação", "Vendido", "Novo"])
     })
 
@@ -95,7 +95,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
     //     // }
     // }
 
-    async function onChangeSubmit(id: string, status: string) {
+    async function onChangeSubmit(id: number, status: string) {
         // console.log(id, status);
         setLoading(true)
         try {

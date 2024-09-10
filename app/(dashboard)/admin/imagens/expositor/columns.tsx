@@ -12,7 +12,7 @@ import Link from "next/link"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type ExpositorFiles = {
-    id: string
+    id: number
     url_image: string
     public_id_image: string
     url_video: string

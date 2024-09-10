@@ -7,8 +7,10 @@ import { useSideBarToggle } from '@/lib/hooks/use-sidebar-toggle'
 import { ModeToggle } from '../theme-changer';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function HeaderAdmin() {
+    const router = useRouter()
     const { toggleCollapse, invokeToggleCollapse } = useSideBarToggle()
     const session = useSession()
     function sideBarToggle() {
@@ -40,6 +42,20 @@ export default function HeaderAdmin() {
                                 </div>
                             </DropdownMenuLabel>
                             <DropdownMenuSeparator />
+
+                            {[3, 4].includes(session.data?.user.id || 0) && (
+                                <DropdownMenuItem onClick={() => router.push('/admin/register')}>
+                                    Cadastrar Usuário
+                                </DropdownMenuItem>
+                            )}
+
+                            <DropdownMenuItem onClick={() => router.push('/admin/reset')}>
+                                Alterar Senha
+                            </DropdownMenuItem>
+
+                            {[3, 4].includes(session.data?.user.id || 0) && <DropdownMenuItem onClick={() => router.push('/admin/logs')}>
+                                Logs
+                            </DropdownMenuItem>}
                             <DropdownMenuItem onClick={() => signOut()}>
                                 Sair
                             </DropdownMenuItem>

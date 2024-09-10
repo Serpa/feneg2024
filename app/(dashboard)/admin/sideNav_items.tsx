@@ -70,9 +70,4 @@ export const SideNav_Items: SideNavItem[] = [
         path: '/admin/faq',
         icon: <MessageCircleQuestion />,
     },
-    {
-        title: 'Logs',
-        path: '/admin/logs',
-        icon: <ScrollText />,
-    },
 ]

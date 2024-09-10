@@ -90,7 +90,7 @@ export async function GET(
     }
 }
 export async function PUT(
-    request: Request,
+    req: Request,
     { params }: { params: { id: number } }
 ) {
     const session = await getServerSession(authOptions)
@@ -99,13 +99,18 @@ export async function PUT(
     }
     const id = +params.id
     try {
-        const editPost = await request.json();
+        const editPost = await req.json();
         const result = await prisma.posts.update({
             data: editPost,
             where: {
                 id: id
             }
         })
+
+        
+        const ip = req.headers.get('x-forwarded-for') || req.headers.get('remote-addr') || 'IP não disponível';
+        await logAction(session.user.id, "EDIT_POST", { result }, ip);
+
 
         return new Response(JSON.stringify(result), { status: 200 })
     } catch (error) {

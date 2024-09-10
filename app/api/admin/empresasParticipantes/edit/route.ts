@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/authOptions"
 import prisma from "@/lib/prisma"
 
 import { v2 as cloudinary } from 'cloudinary';
+import { logAction } from "@/lib/log";
 
 cloudinary.config({
     cloud_name: process.env.CLOUDNARY_CLOUD_NAME,
@@ -37,6 +38,9 @@ export async function PUT(req: Request) {
 
             }
         })
+
+        const ip = req.headers.get('x-forwarded-for') || req.headers.get('remote-addr') || 'IP não disponível';
+        await logAction(session.user.id, "EDIT_EMPRESA", { data }, ip);
 
         return new Response(JSON.stringify(res), { status: 200 })
     } catch (error) {

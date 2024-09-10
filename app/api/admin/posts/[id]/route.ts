@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/authOptions"
 import prisma from "@/lib/prisma"
 import * as Minio from 'minio'
+import { logAction } from "@/lib/log"
 
 const s3Client = new Minio.Client({
     endPoint: process.env.END_POINT_MINIO as string,
@@ -10,7 +11,7 @@ const s3Client = new Minio.Client({
 })
 
 export async function DELETE(
-    request: Request,
+    req: Request,
     { params }: { params: { id: number } }
 ) {
     const session = await getServerSession(authOptions)
@@ -55,6 +56,10 @@ export async function DELETE(
                 id: id
             }
         })
+
+        const ip = req.headers.get('x-forwarded-for') || req.headers.get('remote-addr') || 'IP não disponível';
+        await logAction(session.user.id, "DELETE_POST", { result }, ip);
+
 
         return new Response(JSON.stringify(result), { status: 200 })
     } catch (error) {

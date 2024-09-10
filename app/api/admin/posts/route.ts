@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/authOptions"
 import prisma from "@/lib/prisma"
+import { logAction } from "@/lib/log"
 
 export async function GET(req: Request) {
     const session = await getServerSession(authOptions)
@@ -41,6 +42,10 @@ export async function POST(req: Request) {
                 }
             }
         })
+
+        const ip = req.headers.get('x-forwarded-for') || req.headers.get('remote-addr') || 'IP não disponível';
+        await logAction(session.user.id, "CREATE_POST", { files }, ip);
+
         return new Response(JSON.stringify(files), { status: 200 })
     } catch (error) {
         console.log(error)

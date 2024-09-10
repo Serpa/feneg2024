@@ -44,7 +44,7 @@ const ACCEPTED_IMAGE_TYPES = ["jpeg", "jpg", "png", "webp"];
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type EmpresasParticipantes = {
-    id: string
+    id: number
     url: string
     nome: string
     email: string
@@ -111,7 +111,7 @@ const imageSchema = z.object({
     whatsapp: z.string(),
     endereco: z.string(),
     public_id: z.string(),
-    id: z.string(),
+    id: z.number(),
     cidade: z.string().optional().or(z.literal('')),
     estado: z.string().length(2, 'Estado deve ter 2 letras.').optional().or(z.literal(''))
 })
@@ -136,7 +136,7 @@ const EditCell: React.FC<ActionsCellProps> = ({ row }) => {
             cidade: row.original.cidade,
             estado: row.original.estado,
             public_id: row.original.public_id,
-            id: row.original.id,
+            id: +row.original.id,
         },
     })
 
@@ -149,7 +149,7 @@ const EditCell: React.FC<ActionsCellProps> = ({ row }) => {
         form.setValue('endereco', row.original.endereco);
         form.setValue('estado', row.original.estado);
         form.setValue('public_id', row.original.public_id);
-        form.setValue('id', row.original.id);
+        form.setValue('id', +row.original.id);
     }
 
     async function onSubmit(values: z.infer<typeof imageSchema>) {
@@ -347,7 +347,7 @@ const EditCell: React.FC<ActionsCellProps> = ({ row }) => {
                                 />
 
                                 <div className='flex justify-end'>
-                                    <Button disabled={loading} type="submit">{loading && <Loader2 className='animate-spin' />}Salvar</Button>
+                                    <Button disabled={loading} type="submit" onClick={() => console.log(form.formState.errors)}>{loading && <Loader2 className='animate-spin' />}Salvar</Button>
                                 </div>
                             </form>
                         </Form>

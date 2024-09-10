@@ -1,6 +1,7 @@
 import { authOptions } from '@/lib/authOptions';
 import { getServerSession } from 'next-auth';
 import * as Minio from 'minio'
+import { logAction } from '@/lib/log';
 
 const s3Client = new Minio.Client({
     endPoint: process.env.END_POINT_MINIO as string,
@@ -52,6 +53,12 @@ export async function GET(req: Request) {
             bucketName,
             fileName,
         );
+
+        const ip = req.headers.get('x-forwarded-for') || req.headers.get('remote-addr') || 'IP não disponível';
+        await logAction(session.user.id, "REMOVE_BUCKET", {
+            bucketName,
+            fileName,
+        }, ip);
 
         return new Response(JSON.stringify(fileUrl), { status: 200 })
     } catch (error) {

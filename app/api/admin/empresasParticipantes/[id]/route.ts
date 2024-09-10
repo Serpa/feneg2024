@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/authOptions"
 import prisma from "@/lib/prisma"
 
 import { v2 as cloudinary } from 'cloudinary';
+import { logAction } from "@/lib/log";
 
 cloudinary.config({
     cloud_name: process.env.CLOUDNARY_CLOUD_NAME,
@@ -11,7 +12,7 @@ cloudinary.config({
 });
 
 export async function DELETE(
-    request: Request,
+    req: Request,
     { params }: { params: { id: number } }
 ) {
     const session = await getServerSession(authOptions)
@@ -32,6 +33,8 @@ export async function DELETE(
                     id: id
                 }
             })
+            const ip = req.headers.get('x-forwarded-for') || req.headers.get('remote-addr') || 'IP não disponível';
+            await logAction(session.user.id, "REMOVE_EMPRESA", { getPost }, ip);
             return new Response(JSON.stringify(res), { status: 200 })
         }
     } catch (error) {

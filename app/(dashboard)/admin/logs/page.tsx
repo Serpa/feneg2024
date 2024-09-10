@@ -9,10 +9,10 @@ import LoadingError from '@/components/error-loading'
 import { useSession } from 'next-auth/react'
 
 export default function Logs() {
+    const { data, error, isLoading, mutate } = useSWR('/api/admin/logs')
     const session = useSession()
     if (![3, 4].includes(session.data?.user.id || 0)) return null
 
-    const { data, error, isLoading, mutate } = useSWR('/api/admin/logs')
     if (error) return <LoadingError />
     if (isLoading) return <Loading />
     return (

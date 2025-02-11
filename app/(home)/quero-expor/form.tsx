@@ -79,7 +79,7 @@ export default function FormExpo() {
         <Card className="text-verde-escuro">
             <CardHeader>
                 <CardTitle>Cadastro Expositor</CardTitle>
-                <CardDescription>Faça o cadastro e se torne um expositor na FENEG 2024.</CardDescription>
+                <CardDescription>Faça o cadastro e se torne um expositor na FENEG 2025.</CardDescription>
             </CardHeader>
 
             <CardContent>
@@ -168,7 +168,7 @@ export default function FormExpo() {
                     </form>
                 </Form>
                 <div className="flex flex-col justify-center mt-3 gap-2">
-                    <Link href={`https://wa.me/553484114909?text=Ol%C3%A1%2C+tenho+interesse+em+participar+como+expositor+na+FENEG+2024+e+gostaria+de+obter+mais+informa%C3%A7%C3%B5es...`} target="_blank" className="w-full">
+                    <Link href={`https://wa.me/553484114909?text=Ol%C3%A1%2C+tenho+interesse+em+participar+como+expositor+na+FENEG+2025+e+gostaria+de+obter+mais+informa%C3%A7%C3%B5es...`} target="_blank" className="w-full">
                         <Button disabled={loading} className="w-full"> <FaWhatsapp />WhatsApp</Button>
                     </Link>
                 </div>

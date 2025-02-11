@@ -19,7 +19,7 @@ export default function Interessados() {
                         Cadastro de Interessados.
                     </CardTitle>
                     <CardDescription>
-                        Lista de usuários que realizaram o cadastro para exposição na FENEG 2024.
+                        Lista de usuários que realizaram o cadastro para exposição na FENEG 2025.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>

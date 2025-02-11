@@ -168,7 +168,7 @@ export default function ImagensPrincipal() {
                                         <FormItem>
                                             <FormLabel>Descrição</FormLabel>
                                             <FormControl>
-                                                <Input placeholder="Ex: Banner Palestra FENEG 2024" {...field} />
+                                                <Input placeholder="Ex: Banner Palestra FENEG 2025" {...field} />
                                             </FormControl>
                                             <FormDescription>
                                                 Descrição para a imagem a ser adicionada.

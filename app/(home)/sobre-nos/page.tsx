@@ -51,7 +51,7 @@ export default function TestPage() {
                             Em 2023 a primeira edição da feira foi responsável pela injeção de mais de R$ 100 milhões na economia regional, graças à ampla oferta de taxas e condições facilitadas pelas empresas nos estandes.
                         </p>
                         <p className='text-xl'>
-                            Agradecemos profundamente a todos que participaram do sucesso da 1ª FENEG. E deixamos aqui nosso convite para a FENEG 2024!
+                            Agradecemos profundamente a todos que participaram do sucesso da 1ª FENEG. E deixamos aqui nosso convite para a FENEG 2025!
                         </p>
                     </div>
                     <div className='w-2/4'>

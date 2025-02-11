@@ -278,7 +278,7 @@ export default function ImagensAlbuns() {
                                         <FormItem>
                                             <FormLabel>Nome Álbum</FormLabel>
                                             <FormControl>
-                                                <Input placeholder="Ex: Abertura FENEG 2024" {...field} />
+                                                <Input placeholder="Ex: Abertura FENEG 2025" {...field} />
                                             </FormControl>
                                             <FormDescription>
                                                 Nome do álbum de fotos.
@@ -294,7 +294,7 @@ export default function ImagensAlbuns() {
                                         <FormItem>
                                             <FormLabel>Nome Menu</FormLabel>
                                             <FormControl>
-                                                <Input placeholder="Ex: Abertura FENEG 2024" {...field} />
+                                                <Input placeholder="Ex: Abertura FENEG 2025" {...field} />
                                             </FormControl>
                                             <FormDescription>
                                                 Nome que será exibido no menu de fotos.
@@ -311,7 +311,7 @@ export default function ImagensAlbuns() {
                                         <FormItem>
                                             <FormLabel>Link</FormLabel>
                                             <FormControl>
-                                                <Input placeholder="Ex: abertura-feneg2024" {...field} />
+                                                <Input placeholder="Ex: abertura-feneg2025" {...field} />
                                             </FormControl>
                                             <FormDescription>
                                                 Link da página que será criada para o álbum. Não deve conter espaço, nem caracteres especiais.

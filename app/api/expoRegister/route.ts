@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Novo Interesse em Exposição - FENEG 2024</title>
+  <title>Novo Interesse em Exposição - FENEG 2025</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
   <div class="container">
     <header>
       <img src="https://i.imgur.com/kFqYTBf.png" alt="Logo do Evento">
-      <h1>FENEG 2024 - Feira de Negócios Sicoob Frutal.</h1>
+      <h1>FENEG 2025 - Feira de Negócios Sicoob Frutal.</h1>
       <h2>22 A 25 de Maio.</h2>
     </header>
 
@@ -104,7 +104,7 @@ export async function POST(req: Request) {
     <div class="footer">
       <p>Agradecemos a atenção.</p>
 
-      <p>Equipe FENEG 2024</p>
+      <p>Equipe FENEG 2025</p>
     </div>
   </div>
 </body>

@@ -10,7 +10,7 @@ import SwrProvider from "@/components/swr-provider";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
-  title: "FENEG 2024 - Feira de Negócios Sicoob Frutal.",
+  title: "FENEG 2025 - Feira de Negócios Sicoob Frutal.",
   description: "Feira de Negócios Sicoob Frutal",
 };
 

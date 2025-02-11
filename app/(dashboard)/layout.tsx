@@ -12,7 +12,7 @@ import { NextAppDirEmotionCacheProvider } from "tss-react/next/appDir";
 import { TssCacheProvider } from "tss-react";
 
 export const metadata: Metadata = {
-  title: "FENEG 2024 - Feira de Negócios Sicoob Frutal.",
+  title: "FENEG 2025 - Feira de Negócios Sicoob Frutal.",
   description: "Feira de Negócios Sicoob Frutal",
 };
 

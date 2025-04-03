@@ -25,7 +25,16 @@ export default function Header() {
                     height="0"
                     sizes="100vw"
                     style={{ width: '7rem', height: 'auto' }}
-                    alt="FENEG Logo"
+                    alt="Sicoob Frutal Logo"
+                    className='p-2 hover:animate-pulse cursor-pointer'
+                />
+                <Image
+                    src="/sicoobitapagipe.png"
+                    width="0"
+                    height="0"
+                    sizes="100vw"
+                    style={{ width: '9rem', height: 'auto' }}
+                    alt="Sicoob Itapagipe Logo"
                     className='p-2 hover:animate-pulse cursor-pointer'
                 />
                 <Image

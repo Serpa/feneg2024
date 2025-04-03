@@ -28,7 +28,7 @@ import Image from 'next/image'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Albuns } from '@prisma/client'
 
-const MAX_FILE_SIZE = 1024 * 1024 * 4;
+const MAX_FILE_SIZE = 1024 * 1024 * 100;
 const ACCEPTED_IMAGE_MIME_TYPES = [
     "image/jpeg",
     "image/jpg",
@@ -46,7 +46,7 @@ const imageSchema = z.object({
                 return over.length > 0 ? false : true
             }
             return false
-        }, `Tamanho máximo da imagem: 4 MB.`)
+        }, `Tamanho máximo da imagem: 100 MB.`)
         .refine(
             (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
             "Somente os formatos .jpg, .jpeg, .png and .webp são permitidos."

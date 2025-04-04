@@ -20,7 +20,7 @@ export default function NavBar() {
 
     const SocialMedia: { title: string; href: string; description: string }[] = [
         {
-            title: "FENEG 2025",
+            title: "FENEG",
             href: "https://www.instagram.com/fenegsicoob/",
             description:
                 "Instagram FENEG Frutal.",

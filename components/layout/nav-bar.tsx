@@ -65,6 +65,14 @@ export default function NavBar() {
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
+                        <Link href="/interessados" legacyBehavior passHref>
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                QUERO PARTICIPAR
+                            </NavigationMenuLink>
+                        </Link>
+                    </NavigationMenuItem>
+
+                    <NavigationMenuItem>
                         <Link href="/news" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                 NOTÍCIAS

@@ -149,3 +149,18 @@ model Log {
   User      User     @relation(fields: [userId], references: [id])
   userId    Int
 }
+
+model UsuariosInteresados {
+  id              String    @id @default(cuid())
+  name            String
+  cpf             String    @unique
+  contact         String
+  email           String?
+  acceptedTerms   Boolean   @default(false)
+  acceptedTermsAt DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([cpf])
+  @@map("usuarios_interesados")
+}

@@ -1,6 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/authOptions"
+import { logAction } from "@/lib/log"
 
 // Schema de validação
 const registrationSchema = z.object({
@@ -11,6 +14,12 @@ const registrationSchema = z.object({
 })
 
 export async function POST(request: NextRequest) {
+  const session = await getServerSession(authOptions)
+  if (!session) {
+    return new Response('Não autorizado!', { status: 401 })
+  }
+  const ip = request.headers.get('x-forwarded-for') || request.headers.get('remote-addr') || 'IP não disponível';
+
   try {
     const body = await request.json()
 
@@ -56,7 +65,7 @@ export async function POST(request: NextRequest) {
         email,
       },
     })
-
+    await logAction(session.user.id, "ADICIONA_INTERESSADO", registration, ip);
     return NextResponse.json(
       {
         success: true,

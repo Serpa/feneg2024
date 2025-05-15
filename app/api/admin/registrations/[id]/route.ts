@@ -1,6 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { z } from "zod"
+import { logAction } from "@/lib/log"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/authOptions"
 
 // Schema para validação de atualização
 const updateSchema = z.object({
@@ -110,6 +113,11 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
 }
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+  const session = await getServerSession(authOptions)
+  if (!session) {
+    return new Response('Não autorizado!', { status: 401 })
+  }
+  const ip = request.headers.get('x-forwarded-for') || request.headers.get('remote-addr') || 'IP não disponível';
   try {
     const id = params.id
 
@@ -136,6 +144,8 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
         id,
       },
     })
+
+    await logAction(session.user.id, "EXCLUIR_INTERESSADO", registration, ip);
 
     return NextResponse.json(
       {

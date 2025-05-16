@@ -1,15 +1,13 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { z } from "zod"
-import { logAction } from "@/lib/log"
-import { getServerSession } from "next-auth"
-import { authOptions } from "@/lib/authOptions"
 
 // Schema para validação de atualização
 const updateSchema = z.object({
   name: z.string().min(3, { message: "Nome deve ter pelo menos 3 caracteres" }).optional(),
   contact: z.string().min(10, { message: "Contato deve ter pelo menos 10 dígitos" }).optional(),
   email: z.string().email({ message: "Email inválido" }).optional().nullable(),
+  empresasParceiras: z.string().optional().nullable(),
 })
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
@@ -113,11 +111,6 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
 }
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    return new Response('Não autorizado!', { status: 401 })
-  }
-  const ip = request.headers.get('x-forwarded-for') || request.headers.get('remote-addr') || 'IP não disponível';
   try {
     const id = params.id
 
@@ -144,8 +137,6 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
         id,
       },
     })
-
-    await logAction(session.user.id, "EXCLUIR_INTERESSADO", registration, ip);
 
     return NextResponse.json(
       {

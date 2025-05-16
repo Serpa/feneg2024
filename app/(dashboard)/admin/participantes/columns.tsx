@@ -206,6 +206,11 @@ export const columns: ColumnDef<any>[] = [
     cell: EditableCell,
   },
   {
+    accessorKey: "empresasParceiras",
+    header: "Empresa Parceira",
+    cell: EditableCell,
+  },
+  {
     accessorKey: "acceptedTerms",
     header: "Aceitou Termos",
     cell: ({ row }) => {

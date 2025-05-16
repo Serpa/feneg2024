@@ -174,11 +174,13 @@ model UsuariosInteresados {
   cpf             String    @unique
   contact         String
   email           String?
+  empresasParceiras String?
   acceptedTerms   Boolean   @default(false)
   acceptedTermsAt DateTime?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 
-  @@index([cpf])
   @@map("usuarios_interesados")
+  @@index([cpf])
 }
+

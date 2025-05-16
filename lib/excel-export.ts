@@ -8,6 +8,7 @@ export function exportToExcel(data: any[], fileName: string) {
     CPF: formatCPF(item.cpf),
     Contato: item.contact,
     Email: item.email || "-",
+    "Empresas Parceiras": item.empresasParceiras || "-",
     "Aceitou Termos": item.acceptedTerms ? "Sim" : "Não",
     "Data de Aceitação": item.acceptedTermsAt ? new Date(item.acceptedTermsAt).toLocaleDateString("pt-BR") : "-",
     "Data de Registro": new Date(item.createdAt).toLocaleDateString("pt-BR"),
@@ -22,6 +23,7 @@ export function exportToExcel(data: any[], fileName: string) {
     { wch: 15 }, // CPF
     { wch: 15 }, // Contato
     { wch: 30 }, // Email
+    { wch: 30 }, // Empresas Parceiras
     { wch: 15 }, // Aceitou Termos
     { wch: 15 }, // Data de Aceitação
     { wch: 15 }, // Data de Registro

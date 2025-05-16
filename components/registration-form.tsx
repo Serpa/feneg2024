@@ -5,7 +5,7 @@ import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { motion, AnimatePresence } from "framer-motion"
-import { CheckCircle, AlertCircle, FileText } from 'lucide-react'
+import { CheckCircle, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -13,7 +13,6 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { TermsModal } from "@/components/terms-modal"
 import { registerInterest } from "@/app/(home)/interessados/actions"
-
 
 // Definindo o schema de validação com Zod
 const formSchema = z.object({
@@ -32,6 +31,7 @@ const formSchema = z.object({
     ),
   contact: z.string().min(10, { message: "Contato deve ter pelo menos 10 dígitos" }),
   email: z.string().email({ message: "Email inválido" }).optional().or(z.literal("")),
+  empresasParceiras: z.string().optional().or(z.literal("")),
   acceptTerms: z.boolean().refine((val) => val === true, {
     message: "Você precisa aceitar os termos para continuar",
   }),
@@ -58,6 +58,7 @@ export function RegistrationForm() {
       cpf: "",
       contact: "",
       email: "",
+      empresasParceiras: "",
       acceptTerms: false,
     },
   })
@@ -299,6 +300,32 @@ export function RegistrationForm() {
                             className="text-red-500 text-xs mt-1"
                           >
                             {errors.email.message}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="empresasParceiras" className="text-slate-700">
+                      Empresas Parceiras
+                    </Label>
+                    <div className="relative">
+                      <Input
+                        id="empresasParceiras"
+                        placeholder="Informe empresa parceira (opcional)"
+                        className={`${errors.empresasParceiras ? "border-red-300 focus-visible:ring-red-200" : ""}`}
+                        {...register("empresasParceiras")}
+                      />
+                      <AnimatePresence>
+                        {errors.empresasParceiras && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="text-red-500 text-xs mt-1"
+                          >
+                            {errors.empresasParceiras.message}
                           </motion.p>
                         )}
                       </AnimatePresence>

@@ -11,6 +11,7 @@ const formSchema = z.object({
   cpf: z.string().min(11).max(11),
   contact: z.string().min(10),
   email: z.string().email().optional().or(z.literal("")),
+  empresasParceiras: z.string().optional().or(z.literal("")),
   acceptTerms: z.boolean().refine((val) => val === true, {
     message: "Você precisa aceitar os termos para continuar",
   }),
@@ -47,6 +48,7 @@ export async function registerInterest(data: FormValues) {
         cpf: validatedData.cpf,
         contact: validatedData.contact,
         email: validatedData.email || null,
+        empresasParceiras: validatedData.empresasParceiras || null,
         acceptedTerms: true,
         acceptedTermsAt: new Date(),
       },

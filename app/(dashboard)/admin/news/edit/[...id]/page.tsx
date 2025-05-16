@@ -71,7 +71,7 @@ export default function EditNews({ params }: { params: { id: number } }) {
             form.setValue('title', data.title)
             form.setValue('content', data.content)
         }
-    }, [data])
+    }, [data,form])
 
 
     if (error) return <LoadingError />

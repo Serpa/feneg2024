@@ -33,6 +33,106 @@ export type SmallImage = {
   updatedAt: string
 }
 
+// Componente para a célula de ações
+function ActionCell({ image }: { image: SmallImage }) {
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false)
+
+  const handleDelete = async () => {
+    try {
+      // Delete image from bucket
+      await fetch("/api/admin/deleteObjectBucket", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ public_id: image.image_public_id }),
+      })
+
+      // Delete record from database
+      const response = await fetch(`/api/admin/smallImages/${image.id}`, {
+        method: "DELETE",
+      })
+
+      if (!response.ok) {
+        throw new Error("Falha ao excluir imagem")
+      }
+
+      toast.success("Imagem excluída com sucesso")
+      window.location.reload()
+    } catch (error) {
+      console.error("Erro ao excluir imagem:", error)
+      toast.error("Erro ao excluir imagem")
+    }
+  }
+
+  return (
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Abrir menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onClick={() => (window.location.href = `/admin/small-images/edit/${image.id}`)}>
+            <Pencil className="mr-2 h-4 w-4" />
+            Editar
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setShowDeleteDialog(true)} className="text-red-600">
+            <Trash2 className="mr-2 h-4 w-4" />
+            Excluir
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Esta ação não pode ser desfeita. Isso excluirá permanentemente a imagem.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDelete} className="bg-red-600 hover:bg-red-700">
+              Excluir
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
+  )
+}
+
+// Componente para a célula de categoria
+function CategoryCell({ category }: { category: string }) {
+  let displayText = ""
+  let badgeVariant: "default" | "secondary" | "outline" = "default"
+
+  switch (category) {
+    case "PatrocinadorOuro":
+      displayText = "Patrocinador Ouro"
+      badgeVariant = "default"
+      break
+    case "ApoioInstitucional":
+      displayText = "Apoio Institucional"
+      badgeVariant = "secondary"
+      break
+    case "Parceiros":
+      displayText = "Parceiros"
+      badgeVariant = "outline"
+      break
+  }
+
+  return (
+    <div>
+      <Badge variant={badgeVariant}>{displayText}</Badge>
+    </div>
+  )
+}
+
 // Remover a coluna de imagem secundária e atualizar a coluna de imagem principal
 export const columns: ColumnDef<SmallImage>[] = [
   {
@@ -64,32 +164,7 @@ export const columns: ColumnDef<SmallImage>[] = [
   {
     accessorKey: "category",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Categoria" />,
-    cell: ({ row }) => {
-      const category = row.getValue("category") as string
-      let displayText = ""
-      let badgeVariant: "default" | "secondary" | "outline" = "default"
-
-      switch (category) {
-        case "PatrocinadorOuro":
-          displayText = "Patrocinador Ouro"
-          badgeVariant = "default"
-          break
-        case "ApoioInstitucional":
-          displayText = "Apoio Institucional"
-          badgeVariant = "secondary"
-          break
-        case "Parceiros":
-          displayText = "Parceiros"
-          badgeVariant = "outline"
-          break
-      }
-
-      return (
-        <div>
-          <Badge variant={badgeVariant}>{displayText}</Badge>
-        </div>
-      )
-    },
+    cell: ({ row }) => <CategoryCell category={row.getValue("category")} />,
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     },
@@ -120,77 +195,6 @@ export const columns: ColumnDef<SmallImage>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
-      const image = row.original
-      const [showDeleteDialog, setShowDeleteDialog] = useState(false)
-
-      const handleDelete = async () => {
-        try {
-          // Delete image from bucket
-          await fetch("/api/admin/deleteObjectBucket", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ public_id: image.image_public_id }),
-          })
-
-          // Delete record from database
-          const response = await fetch(`/api/admin/smallImages/${image.id}`, {
-            method: "DELETE",
-          })
-
-          if (!response.ok) {
-            throw new Error("Falha ao excluir imagem")
-          }
-
-          toast.success("Imagem excluída com sucesso")
-          window.location.reload()
-        } catch (error) {
-          console.error("Erro ao excluir imagem:", error)
-          toast.error("Erro ao excluir imagem")
-        }
-      }
-
-      return (
-        <>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Abrir menu</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => (window.location.href = `/admin/small-images/edit/${image.id}`)}>
-                <Pencil className="mr-2 h-4 w-4" />
-                Editar
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setShowDeleteDialog(true)} className="text-red-600">
-                <Trash2 className="mr-2 h-4 w-4" />
-                Excluir
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  Esta ação não pode ser desfeita. Isso excluirá permanentemente a imagem.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                <AlertDialogAction onClick={handleDelete} className="bg-red-600 hover:bg-red-700">
-                  Excluir
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-        </>
-      )
-    },
+    cell: ({ row }) => <ActionCell image={row.original} />,
   },
 ]

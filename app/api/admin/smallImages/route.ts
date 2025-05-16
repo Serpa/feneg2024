@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     await log({
       action: "CREATE_SMALL_IMAGE",
       details: { imageId: newImage.id },
-      userId: Number.parseInt(session.user.id),
+      userId: session.user.id,
     })
 
     return NextResponse.json(newImage)

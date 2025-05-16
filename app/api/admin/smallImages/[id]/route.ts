@@ -53,7 +53,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     await log({
       action: "UPDATE_SMALL_IMAGE",
       details: { imageId: id },
-      userId: Number.parseInt(session.user.id),
+      userId: session.user.id,
     })
 
     return NextResponse.json(updatedImage)
@@ -79,7 +79,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     await log({
       action: "DELETE_SMALL_IMAGE",
       details: { imageId: id },
-      userId: Number.parseInt(session.user.id),
+      userId: session.user.id,
     })
 
     return NextResponse.json({ success: true })

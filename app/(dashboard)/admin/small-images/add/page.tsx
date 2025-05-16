@@ -53,15 +53,25 @@ export default function AddSmallImagePage() {
     setIsSubmitting(true)
 
     try {
+<<<<<<< HEAD
       // Upload image
       const formData = new FormData()
       formData.append("file", image)
 
       const imageUploadRes = await fetch("/api/admin/getUrlUpload", {
+=======
+      // Criar um FormData para o upload
+      const formData = new FormData()
+      formData.append("file", image)
+
+      // Fazer o upload da imagem
+      const uploadResponse = await fetch("/api/admin/upload", {
+>>>>>>> 96a89c79300116366913015b2149a3b4bd01ce01
         method: "POST",
         body: formData,
       })
 
+<<<<<<< HEAD
       if (!imageUploadRes.ok) {
         const errorData = await imageUploadRes.json()
         throw new Error(errorData.error || "Falha ao fazer upload da imagem")
@@ -71,6 +81,16 @@ export default function AddSmallImagePage() {
 
       // Create record in database
       const createRes = await fetch("/api/admin/smallImages", {
+=======
+      if (!uploadResponse.ok) {
+        throw new Error("Falha ao fazer upload da imagem")
+      }
+
+      const uploadData = await uploadResponse.json()
+
+      // Criar o registro no banco de dados
+      const createResponse = await fetch("/api/admin/smallImages", {
+>>>>>>> 96a89c79300116366913015b2149a3b4bd01ce01
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,6 +100,7 @@ export default function AddSmallImagePage() {
           description: description || null,
           url: url || null,
           category,
+<<<<<<< HEAD
           image_url: imageData.url,
           image_public_id: imageData.public_id,
         }),
@@ -88,6 +109,15 @@ export default function AddSmallImagePage() {
       if (!createRes.ok) {
         const errorData = await createRes.json()
         throw new Error(errorData.error || "Falha ao criar registro")
+=======
+          image_url: uploadData.url,
+          image_public_id: uploadData.public_id,
+        }),
+      })
+
+      if (!createResponse.ok) {
+        throw new Error("Falha ao criar registro")
+>>>>>>> 96a89c79300116366913015b2149a3b4bd01ce01
       }
 
       toast.success("Imagem adicionada com sucesso")

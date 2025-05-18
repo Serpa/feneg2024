@@ -1,13 +1,15 @@
-export const dynamic = 'force-dynamic'
-import prisma from "@/lib/prisma"
+import { NextResponse } from 'next/server';
+import prisma from '@/lib/prisma';
 
-export async function GET(req: Request) {
+export async function GET() {
     try {
-        const res = await prisma.mainPost.findMany()
-
-        return new Response(JSON.stringify(res), { status: 200 })
+        const images = await prisma.mainPost.findMany({
+            orderBy: {
+                createdAt: 'desc'
+            }
+        });
+        return NextResponse.json(images);
     } catch (error) {
-
-        return new Response(JSON.stringify(error), { status: 500 })
+        return NextResponse.json({ error: 'Erro ao buscar imagens' }, { status: 500 });
     }
 }

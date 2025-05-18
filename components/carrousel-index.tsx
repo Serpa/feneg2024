@@ -1,51 +1,17 @@
-'use client'
-import React from 'react'
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
-import Autoplay from "embla-carousel-autoplay"
-import Image from 'next/image'
-import useSWR from 'swr'
-import LoadingError from './error-loading'
-import Loading from './loading'
-import { MainPost } from '@prisma/client'
+import prisma from '@/lib/prisma'
+import ClientCarrousel from './client-carrousel'
 
-export default function CarrouselIndex() {
-    const plugin = React.useRef(
-        Autoplay({ delay: 5000, stopOnInteraction: true })
-    )
-    const { data, error, isLoading } = useSWR('/api/posts')
-    if (error) return <LoadingError />
-    if (isLoading) return <Loading />
-    return (
-        <div className='p-5 flex justify-center'>
+async function getImages() {
+    const images = await prisma.mainPost.findMany({
+        orderBy: {
+            createdAt: 'desc'
+        }
+    });
+    return images;
+}
 
-            <Carousel
-                plugins={[plugin.current]}
-            >
-                <CarouselContent>
-                    {data.map((img: MainPost) => {
-                        return (
-                            <CarouselItem key={img.id} className='flex justify-center'>
-                                <Image
-                                    src={img.url}
-                                    alt={img.alt}
-                                    width="0"
-                                    height="0"
-                                    sizes="100vw"
-                                    style={{ width: '820px', height: 'auto' }}
-                                />
-                            </CarouselItem>
-                        )
-                    })}
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-            </Carousel>
-        </div>
-    )
+export default async function CarrouselIndex() {
+    const images = await getImages();
+    
+    return <ClientCarrousel initialImages={images} />
 }

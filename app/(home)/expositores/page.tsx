@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import EmpresasParticipantes from '@/components/empresas'
 import React from 'react'
 

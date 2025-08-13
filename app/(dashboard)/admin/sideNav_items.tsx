@@ -1,5 +1,5 @@
 import type { SideNavItem } from "@/lib/types/types"
-import { BookUser, Home, ImageIcon, MessageCircleQuestion, Newspaper } from "lucide-react"
+import { BookUser, Home, ImageIcon, MessageCircleQuestion, Newspaper, Ticket } from "lucide-react"
 
 export const SideNav_Items: SideNavItem[] = [
   {
@@ -79,5 +79,10 @@ export const SideNav_Items: SideNavItem[] = [
     title: "FAQ",
     path: "/admin/faq",
     icon: <MessageCircleQuestion />,
+  },
+  {
+    title: "Cupons",
+    path: "/admin/cupons",
+    icon: <Ticket />,
   },
 ]

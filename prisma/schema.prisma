@@ -184,3 +184,56 @@ model UsuariosInteresados {
   @@index([cpf])
 }
 
+model Cupom {
+  id                     String   @id @default(cuid())
+  contaCorrente         String
+  nome                  String
+  cupomId               String   @unique // Suporta UUIDs como "3033cf85-560e-4129-b789-4cd8c7893a6c"
+  classificacaoAleatoria String
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  // Relacionamento com participações em sorteios
+  participacoes         Participacao[]
+  
+  sorteiosVencidos      Sorteio[] @relation("SorteioVencedor")
+  
+  @@map("cupons")
+}
+
+model Sorteio {
+  id          String   @id @default(cuid())
+  nome        String
+  descricao   String?
+  isPrincipal Boolean  @default(false) // true = todos podem participar, false = apenas quem nunca ganhou sorteio normal
+  dataInicio  DateTime
+  dataFim     DateTime?
+  ativo       Boolean  @default(true)
+  realizado   Boolean  @default(false)
+  vencedorId  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relacionamento com participações
+  participacoes Participacao[]
+  
+  vencedor    Cupom?   @relation("SorteioVencedor", fields: [vencedorId], references: [id], onDelete: SetNull)
+  
+  @@map("sorteios")
+}
+
+model Participacao {
+  id        String   @id @default(cuid())
+  cupomId   String
+  sorteioId String
+  vencedor  Boolean  @default(false) // Marca se este cupom foi o vencedor
+  createdAt DateTime @default(now())
+  
+  // Relacionamentos
+  cupom     Cupom    @relation(fields: [cupomId], references: [id], onDelete: Cascade)
+  sorteio   Sorteio  @relation(fields: [sorteioId], references: [id], onDelete: Cascade)
+  
+  // Um cupom só pode participar uma vez de cada sorteio
+  @@unique([cupomId, sorteioId])
+  @@map("participacoes")
+}

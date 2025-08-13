@@ -80,6 +80,14 @@ export default function NavBar() {
                         </Link>
                     </NavigationMenuItem>
 
+                    <NavigationMenuItem>
+                        <Link href="/cupons" legacyBehavior passHref>
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                APLIQUE E GANHE
+                            </NavigationMenuLink>
+                        </Link>
+                    </NavigationMenuItem>
+
                     <FotosMenu />
                     <FaqMenu />
                     <NavigationMenuItem>

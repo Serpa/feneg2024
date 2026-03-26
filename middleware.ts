@@ -8,6 +8,7 @@ export default withAuth(
                 if (req.nextUrl.pathname.startsWith('/admin/') && token === null) return false
                 return true
             }
-        }
+        },
+        secret: process.env.NEXTAUTH_SECRET,
     }
 )

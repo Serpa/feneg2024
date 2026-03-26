@@ -4,16 +4,25 @@ import { ChevronDown, ChevronRight } from 'lucide-react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react'
+import { useSideBarToggle } from '@/lib/hooks/use-sidebar-toggle';
 
 export default function SideBarMenuItem({ item, toggleCollapse }: { item: SideNavItem, toggleCollapse: boolean }) {
     const pathName = usePathname();
-    const ActiveLinkStyle = 'rounded-md bg-primary/50'
-    const LinkStyle = 'flex items-center min-h-40px h-full py-2 px-4 hover:rounded-md duration-300 hover:bg-primary/50';
+    const { invokeToggleCollapse } = useSideBarToggle();
+    const ActiveLinkStyle = 'bg-primary/20 text-primary border-l-4 border-primary rounded-r-md font-semibold font-bold'
+    const LinkStyle = 'flex items-center min-h-[40px] h-full py-2 px-4 hover:bg-muted text-foreground/80 hover:text-foreground hover:rounded-md transition-all duration-300 cursor-pointer';
     const subLinkStyle = LinkStyle;
     const [subMenuOpen, setSubMenuOpen] = useState(false)
+
     function toggleSubMenu() {
-        setSubMenuOpen(!subMenuOpen)
+        if (!toggleCollapse) {
+            invokeToggleCollapse();
+            setSubMenuOpen(true);
+        } else {
+            setSubMenuOpen(!subMenuOpen);
+        }
     }
+
     return (
         <>
             {

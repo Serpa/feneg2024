@@ -27,9 +27,10 @@ export default function ClientCarrousel({ initialImages }: ClientCarrouselProps)
                 plugins={[plugin.current]}
             >
                 <CarouselContent>
-                    {initialImages.map((img: MainPost) => (
+                    {initialImages.map((img: MainPost, index: number) => (
                         <CarouselItem key={img.id} className='flex justify-center'>
                             <Image
+                                priority={index === 0}
                                 src={img.url}
                                 alt={img.alt}
                                 width="0"

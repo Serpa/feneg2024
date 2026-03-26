@@ -35,5 +35,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env
-app/api/admin/route.ts
 app/api/user/route.ts
+
+# temp build files
+build.log
+build.txt
+fixApiDynamic*

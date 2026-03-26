@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { authOptions } from '@/lib/authOptions';
 import { getServerSession } from 'next-auth';
 import * as Minio from 'minio'

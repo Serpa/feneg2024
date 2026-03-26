@@ -9,6 +9,8 @@ import { Toaster } from "@/components/ui/toaster"
 import SwrProvider from "@/components/swr-provider";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "FENEG 2025 - Feira de Negócios Sicoob Frutal.",
   description: "Feira de Negócios Sicoob Frutal",

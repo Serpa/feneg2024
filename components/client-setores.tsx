@@ -25,7 +25,7 @@ export default function ClientSetores({ initialData }: ClientSetoresProps) {
                         <div className='flex gap-15 justify-center flex-wrap'>
                             {initialData.map((item: SetoresImages, index: number) => (
                                 <PhotoView key={index} src={item.url}>
-                                    <Image src={item.url} width={120} alt='image ' height={0} />
+                                    <Image src={item.url} width={120} alt='image ' height={0} style={{ width: '120px', height: 'auto' }} />
                                 </PhotoView>
                             ))}
                         </div>

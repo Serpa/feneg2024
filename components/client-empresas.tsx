@@ -55,7 +55,7 @@ export default function ClientEmpresas({ initialData }: ClientEmpresasProps) {
                                 <PhotoView key={index} src={item.url} overlay={
                                     <RenderInfo item={item} />
                                 }>
-                                    <Image src={item.url} alt="" width={230} height={0} />
+                                    <Image src={item.url} alt="" width={230} height={0} style={{ width: '230px', height: 'auto' }} />
                                 </PhotoView>
                             ))}
                         </div>

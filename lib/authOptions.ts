@@ -42,6 +42,22 @@ export const authOptions: NextAuthOptions = {
                 const headers = req.headers || {}; // Fallback caso headers seja indefinido
                 let ip = headers['x-forwarded-for'] || headers['remote-addr'] || 'IP não disponível';
 
+                // Proteção contra Brute Force (Impede IPs com mais de 5 falhas nos últimos 15min)
+                const recentFailures = await prisma.log.count({
+                    where: {
+                        action: 'INVALID LOGIN',
+                        ip: ip,
+                        timestamp: {
+                            gte: new Date(Date.now() - 15 * 60 * 1000)
+                        }
+                    }
+                });
+
+                if (recentFailures >= 5) {
+                    // NextAuth intercepta esse erro de bloqueio de segurança
+                    throw new Error("Muitas tentativas falhas de login. Acesso do seu IP bloqueado por 15 minutos.");
+                }
+
                 if (!credentials?.email || !credentials.password) {
                     return null
                 }
@@ -51,8 +67,10 @@ export const authOptions: NextAuthOptions = {
                     },
                 })
 
-
                 if (!user) {
+                    // Mitigação contra "Timing Attacks" (Enumeration Users)
+                    // Finge processar uma senha pesada para igualar o tempo de resposta
+                    await compare('dummy', '$2b$10$dummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDum');
                     return null
                 }
 

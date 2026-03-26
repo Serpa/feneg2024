@@ -23,7 +23,7 @@ export async function POST(req: Request) {
         const ip = req.headers.get('x-forwarded-for') || req.headers.get('remote-addr') || 'IP não disponível';
         await logAction(session.user.id, "CREATE_USER", { ...res, hashedPassword: '' }, ip);
 
-        return new Response(JSON.stringify(newUser), { status: 200 })
+        return new Response(JSON.stringify({ id: res.id, name: res.name, email: res.email }), { status: 200 })
     } catch (error) {
         console.log(error);
 

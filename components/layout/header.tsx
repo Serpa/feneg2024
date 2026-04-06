@@ -17,24 +17,32 @@ export default function Header() {
                 alt="FENEG Logo"
                 className='hover:animate-pulse cursor-pointer'
             />
-            <div className='flex h-fit w-fit p-2'>
-
+            <div className='flex h-fit w-fit items-center p-2'>
                 <Image
-                    src="/sicoobfrutal.png"
+                    src="/prefeitura-frutal.png"
                     width="0"
                     height="0"
                     sizes="100vw"
-                    style={{ width: '7rem', height: 'auto' }}
-                    alt="Sicoob Frutal Logo"
+                    style={{ width: '13rem', height: 'auto' }}
+                    alt="Prefeitura de Frutal Logo"
                     className='p-2 hover:animate-pulse cursor-pointer'
                 />
                 <Image
-                    src="/sicoobitapagipe.png"
+                    src="/camara-municial.png"
                     width="0"
                     height="0"
                     sizes="100vw"
-                    style={{ width: '9rem', height: 'auto' }}
-                    alt="Sicoob Itapagipe Logo"
+                    style={{ width: '10rem', height: 'auto' }}
+                    alt="Câmara Municipal Logo"
+                    className='p-2 hover:animate-pulse cursor-pointer'
+                />
+                <Image
+                    src="/solis.png"
+                    width="0"
+                    height="0"
+                    sizes="100vw"
+                    style={{ width: '4.5rem', height: 'auto' }}
+                    alt="Solis Logo"
                     className='p-2 hover:animate-pulse cursor-pointer'
                 />
                 <Image
@@ -43,8 +51,26 @@ export default function Header() {
                     height="0"
                     sizes="100vw"
                     style={{ width: '5rem', height: 'auto' }}
-                    alt="FENEG Logo"
-                    className='hover:animate-pulse cursor-pointer'
+                    alt="Sebrae Logo"
+                    className='p-2 hover:animate-pulse cursor-pointer'
+                />
+                <Image
+                    src="/sicoobitapagipe.png"
+                    width="0"
+                    height="0"
+                    sizes="100vw"
+                    style={{ width: '8rem', height: 'auto' }}
+                    alt="Sicoob Itapagipe Logo"
+                    className='p-2 hover:animate-pulse cursor-pointer'
+                />
+                <Image
+                    src="/sicoobfrutal.png"
+                    width="0"
+                    height="0"
+                    sizes="100vw"
+                    style={{ width: '8rem', height: 'auto' }}
+                    alt="Sicoob Frutal Logo"
+                    className='p-2 hover:animate-pulse cursor-pointer'
                 />
             </div>
         </div>

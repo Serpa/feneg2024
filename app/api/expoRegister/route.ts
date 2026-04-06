@@ -81,7 +81,7 @@ export async function POST(req: Request) {
   <div class="container">
     <header>
       <img src="https://i.imgur.com/kFqYTBf.png" alt="Logo do Evento">
-      <h1>FENEG 2025 - Feira de Negócios Sicoob Frutal.</h1>
+      <h1>FENEG 2026 - Feira de Negócios do Brasil Central.</h1>
       <h2>22 A 25 de Maio.</h2>
     </header>
 
@@ -104,7 +104,7 @@ export async function POST(req: Request) {
     <div class="footer">
       <p>Agradecemos a atenção.</p>
 
-      <p>Equipe FENEG 2025</p>
+      <p>Equipe FENEG 2026</p>
     </div>
   </div>
 </body>

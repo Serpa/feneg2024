@@ -33,7 +33,7 @@ export default function NavBar() {
         },
         {
             title: "WhatsApp",
-            href: `https://wa.me/553484114909?text=Ol%C3%A1%2C+tenho+interesse+em+mais+informa%C3%A7%C3%B5es+sobre+o+FENEG+Frutal+2025`,
+            href: `https://wa.me/553484114909?text=Ol%C3%A1%2C+tenho+interesse+em+mais+informa%C3%A7%C3%B5es+sobre+o+FENEG+Frutal+2026`,
             description:
                 "Fale com um de nossos colaboradores.",
         },

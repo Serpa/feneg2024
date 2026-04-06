@@ -12,8 +12,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "FENEG 2025 - Feira de Negócios Sicoob Frutal.",
-  description: "Feira de Negócios Sicoob Frutal",
+  title: "FENEG 2026 - Feira de Negócios do Brasil Central.",
+  description: "Feira de Negócios do Brasil Central",
 };
 
 export default function RootLayout({

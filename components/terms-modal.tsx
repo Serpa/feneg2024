@@ -21,7 +21,7 @@ export function TermsModal({ open, onOpenChange }: TermsModalProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px] max-h-[90vh]">
         <DialogHeader>
-          <DialogTitle>Termos de Uso e Política de Privacidade - FENEG 2025</DialogTitle>
+          <DialogTitle>Termos de Uso e Política de Privacidade - FENEG 2026</DialogTitle>
           <DialogDescription>
             Por favor, leia atentamente os termos de uso e política de privacidade antes de prosseguir com o cadastro.
           </DialogDescription>
@@ -31,7 +31,7 @@ export function TermsModal({ open, onOpenChange }: TermsModalProps) {
             <section>
               <h3 className="text-lg font-semibold mb-2">1. Introdução</h3>
               <p className="text-muted-foreground">
-                Bem-vindo aos Termos de Uso e Política de Privacidade da FENEG 2025 - Feira de Negócios Sicoob Frutal.
+                Bem-vindo aos Termos de Uso e Política de Privacidade da FENEG 2026 - Feira de Negócios do Brasil Central.
               </p>
             </section>
 
@@ -39,7 +39,7 @@ export function TermsModal({ open, onOpenChange }: TermsModalProps) {
               <h3 className="text-lg font-semibold mb-2">2. Aceitação dos Termos</h3>
               <p className="text-muted-foreground">
                 Ao se cadastrar em nossa plataforma, você concorda expressamente com todos os termos e condições aqui
-                estabelecidos pela FENEG 2025 - Feira de Negócios Sicoob Frutal. Se você não concordar com qualquer
+                estabelecidos pela FENEG 2026 - Feira de Negócios do Brasil Central. Se você não concordar com qualquer
                 parte destes termos, solicitamos que não prossiga com o cadastro ou utilização dos nossos serviços.
               </p>
             </section>
@@ -47,7 +47,7 @@ export function TermsModal({ open, onOpenChange }: TermsModalProps) {
             <section>
               <h3 className="text-lg font-semibold mb-2">3. Coleta de Dados</h3>
               <p className="text-muted-foreground">
-                Para participar da FENEG 2025 - Feira de Negócios Sicoob Frutal, coletamos as seguintes informações:
+                Para participar da FENEG 2026 - Feira de Negócios do Brasil Central, coletamos as seguintes informações:
               </p>
               <ul className="list-disc pl-6 mt-2 text-muted-foreground space-y-1">
                 <li>Nome completo</li>
@@ -141,7 +141,7 @@ export function TermsModal({ open, onOpenChange }: TermsModalProps) {
             <section>
               <h3 className="text-lg font-semibold mb-2">11. Disposições Finais</h3>
               <p className="text-muted-foreground">
-                Este documento constitui o acordo integral entre você e a FENEG 2025 - Feira de Negócios Sicoob Frutal
+                Este documento constitui o acordo integral entre você e a FENEG 2026 - Feira de Negócios do Brasil Central
                 em relação ao uso dos seus dados pessoais. A tolerância quanto ao eventual descumprimento de qualquer
                 das cláusulas destes Termos não constituirá novação ou renúncia dos direitos estabelecidos.
               </p>

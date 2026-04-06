@@ -16,7 +16,7 @@ export default function Component() {
               rel="noreferrer"
               className="font-medium"
             >
-              Copyright {new Date().getFullYear()} © - FENEG - Feira de Negócios Sicoob Frutal.{" "}
+              Copyright {new Date().getFullYear()} © - FENEG - Feira de Negócios do Brasil Central.{" "}
             </a>
           </p>
         </div>

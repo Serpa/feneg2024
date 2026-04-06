@@ -36,22 +36,22 @@ export default function TestPage() {
                     <div className='w-2/4 p-5'>
                         <p className='text-2xl text-verde-escuro font-bold'>A FENEG</p>
                         <p className='text-xl'>
-                        A Feira de Negócios Sicoob Frutal foi idealizada para ser algo diferente e inovador, focada em negócios e cultura. Por isso, o Sicoob Frutal em parceria com o Sebrae e agora com o Sicoob Itapagipe se uniram mais uma vez para promover o desenvolvimento econômico e social da região.
+                            A Feira de Negócios do Brasil Central foi idealizada para ser algo diferente e inovador, focada em negócios e cultura. Por isso, o Sicoob Frutal em parceria com o Sebrae e agora com o Sicoob Itapagipe se uniram mais uma vez para promover o desenvolvimento econômico e social da região.
                         </p>
                         <p className='text-xl'>
-                        A Feira oportuniza as empresas, exporem e venderem seus produtos e serviços por meio de financiamentos com taxas diferenciadas e competitivas no mercado, fomentando a sustentabilidade dos negócios.
+                            A Feira oportuniza as empresas, exporem e venderem seus produtos e serviços por meio de financiamentos com taxas diferenciadas e competitivas no mercado, fomentando a sustentabilidade dos negócios.
                         </p>
                         <p className='text-xl'>
-                        O agronegócio, o comércio e os demais pilares negociais do território são beneficiados, uma vez que são ofertados pela cooperativa recursos para custeio, investimento, financiamentos e capital de giro, além de um vasto portfólio de produtos e serviços disponibilizados pelos expositores em condições muito favoráveis.
+                            O agronegócio, o comércio e os demais pilares negociais do território são beneficiados, uma vez que são ofertados pela cooperativa recursos para custeio, investimento, financiamentos e capital de giro, além de um vasto portfólio de produtos e serviços disponibilizados pelos expositores em condições muito favoráveis.
                         </p>
                         <p className='text-xl'>
-                        No âmbito de conhecimento e conexão o evento proporciona uma programação repleta de aprendizado com temáticas de grande relevância, além da geração networking.
+                            No âmbito de conhecimento e conexão o evento proporciona uma programação repleta de aprendizado com temáticas de grande relevância, além da geração networking.
                         </p>
                         <p className='text-xl'>
-                        Em 2024 a feira foi responsável pela injeção de mais de R$ 170 milhões na economia regional, graças à ampla oferta de taxas e condições facilitadas pelas empresas nos estandes.
+                            Em 2024 a feira foi responsável pela injeção de mais de R$ 170 milhões na economia regional, graças à ampla oferta de taxas e condições facilitadas pelas empresas nos estandes.
                         </p>
                         <p className='text-xl'>
-                        Agradecemos profundamente a todos que participaram do sucesso das últimas edições da FENEG. E deixamos aqui nosso convite para a FENEG 2025!
+                            Agradecemos profundamente a todos que participaram do sucesso das últimas edições da FENEG. E deixamos aqui nosso convite para a FENEG 2025!
                         </p>
                     </div>
                     <div className='w-2/4'>
@@ -59,13 +59,13 @@ export default function TestPage() {
                     </div>
                 </div>
             </div>
-            <Separator />
+            {/* <Separator />
             <div className='flex grow p-5'>
                 <video controls autoPlay muted playsInline preload="auto" className='object-fill'>
                     <source src="https://console.feneg-minio.yal8nw.easypanel.host/api/v1/buckets/files/objects/download?preview=true&prefix=sobre-nos.mp4&version_id=null" type="video/mp4" />
                     Seu navegador não suporta a execução de videos.
                 </video>
-            </div>
+            </div> */}
         </>
     )
 }

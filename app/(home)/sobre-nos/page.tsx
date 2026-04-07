@@ -59,13 +59,6 @@ export default function TestPage() {
                     </div>
                 </div>
             </div>
-            {/* <Separator />
-            <div className='flex grow p-5'>
-                <video controls autoPlay muted playsInline preload="auto" className='object-fill'>
-                    <source src="https://console.feneg-minio.yal8nw.easypanel.host/api/v1/buckets/files/objects/download?preview=true&prefix=sobre-nos.mp4&version_id=null" type="video/mp4" />
-                    Seu navegador não suporta a execução de videos.
-                </video>
-            </div> */}
         </>
     )
 }

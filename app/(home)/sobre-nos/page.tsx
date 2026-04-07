@@ -1,15 +1,8 @@
-'use client';
-import LoadingError from '@/components/error-loading'
-import Loading from '@/components/loading'
 import React from 'react'
-import useSWR from 'swr'
 import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
 
 export default function TestPage() {
-    const { data, isLoading, error } = useSWR('/api/admin/sobreNos')
-    if (isLoading) return <Loading />
-    if (error) return <LoadingError />
     return (
         <>
             <h1 className='flex mb-4 justify-center items-center text-4xl font-extrabold leading-none tracking-tight text-verde-escuro md:text-5xl lg:text-6xl dark:text-white m-5'>SOBRE NÓS</h1>

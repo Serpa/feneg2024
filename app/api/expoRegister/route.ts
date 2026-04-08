@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Novo Interesse em Exposição - FENEG 2025</title>
+  <title>Novo Interesse em Exposição - FENEG</title>
   <style>
     body {
       font-family: Arial, sans-serif;

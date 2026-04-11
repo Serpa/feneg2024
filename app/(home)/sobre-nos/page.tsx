@@ -44,7 +44,7 @@ export default function TestPage() {
                             Em 2024 a feira foi responsável pela injeção de mais de R$ 170 milhões na economia regional, graças à ampla oferta de taxas e condições facilitadas pelas empresas nos estandes.
                         </p>
                         <p className='text-xl'>
-                            Agradecemos profundamente a todos que participaram do sucesso das últimas edições da FENEG. E deixamos aqui nosso convite para a FENEG 2025!
+                            Agradecemos profundamente a todos que participaram do sucesso das últimas edições da FENEG. E deixamos aqui nosso convite para a FENEG!
                         </p>
                     </div>
                     <div className='w-2/4'>

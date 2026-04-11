@@ -12,11 +12,11 @@ export const SideNav_Items: SideNavItem[] = [
     path: "/admin/interessados",
     icon: <BookUser />,
   },
-  {
-    title: "Participantes",
-    path: "/admin/participantes",
-    icon: <BookUser />,
-  },
+  // {
+  //   title: "Participantes",
+  //   path: "/admin/participantes",
+  //   icon: <BookUser />,
+  // },
   // {
   //     title: 'Sobre Nós',
   //     path: '/admin/sobre-nos',

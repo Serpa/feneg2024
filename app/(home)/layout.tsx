@@ -25,14 +25,16 @@ export default function RootLayout({
     <html lang="pt-br" suppressHydrationWarning>
       <SwrProvider>
         <body className="flex min-h-screen flex-col min-w-fit">
-          <div className="top-0 bg-gradient-to-b from-verde-be/30 to-white">
-            <Header />
-            <div className="flex justify-center items-center">
-              <Separator className="w-[90%]" />
-            </div>
-            <NavBar />
-            <div className="flex justify-center items-center">
-              <Separator className="w-[90%]" />
+          <div className="sticky top-0 z-50 bg-white shadow-md">
+            <div className="bg-gradient-to-b from-verde-be/30 to-white">
+              <Header />
+              <div className="flex justify-center items-center">
+                <Separator className="w-[90%]" />
+              </div>
+              <NavBar />
+              <div className="flex justify-center items-center">
+                <Separator className="w-[90%]" />
+              </div>
             </div>
           </div>
           <main className="container flex-1 grow">

@@ -26,7 +26,7 @@ export default function AddSmallImagePage() {
   const [image, setImage] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [category, setCategory] = useState<"PatrocinadorOuro" | "ApoioInstitucional" | "Parceiros" | "">("")
+  const [category, setCategory] = useState<"PatrocinadorMaster" | "PatrocinadorOuro" | "PatrocinadorPrata" | "ApoioInstitucional" | "Parceiros" | "">("")
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -191,15 +191,27 @@ export default function AddSmallImagePage() {
                   id="category"
                   value={category}
                   onValueChange={(value) =>
-                    setCategory(value as "PatrocinadorOuro" | "ApoioInstitucional" | "Parceiros")
+                    setCategory(value as "PatrocinadorMaster" | "PatrocinadorOuro" | "PatrocinadorPrata" | "ApoioInstitucional" | "Parceiros")
                   }
                   className="flex flex-col space-y-2"
                   required
                 >
                   <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="PatrocinadorMaster" id="master" />
+                    <Label htmlFor="master" className="font-normal">
+                      Patrocinador Master
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
                     <RadioGroupItem value="PatrocinadorOuro" id="patrocinador" />
                     <Label htmlFor="patrocinador" className="font-normal">
                       Patrocinador Cota Ouro
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="PatrocinadorPrata" id="prata" />
+                    <Label htmlFor="prata" className="font-normal">
+                      Patrocinador Cota Prata
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2">

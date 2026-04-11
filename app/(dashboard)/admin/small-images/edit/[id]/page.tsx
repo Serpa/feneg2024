@@ -27,7 +27,7 @@ export default function EditSmallImagePage({ params }: { params: { id: string } 
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [url, setUrl] = useState("")
-  const [category, setCategory] = useState<"PatrocinadorOuro" | "ApoioInstitucional" | "Parceiros">("PatrocinadorOuro")
+  const [category, setCategory] = useState<"PatrocinadorMaster" | "PatrocinadorOuro" | "PatrocinadorPrata" | "ApoioInstitucional" | "Parceiros">("PatrocinadorOuro")
   const [newImage, setNewImage] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -225,15 +225,27 @@ export default function EditSmallImagePage({ params }: { params: { id: string } 
                   id="category"
                   value={category}
                   onValueChange={(value) =>
-                    setCategory(value as "PatrocinadorOuro" | "ApoioInstitucional" | "Parceiros")
+                    setCategory(value as "PatrocinadorMaster" | "PatrocinadorOuro" | "PatrocinadorPrata" | "ApoioInstitucional" | "Parceiros")
                   }
                   className="flex flex-col space-y-2"
                   required
                 >
                   <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="PatrocinadorMaster" id="master" />
+                    <Label htmlFor="master" className="font-normal">
+                      Patrocinador Master
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
                     <RadioGroupItem value="PatrocinadorOuro" id="patrocinador" />
                     <Label htmlFor="patrocinador" className="font-normal">
                       Patrocinador Cota Ouro
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="PatrocinadorPrata" id="prata" />
+                    <Label htmlFor="prata" className="font-normal">
+                      Patrocinador Cota Prata
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2">

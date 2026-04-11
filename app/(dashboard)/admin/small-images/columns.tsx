@@ -26,7 +26,7 @@ export type SmallImage = {
   title: string
   description: string | null
   url: string | null
-  category: "PatrocinadorOuro" | "ApoioInstitucional" | "Parceiros"
+  category: "PatrocinadorMaster" | "PatrocinadorOuro" | "PatrocinadorPrata" | "ApoioInstitucional" | "Parceiros"
   image_url: string
   image_public_id: string
   createdAt: string
@@ -112,8 +112,16 @@ function CategoryCell({ category }: { category: string }) {
   let badgeVariant: "default" | "secondary" | "outline" = "default"
 
   switch (category) {
+    case "PatrocinadorMaster":
+      displayText = "Patrocinador Master"
+      badgeVariant = "default"
+      break
     case "PatrocinadorOuro":
       displayText = "Patrocinador Ouro"
+      badgeVariant = "default"
+      break
+    case "PatrocinadorPrata":
+      displayText = "Patrocinador Prata"
       badgeVariant = "default"
       break
     case "ApoioInstitucional":

@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,28 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Status {
-  Novo
-  Contatado
-  Interessado
-  Negociacao
-  Vendido
-}
-
-enum ImageCategory {
-  PatrocinadorOuro
-  ApoioInstitucional
-  Parceiros
-}
-
 model User {
   id             Int     @id @default(autoincrement())
   name           String
   email          String  @unique
   hashedPassword String
   image          String?
-  Posts          Posts[]
   Logs           Log[]
+  Posts          Posts[]
 }
 
 model ExpoForm {
@@ -88,8 +71,10 @@ model Photos {
   url       String
   public_id String
   createdAt DateTime @default(now())
-  Albuns    Albuns?  @relation(fields: [albunsId], references: [id])
   albunsId  Int?
+  Albuns    Albuns?  @relation(fields: [albunsId], references: [id])
+
+  @@index([albunsId], map: "Photos_albunsId_fkey")
 }
 
 model SetoresImages {
@@ -132,9 +117,11 @@ model Posts {
   content     String        @db.LongText
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @default(now())
-  User        User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      Int?
   ImagensPost ImagensPost[]
+  User        User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Posts_userId_fkey")
 }
 
 model ImagensPost {
@@ -142,8 +129,10 @@ model ImagensPost {
   url       String
   public_id String
   createdAt DateTime @default(now())
-  Posts     Posts?   @relation(fields: [postsId], references: [id], onDelete: Cascade)
   postsId   Int?
+  Posts     Posts?   @relation(fields: [postsId], references: [id], onDelete: Cascade)
+
+  @@index([postsId], map: "ImagensPost_postsId_fkey")
 }
 
 model SmallImages {
@@ -161,26 +150,86 @@ model SmallImages {
 model Log {
   id        Int      @id @default(autoincrement())
   timestamp DateTime @default(now())
+  userId    Int
   action    String
   details   Json
   ip        String
   User      User     @relation(fields: [userId], references: [id])
-  userId    Int
+
+  @@index([userId], map: "Log_userId_fkey")
 }
 
 model UsuariosInteresados {
-  id              String    @id @default(cuid())
-  name            String
-  cpf             String    @unique
-  contact         String
-  email           String?
+  id                String    @id @default(cuid())
+  name              String
+  cpf               String    @unique
+  contact           String
+  email             String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  acceptedTerms     Boolean   @default(false)
+  acceptedTermsAt   DateTime?
   empresasParceiras String?
-  acceptedTerms   Boolean   @default(false)
-  acceptedTermsAt DateTime?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
 
-  @@map("usuarios_interesados")
   @@index([cpf])
+  @@map("usuarios_interesados")
 }
 
+model cupons {
+  id                     String          @id
+  contaCorrente          String
+  nome                   String
+  cupomId                String          @unique
+  classificacaoAleatoria String
+  createdAt              DateTime        @default(now())
+  updatedAt              DateTime
+  participacoes          participacoes[]
+  sorteios               sorteios[]
+}
+
+model participacoes {
+  id        String   @id
+  cupomId   String
+  sorteioId String
+  vencedor  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  cupons    cupons   @relation(fields: [cupomId], references: [id], onDelete: Cascade)
+  sorteios  sorteios @relation(fields: [sorteioId], references: [id], onDelete: Cascade)
+
+  @@unique([cupomId, sorteioId])
+  @@index([sorteioId], map: "participacoes_sorteioId_fkey")
+}
+
+model sorteios {
+  id            String          @id
+  nome          String
+  descricao     String?
+  isPrincipal   Boolean         @default(false)
+  dataInicio    DateTime
+  dataFim       DateTime?
+  ativo         Boolean         @default(true)
+  realizado     Boolean         @default(false)
+  vencedorId    String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime
+  participacoes participacoes[]
+  cupons        cupons?         @relation(fields: [vencedorId], references: [id])
+
+  @@index([vencedorId], map: "sorteios_vencedorId_fkey")
+}
+
+enum Status {
+  Novo
+  Contatado
+  Interessado
+  Negociacao
+  Vendido
+}
+
+enum ImageCategory {
+  PatrocinadorMaster
+  PatrocinadorOuro
+  PatrocinadorPrata
+  ApoioInstitucional
+  Parceiros
+}

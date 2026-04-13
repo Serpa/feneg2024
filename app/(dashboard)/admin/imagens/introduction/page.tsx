@@ -22,7 +22,7 @@ import { Input } from '@/components/ui/input'
 import { useToast } from '@/components/ui/use-toast'
 import axios from 'axios'
 
-const MAX_FILE_SIZE_VIDEO = 1024 * 1024 * 150;
+const MAX_FILE_SIZE_VIDEO = 1024 * 1024 * 300;
 const ACCEPTED_VIDEO_MIME_TYPES = [
     "video/mp4",
 ];
@@ -33,7 +33,7 @@ const imageSchema = z.object({
         .any()
         .refine((files) => {
             return files?.[0]?.size <= MAX_FILE_SIZE_VIDEO;
-        }, `Tamanho máximo da imagem: 150 MB.`)
+        }, `Tamanho máximo do vídeo: 300 MB.`)
         .refine(
             (files) => ACCEPTED_VIDEO_MIME_TYPES.includes(files?.[0]?.type),
             "Somente os formatos .mp4 são permitidos."

@@ -36,7 +36,7 @@ export type Interessados = {
     telefone: string
     email: string
     createdAt: string
-    status: "Contatado" | "Interessado" | "Negociação" | "Vendido" | "Novo"
+    status: "Contatado" | "Interessado" | "Negociação" | "Vendido" | "Novo" | "Passado"
 }
 
 enum Status {
@@ -45,6 +45,7 @@ enum Status {
     Interessado,
     Negociacao,
     Vendido,
+    Passado,
 }
 
 type ActionsCellProps = {
@@ -60,7 +61,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
     const [loading, setLoading] = useState(false)
     const statusSchema = z.object({
         id: z.number(),
-        status: z.enum(["Contatado", "Interessado", "Negociação", "Vendido", "Novo"])
+        status: z.enum(["Contatado", "Interessado", "Negociação", "Vendido", "Novo", "Passado"])
     })
 
     const form = useForm<z.infer<typeof statusSchema>>({
@@ -142,6 +143,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ row }) => {
                                     <SelectItem value="Negociacao">Negociação</SelectItem>
                                     <SelectItem value="Vendido">Vendido</SelectItem>
                                     <SelectItem value="Novo">Novo</SelectItem>
+                                    <SelectItem value="Passado">Passado</SelectItem>
                                 </SelectContent>
                             </Select>
                             <FormMessage />

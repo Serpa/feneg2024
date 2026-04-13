@@ -224,6 +224,7 @@ enum Status {
   Interessado
   Negociacao
   Vendido
+  Passado
 }
 
 enum ImageCategory {

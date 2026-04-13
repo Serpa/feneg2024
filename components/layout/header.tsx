@@ -18,6 +18,7 @@ export default function Header() {
                 className='hover:animate-pulse cursor-pointer'
             />
             <div className='flex h-fit w-fit items-center p-2'>
+                <p className='text-xs text-gray-500'>Realização:</p>
                 <Image
                     src="/prefeitura-frutal.png"
                     width="0"

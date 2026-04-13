@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/table"
 import { DataTablePagination } from "@/components/data-table-pagination"
 import { DataTableFacetedFilter } from "@/components/DataTableFacetedFilter"
-import { AlertTriangle, BellPlus, Flame, PhoneOutgoing, Receipt, ShieldAlert, Stamp, XOctagon } from "lucide-react"
+import { AlertTriangle, BellPlus, Flame, PhoneOutgoing, Receipt, ShieldAlert, Stamp, XOctagon, Archive } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
 
@@ -56,6 +56,11 @@ const status = [
     value: 'Vendido',
     label: 'Fechado',
     icon: Stamp
+  },
+  {
+    value: 'Passado',
+    label: 'Passado',
+    icon: Archive
   },
 ]
 

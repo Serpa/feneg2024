@@ -95,17 +95,19 @@ export default function AddNews() {
                 });
             });
 
-            await Promise.all(uploadPromises);
-
-            // Verifica se todos os uploads foram bem-sucedidos
-            const uploadResponses = await Promise.all(uploadPromises.map(p => p.catch(e => e)));
-            const allSuccess = uploadResponses.every(response => response.ok);
+            const uploadResponses = await Promise.all(uploadPromises);
+            
+            for (const response of uploadResponses) {
+                if (!response.ok) {
+                    throw new Error("Falha no upload de uma ou mais imagens.");
+                }
+            }
 
             const getUrls = await Promise.all(namesImages.map(name => axios.get(`/api/admin/getUrlUpload?bucketName=${'news'}&fileName=${name}`)))
 
-            const imagesList = getUrls.map((url, index) => {
+            const imagesList = getUrls.map((res, index) => {
                 return {
-                    url: url.data,
+                    url: res.data.url,
                     public_id: namesImages[index]
                 }
             })

@@ -60,7 +60,8 @@ export default function IntroductionVideo() {
         setLoading(true)
         try {
 
-            const { data: presignedUrlVideo } = await axios.post('/api/admin/getUrlUpload', { fileName: `home_video.${values.video[0].type.replace('video/', '')}`, bucketName: 'files' });
+            const { data: presignedData } = await axios.post('/api/admin/getUrlUpload', { fileName: `home_video.${values.video[0].type.replace('video/', '')}`, bucketName: 'files' });
+            const presignedUrlVideo = presignedData.url;
 
             const responseVideo = await fetch(presignedUrlVideo, {
                 method: 'PUT',
@@ -71,7 +72,12 @@ export default function IntroductionVideo() {
                 },
             })
 
-            const { data: urlVideo } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=home_video.${values.video[0].type.replace('video/', '')}`);
+            if (!responseVideo.ok) {
+                throw new Error("Falha no upload do vídeo.")
+            }
+
+            const { data: urlData } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=home_video.${values.video[0].type.replace('video/', '')}`);
+            const urlVideo = urlData.url;
 
             const res = await axios.post('/api/admin/homeVideo', {
                 url_video: urlVideo.split("?")[0],
@@ -90,6 +96,12 @@ export default function IntroductionVideo() {
                 setOpen(false)
             }
         } catch (error) {
+            console.error(error)
+            toast({
+                title: "Erro!",
+                description: "Não foi possível realizar o upload.",
+                variant: "destructive"
+            })
             setLoading(false)
         }
     }

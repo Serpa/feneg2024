@@ -16,7 +16,7 @@ export default function ClientQueroExpor({ initialData }: ClientQueroExporProps)
         <div className='flex justify-center flex-wrap'>
             <div className='flex flex-col justify-center w-2/4 min-w-[400px]'>
                 <div className='flex justify-center pt-5'>
-                    {/* <Image priority={true} src={'/quero-expor.png'} width={410} height={180} alt='Logo Quero Expor' /> */}
+                    <Image priority={true} src={'/expositor.jpeg'} width={410} height={180} alt='Logo Quero Expor' />
                 </div>
                 <div className='flex flex-row p-5 gap-2 grow justify-center items-center align-middle pb-2'>
                     <FormExpo />

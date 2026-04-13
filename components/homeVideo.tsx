@@ -16,7 +16,7 @@ export default function HomeVideo() {
         <div>
             <Separator />
             <div className="flex flex-col justify-center space-y-2 mt-5">
-                {data.title && <h1 className="text-center text-4xl font-bold tracking-tighter sm:text-4xl md:text-4xl">{data.title}</h1>}
+                {/* {data.title && <h1 className="text-center text-4xl font-bold tracking-tighter sm:text-4xl md:text-4xl">{data.title}</h1>} */}
                 {data.url_video && <video controls autoPlay muted className='px-16 pb-5'>
                     <source src={data.url_video} type="video/mp4" />
                     Seu navegador não suporta a execução de videos.

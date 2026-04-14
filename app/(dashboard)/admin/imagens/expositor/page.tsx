@@ -84,7 +84,9 @@ export default function ImagensExpositor() {
     async function onSubmit(values: z.infer<typeof imageSchema>) {
         setLoading(true)
         try {
-            const { data: presignedUrlImage } = await axios.post('/api/admin/getUrlUpload', { fileName: `imagem_queroExpor.${values.images[0].type.replace('image/', '')}`, bucketName: 'files' });
+            // Image Upload
+            const { data: presignedDataImage } = await axios.post('/api/admin/getUrlUpload', { fileName: `imagem_queroExpor.${values.images[0].type.replace('image/', '')}`, bucketName: 'files' });
+            const presignedUrlImage = presignedDataImage.url;
 
             const responseImage = await fetch(presignedUrlImage, {
                 method: 'PUT',
@@ -95,10 +97,15 @@ export default function ImagensExpositor() {
                 },
             })
 
-            const { data: urlImage } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=imagem_queroExpor.${values.images[0].type.replace('image/', '')}`);
+            if (!responseImage.ok) throw new Error("Falha no upload da imagem")
+
+            const { data: urlDataImage } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=imagem_queroExpor.${values.images[0].type.replace('image/', '')}`);
+            const urlImage = urlDataImage.url;
 
 
-            const { data: presignedUrlVideo } = await axios.post('/api/admin/getUrlUpload', { fileName: `video_queroExpor.${values.video[0].type.replace('video/', '')}`, bucketName: 'files' });
+            // Video Upload
+            const { data: presignedDataVideo } = await axios.post('/api/admin/getUrlUpload', { fileName: `video_queroExpor.${values.video[0].type.replace('video/', '')}`, bucketName: 'files' });
+            const presignedUrlVideo = presignedDataVideo.url;
 
             const responseVideo = await fetch(presignedUrlVideo, {
                 method: 'PUT',
@@ -109,9 +116,14 @@ export default function ImagensExpositor() {
                 },
             })
 
-            const { data: urlVideo } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=video_queroExpor.${values.video[0].type.replace('video/', '')}`);
+            if (!responseVideo.ok) throw new Error("Falha no upload do vídeo")
 
-            const { data: presignedUrlPdf } = await axios.post('/api/admin/getUrlUpload', { fileName: `pdf_queroExpor.${values.pdf[0].type.replace('application/', '')}`, bucketName: 'files' });
+            const { data: urlDataVideo } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=video_queroExpor.${values.video[0].type.replace('video/', '')}`);
+            const urlVideo = urlDataVideo.url;
+
+            // PDF Upload
+            const { data: presignedDataPdf } = await axios.post('/api/admin/getUrlUpload', { fileName: `pdf_queroExpor.${values.pdf[0].type.replace('application/', '')}`, bucketName: 'files' });
+            const presignedUrlPdf = presignedDataPdf.url;
 
             const responsePdf = await fetch(presignedUrlPdf, {
                 method: 'PUT',
@@ -122,7 +134,10 @@ export default function ImagensExpositor() {
                 },
             })
 
-            const { data: urlPdf } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=pdf_queroExpor.${values.pdf[0].type.replace('application/', '')}`);
+            if (!responsePdf.ok) throw new Error("Falha no upload do PDF")
+
+            const { data: urlDataPdf } = await axios.get(`/api/admin/getUrlUpload?bucketName=${'files'}&fileName=pdf_queroExpor.${values.pdf[0].type.replace('application/', '')}`);
+            const urlPdf = urlDataPdf.url;
 
             const res = await axios.post('/api/admin/queroSerExpositor', {
                 url_image: urlImage.split("?")[0],
@@ -144,6 +159,12 @@ export default function ImagensExpositor() {
                 setOpen(false)
             }
         } catch (error) {
+            console.error(error)
+            toast({
+                title: "Erro!",
+                description: "Ocorreu um erro ao realizar o upload dos arquivos.",
+                variant: "destructive"
+            })
             setLoading(false)
         }
     }

@@ -21,7 +21,7 @@ export default function Component() {
           </p>
         </div>
         <div>
-          <Link href={'https://www.instagram.com/fenegsicoob/'} target="_blank" className="w-full">
+          <Link href={'https://www.instagram.com/fenegfrutal/'} target="_blank" className="w-full">
             <Button variant='ghost'><FaInstagram /></Button>
           </Link>
           <Link href={'https://www.facebook.com/sicoobfrutal/'} target="_blank" className="w-full">

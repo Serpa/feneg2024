@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    output: 'standalone',
     async headers() {
         return [
             {
@@ -30,11 +31,10 @@ const nextConfig = {
             { protocol: 'https', hostname: 'i.imgur.com' },
             { protocol: 'http', hostname: 'localhost' },
             { protocol: 'https', hostname: 'res.cloudinary.com' },
-            { protocol: 'https', hostname: 'minio.serpaaa.com' },
-            { protocol: 'https', hostname: 'feneg-minio.yal8nw.easypanel.host' },
-            { protocol: 'https', hostname: 'feneg-minio.zj8qie.easypanel.host' },
-            { protocol: 'http', hostname: 'feneg-minio.yal8nw.easypanel.host' },
-            { protocol: 'http', hostname: 'feneg-minio.zj8qie.easypanel.host' }
+            ...(process.env.END_POINT_MINIO ? [
+                { protocol: 'https', hostname: process.env.END_POINT_MINIO },
+                { protocol: 'http', hostname: process.env.END_POINT_MINIO }
+            ] : [])
         ],
     },
     webpack: (config) => {

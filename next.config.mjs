@@ -32,7 +32,8 @@ const nextConfig = {
             { protocol: 'https', hostname: 'res.cloudinary.com' },
             { protocol: 'https', hostname: 'minio.serpaaa.com' },
             { protocol: 'https', hostname: 'feneg-minio.yal8nw.easypanel.host' },
-            { protocol: 'http', hostname: 'feneg-minio.yal8nw.easypanel.host' }
+            { protocol: 'http', hostname: 'feneg-minio.yal8nw.easypanel.host' },
+            { protocol: 'http', hostname: 'feneg-minio.zj8qie.easypanel.host' }
         ],
     },
     webpack: (config) => {

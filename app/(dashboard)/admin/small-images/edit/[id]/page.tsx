@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
 import { Loader2, Upload } from "lucide-react"
-import Image from "next/image"
+import { MinioImage } from "@/components/MinioImage"
 import { useRouter } from "next/navigation"
 import Loading from "@/components/loading"
 import LoadingError from "@/components/error-loading"
@@ -197,7 +197,7 @@ export default function EditSmallImagePage({ params }: { params: { id: string } 
                       >
                         {imagePreview ? (
                           <div className="relative w-[180px] h-[180px]">
-                            <Image
+                            <MinioImage
                               src={imagePreview || "/placeholder.svg"}
                               alt="Preview"
                               width={180}

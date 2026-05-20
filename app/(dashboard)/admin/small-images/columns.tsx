@@ -5,7 +5,7 @@ import { DataTableColumnHeader } from "@/components/DataTableColumnHeader"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react"
-import Image from "next/image"
+import { MinioImage } from "@/components/MinioImage"
 import { useState } from "react"
 import {
   AlertDialog,
@@ -153,7 +153,7 @@ export const columns: ColumnDef<SmallImage>[] = [
     header: ({ column }) => <DataTableColumnHeader column={column} title="Imagem" />,
     cell: ({ row }) => (
       <div className="flex items-center justify-center">
-        <Image
+        <MinioImage
           src={row.getValue("image_url") || "/placeholder.svg"}
           alt={row.getValue("title")}
           width={50}

@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import Image from "next/image";
+import { MinioImage } from "@/components/MinioImage";
 
 async function getImages() {
   const images = await prisma.smallImages.findMany({
@@ -28,7 +28,7 @@ export default async function ImagensPatrocinadores() {
           <div className="flex justify-center flex-wrap gap-8">
             {patrocinadoresMaster.map((img) => (
               <div key={img.id} className="w-full max-w-lg flex justify-center">
-                <Image
+                <MinioImage
                   src={img.image_url}
                   alt={img.title}
                   width={240}
@@ -47,7 +47,7 @@ export default async function ImagensPatrocinadores() {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8 justify-items-center">
             {patrocinadoresOuro.slice(0, 10).map((img) => (
               <div key={img.id} className="w-full max-w-sm flex justify-center">
-                <Image
+                <MinioImage
                   src={img.image_url}
                   alt={img.title}
                   width={180}
@@ -66,7 +66,7 @@ export default async function ImagensPatrocinadores() {
           <div className="grid grid-cols-2 md:grid-cols-6 gap-6 justify-items-center">
             {patrocinadoresPrata.map((img) => (
               <div key={img.id} className="w-full max-w-xs flex justify-center">
-                <Image
+                <MinioImage
                   src={img.image_url}
                   alt={img.title}
                   width={140}
@@ -84,7 +84,7 @@ export default async function ImagensPatrocinadores() {
         <div className="flex justify-center">
           {apoioInstitucional.slice(0, 2).map((img) => (
             <div key={img.id} className="w-full max-w-md flex justify-center ">
-              <Image
+              <MinioImage
                 src={img.image_url}
                 alt={img.title}
                 width={180}
@@ -104,7 +104,7 @@ export default async function ImagensPatrocinadores() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 justify-items-center">
             {parceiros.map((img) => (
               <div key={img.id} className="w-full max-w-xs flex justify-center">
-                <Image
+                <MinioImage
                   src={img.image_url}
                   alt={img.title}
                   width={180}

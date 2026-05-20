@@ -1,14 +1,19 @@
 import { prisma } from "@/lib/prisma";
 import { MinioImage } from "@/components/MinioImage";
+import { unstable_cache } from "next/cache";
 
-async function getImages() {
-  const images = await prisma.smallImages.findMany({
-    orderBy: {
-      createdAt: 'desc'
-    }
-  });
-  return images;
-}
+const getImages = unstable_cache(
+  async () => {
+    const images = await prisma.smallImages.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
+    return images;
+  },
+  ["home-sponsors"],
+  { revalidate: false }
+)
 
 export default async function ImagensPatrocinadores() {
   const images = await getImages();

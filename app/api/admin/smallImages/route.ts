@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/authOptions"
 import { log } from "@/lib/log"
+import { revalidateTag } from "next/cache"
 
 export async function GET() {
   try {
@@ -49,6 +50,8 @@ export async function POST(request: Request) {
       details: { imageId: newImage.id },
       userId: session.user.id,
     })
+
+    revalidateTag("home-sponsors")
 
     return NextResponse.json(newImage)
   } catch (error) {

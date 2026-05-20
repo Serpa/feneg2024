@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import CarrouselIndex from "@/components/carrousel-index";
 import HomeVideo from "@/components/homeVideo";
 import SetoresParticipantes from "@/components/setores";

@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/authOptions"
 import { log } from "@/lib/log"
+import { revalidateTag } from "next/cache"
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
@@ -57,6 +58,8 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       userId: session.user.id,
     })
 
+    revalidateTag("home-sponsors")
+
     return NextResponse.json(updatedImage)
   } catch (error) {
     console.error("Error updating small image:", error)
@@ -82,6 +85,8 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
       details: { imageId: id },
       userId: session.user.id,
     })
+
+    revalidateTag("home-sponsors")
 
     return NextResponse.json({ success: true })
   } catch (error) {

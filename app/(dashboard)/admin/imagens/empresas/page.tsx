@@ -207,7 +207,7 @@ export default function ImagensEmpresas() {
                                         <FormItem>
                                             <FormLabel>Instagram</FormLabel>
                                             <FormControl>
-                                                <Input placeholder="Ex: https://www.instagram.com/fenegsicoob/" {...field} />
+                                                <Input placeholder="Ex: https://www.instagram.com/fenegfrutal/" {...field} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>

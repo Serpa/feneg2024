@@ -10,32 +10,34 @@ const s3Client = new Minio.Client({
     secretKey: process.env.SECRET_KEY_MINIO as string,
 })
 
-// export async function POST(req: Request) {
-//     const session = await getServerSession(authOptions)
-//     if (!session) {
-//         return new Response('Não autorizado!', { status: 401 })
-//     }
-//     try {
-//         const urls = [];
-//         const { bucketName, fileNames } = await req.json()
-//         console.log(fileNames)
-//         for (const fileName of fileNames) {
-//             const expiry = 60 * 1000;
-//             const presignedUrl = await s3Client.presignedPutObject(
-//                 bucketName,
-//                 fileName,
-//                 expiry,
-//             );
-//             // Gere a URL pré-assinada para cada arquivo
-//             urls.push(presignedUrl);
-//         }
+export async function POST(req: Request) {
+    const session = await getServerSession(authOptions)
+    if (!session) {
+        return new Response('Não autorizado!', { status: 401 })
+    }
+    try {
+        const { public_id } = await req.json()
+        if (!public_id || !public_id.includes("/")) {
+            return new Response(JSON.stringify('Erro: BAD REQUEST'), { status: 400 })
+        }
 
-//         return new Response(JSON.stringify(urls), { status: 200 })
-//     } catch (error) {
-//         console.log(error);
-//         return new Response(JSON.stringify(error), { status: 500 })
-//     }
-// }
+        const [bucketName, ...fileNameParts] = public_id.split("/")
+        const fileName = fileNameParts.join("/")
+
+        await s3Client.removeObject(bucketName, fileName)
+
+        const ip = req.headers.get('x-forwarded-for') || req.headers.get('remote-addr') || 'IP não disponível';
+        await logAction(session.user.id, "REMOVE_BUCKET", {
+            bucketName,
+            fileName,
+        }, ip);
+
+        return new Response(JSON.stringify({ success: true }), { status: 200 })
+    } catch (error) {
+        console.log(error);
+        return new Response(JSON.stringify(error), { status: 500 })
+    }
+}
 
 export async function GET(req: Request) {
     const url = new URL(req.url);

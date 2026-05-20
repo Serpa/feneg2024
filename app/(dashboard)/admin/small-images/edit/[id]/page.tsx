@@ -95,7 +95,7 @@ export default function EditSmallImagePage({ params }: { params: { id: string } 
         const formData = new FormData()
         formData.append("file", newImage)
 
-        const uploadResponse = await fetch("/api/admin/upload", {
+        const uploadResponse = await fetch("/api/admin/getUrlUpload", {
           method: "POST",
           body: formData,
         })

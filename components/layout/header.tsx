@@ -18,6 +18,18 @@ export default function Header() {
                 className='hover:animate-pulse cursor-pointer'
             />
             <div className='flex h-fit w-fit items-center p-2'>
+
+                <p className='text-xs text-gray-500'>Apoio:</p>
+                <Image
+                    src="/sebrae.png"
+                    width="0"
+                    height="0"
+                    sizes="100vw"
+                    style={{ width: '5rem', height: 'auto' }}
+                    alt="Sebrae Logo"
+                    className='p-2 hover:animate-pulse cursor-pointer'
+                />
+
                 <p className='text-xs text-gray-500'>Realização:</p>
                 <Image
                     src="/prefeitura-frutal.png"
@@ -44,15 +56,6 @@ export default function Header() {
                     sizes="100vw"
                     style={{ width: '4.5rem', height: 'auto' }}
                     alt="Solis Logo"
-                    className='p-2 hover:animate-pulse cursor-pointer'
-                />
-                <Image
-                    src="/sebrae.png"
-                    width="0"
-                    height="0"
-                    sizes="100vw"
-                    style={{ width: '5rem', height: 'auto' }}
-                    alt="Sebrae Logo"
                     className='p-2 hover:animate-pulse cursor-pointer'
                 />
                 <Image

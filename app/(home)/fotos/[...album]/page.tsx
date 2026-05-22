@@ -2,6 +2,8 @@ import React from 'react'
 import prisma from "@/lib/prisma";
 import ClientPhotoAlbum from './photo-album';
 
+export const dynamic = 'force-dynamic'
+
 export default async function Fotos({ params }: { params: { album: string | string[] } }) {
     const link = Array.isArray(params.album) ? params.album[0] : params.album;
     const data = await prisma.albuns.findUnique({

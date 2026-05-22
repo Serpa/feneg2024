@@ -3,6 +3,8 @@ import dayjs from 'dayjs';
 import prisma from "@/lib/prisma";
 import NewsCarousel from './news-carousel';
 
+export const dynamic = 'force-dynamic'
+
 function RenderHtml({ content }: { content: string }) {
     return (
         <div

@@ -1,6 +1,8 @@
 import prisma from '@/lib/prisma'
 import ClientQueroExpor from './client-page'
 
+export const dynamic = 'force-dynamic'
+
 async function getQueroExporData() {
     const data = await prisma.expositorFiles.findFirst({
         orderBy: {
